@@ -1,0 +1,1 @@
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS active_brand_id uuid REFERENCES brands(id) ON DELETE SET NULL;

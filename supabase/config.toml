@@ -1,0 +1,34 @@
+project_id = "mguavdrifefyzswdiqww"
+
+[functions.generate-trend-content]
+verify_jwt = false
+
+[functions.generate-image]
+verify_jwt = false
+
+[functions.stripe-billing]
+verify_jwt = false
+
+[functions.stripe-webhook]
+verify_jwt = false
+
+[functions.process-scheduled-posts]
+verify_jwt = false
+
+[functions.social-oauth]
+verify_jwt = false
+
+[functions.api-v1]
+verify_jwt = false
+
+[functions.api-keys]
+verify_jwt = false
+
+[functions.sync-post-analytics]
+verify_jwt = false
+
+[functions.generate-weekly-insights]
+verify_jwt = false
+
+[functions.check-trial-expiry]
+verify_jwt = false
