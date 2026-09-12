@@ -9,7 +9,7 @@ import SEOHead from "@/components/seo-head";
 const LoginPage = () => {
   return (
     <>
-      <SEOHead title="Log In — Flowo" description="Log in to your Flowo account to manage your AI-powered social media strategy." path="/login" />
+      <SEOHead title="Log In — Publioxa" description="Log in to your Publioxa account to manage your AI-powered social media strategy." path="/login" />
       <LoginPageInner />
     </>
   );
