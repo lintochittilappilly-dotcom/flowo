@@ -15,7 +15,7 @@ const AuthBrandPanel = () => (
     <div className="pointer-events-none absolute right-1/3 bottom-1/4 h-2 w-2 rounded-full bg-primary-foreground/15" />
 
     <h2 className="relative max-w-md text-center font-heading text-3xl font-bold leading-tight text-primary-foreground">
-      Join 2,847+ businesses already growing with Flowo
+      Join 2,847+ businesses already growing with Publioxa
     </h2>
 
     <div className="relative mt-8 space-y-4">
@@ -37,7 +37,7 @@ const AuthBrandPanel = () => (
         ))}
       </div>
       <p className="mt-3 font-body text-sm italic text-primary-foreground/90">
-        "Flowo saved my business. I went from posting twice a month to posting every single day."
+        "Publioxa saved my business. I went from posting twice a month to posting every single day."
       </p>
       <p className="mt-3 font-heading text-sm font-bold text-primary-foreground">Sarah Mitchell</p>
       <p className="font-body text-xs text-primary-foreground/70">Owner, Bloom Skincare Co</p>
