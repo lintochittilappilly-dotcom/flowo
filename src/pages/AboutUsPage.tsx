@@ -6,7 +6,7 @@ import SEOHead from "@/components/seo-head";
 const values = [
   { icon: <Target className="h-6 w-6" />, title: "Mission-Driven", desc: "We exist to give small businesses the same social media firepower that big brands take for granted." },
   { icon: <Zap className="h-6 w-6" />, title: "Simplicity First", desc: "Powerful doesn't have to mean complicated. Every feature we ship must be usable in under 60 seconds." },
-  { icon: <Heart className="h-6 w-6" />, title: "Customer Obsessed", desc: "Our roadmap is shaped by the businesses who use Flowo every day, not by trends or VC pressure." },
+  { icon: <Heart className="h-6 w-6" />, title: "Customer Obsessed", desc: "Our roadmap is shaped by the businesses who use Publioxa every day, not by trends or VC pressure." },
   { icon: <Globe className="h-6 w-6" />, title: "Globally Inclusive", desc: "We build for creators and businesses everywhere — every language, every niche, every platform." },
 ];
 
@@ -18,27 +18,27 @@ const team = [
 ];
 
 const milestones = [
-  { year: "2022", event: "Flowo founded in San Francisco by Sarah & Marcus" },
+  { year: "2022", event: "Publioxa founded in San Francisco by Sarah & Marcus" },
   { year: "2023", event: "Launched public beta — 5,000 users in first month" },
   { year: "2023", event: "Raised $4.2M seed round led by Sequoia Scout" },
   { year: "2024", event: "Hit 50,000 active users across 120 countries" },
   { year: "2024", event: "Launched AI content engine powered by GPT-4" },
   { year: "2025", event: "Series A — $18M led by Andreessen Horowitz" },
-  { year: "2026", event: "100,000+ businesses trust Flowo for their social presence" },
+  { year: "2026", event: "100,000+ businesses trust Publioxa for their social presence" },
 ];
 
 const AboutUsPage = () => (
   <>
-    <SEOHead title="About Us — Flowo" description="Learn about the team behind Flowo, our mission to democratize social media marketing with AI." path="/about" />
-    <InfoPageLayout badge="Company" badgeIcon={<Users className="h-4 w-4" />} title="About Flowo" description="We're building the AI-powered social media team that every small business deserves.">
+    <SEOHead title="About Us — Publioxa" description="Learn about the team behind Publioxa, our mission to democratize social media marketing with AI." path="/about" />
+    <InfoPageLayout badge="Company" badgeIcon={<Users className="h-4 w-4" />} title="About Publioxa" description="We're building the AI-powered social media team that every small business deserves.">
     {/* Story */}
     <section className="mb-16">
       <h2 className="mb-4 border-l-4 border-primary pl-4 font-heading text-2xl font-bold text-foreground">Our Story</h2>
       <div className="space-y-4 font-body text-[15px] leading-relaxed text-foreground/80">
-        <p>Flowo started with a frustration. Sarah Chen had spent years helping brands crush it on social media at Buffer, but when her sister opened a small bakery and asked for help — Sarah realized the tools that worked for brands with marketing teams were impossible for a one-person shop.</p>
+        <p>Publioxa started with a frustration. Sarah Chen had spent years helping brands crush it on social media at Buffer, but when her sister opened a small bakery and asked for help — Sarah realized the tools that worked for brands with marketing teams were impossible for a one-person shop.</p>
         <p>The content calendars were overwhelming. The analytics dashboards required a data science degree. And the "AI" tools at the time just spit out generic, soulless captions that sounded like everyone else.</p>
-        <p>She teamed up with Marcus Williams, a former Google engineer obsessed with making powerful technology feel simple, and together they built <strong>Flowo</strong> — an AI-powered social media platform that actually understands your brand, creates content that sounds like you, and handles the entire publishing workflow so you can focus on running your business.</p>
-        <p>Today, over <strong>100,000 businesses</strong> across 120+ countries use Flowo to manage their social media presence. From local coffee shops to fast-growing D2C brands, Flowo gives every business access to the social media superpowers that used to require a full marketing team.</p>
+        <p>She teamed up with Marcus Williams, a former Google engineer obsessed with making powerful technology feel simple, and together they built <strong>Publioxa</strong> — an AI-powered social media platform that actually understands your brand, creates content that sounds like you, and handles the entire publishing workflow so you can focus on running your business.</p>
+        <p>Today, over <strong>100,000 businesses</strong> across 120+ countries use Publioxa to manage their social media presence. From local coffee shops to fast-growing D2C brands, Publioxa gives every business access to the social media superpowers that used to require a full marketing team.</p>
       </div>
     </section>
 
