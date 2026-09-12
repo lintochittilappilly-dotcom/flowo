@@ -27,9 +27,9 @@ const ProtectedRoute = ({ children, requireActivePlan = true }: ProtectedRoutePr
   }
 
   // Check if onboarding is completed
-  if (profile && !profile.completed_onboarding) {
-    return <Navigate to="/onboarding" replace />;
-  }
+  if (profile && !profile.completed_onboarding && location.pathname !== "/onboarding") {
+  return <Navigate to="/onboarding" replace />;
+}
 
   // Check active access (trial or paid plan) for dashboard routes
   if (requireActivePlan && profile) {
