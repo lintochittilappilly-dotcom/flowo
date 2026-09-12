@@ -10,7 +10,7 @@ import SEOHead from "@/components/seo-head";
 const SignupPage = () => {
   return (
     <>
-      <SEOHead title="Sign Up — Flowo" description="Create your free Flowo account. Get a 14-day trial with full Pro access. No credit card required." path="/signup" />
+      <SEOHead title="Sign Up — Publioxa" description="Create your free Publioxa account. Get a 14-day trial with full Pro access. No credit card required." path="/signup" />
       <SignupPageInner />
     </>
   );
