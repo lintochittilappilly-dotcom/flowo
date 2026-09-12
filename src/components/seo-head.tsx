@@ -8,7 +8,7 @@ interface SEOHeadProps {
 }
 
 export default function SEOHead({ title, description, path = "", ogImage }: SEOHeadProps) {
-  const baseUrl = "https://flowo-ai.lovable.app";
+  const baseUrl = "https://www.publioxa.com";
   const fullUrl = `${baseUrl}${path}`;
   const defaultOgImage = "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/34bfa62f-1e42-45dd-8145-37e2003237fd";
 
