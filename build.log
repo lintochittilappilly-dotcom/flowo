@@ -1,0 +1,21 @@
+vite v5.4.19 building for production...
+transforming...
+Browserslist: browsers data (caniuse-lite) is 15 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+✓ 3224 modules transformed.
+[plugin:vite:reporter] [plugin vite:reporter] 
+(!) /tmp/flowo_src/flowo/src/integrations/supabase/client.ts is dynamically imported by /tmp/flowo_src/flowo/src/services/openai.service.ts, /tmp/flowo_src/flowo/src/services/openai.service.ts, /tmp/flowo_src/flowo/src/services/openai.service.ts, /tmp/flowo_src/flowo/src/services/openai.service.ts, /tmp/flowo_src/flowo/src/services/openai.service.ts but also statically imported by /tmp/flowo_src/flowo/src/components/brand-initializer.tsx, /tmp/flowo_src/flowo/src/components/dashboard/DashboardHeader.tsx, /tmp/flowo_src/flowo/src/components/dashboard/DashboardLayout.tsx, /tmp/flowo_src/flowo/src/components/dashboard/DashboardSidebar.tsx, /tmp/flowo_src/flowo/src/components/dashboard/WelcomeModal.tsx, /tmp/flowo_src/flowo/src/components/settings/ApiAccessTab.tsx, /tmp/flowo_src/flowo/src/components/settings/BillingTab.tsx, /tmp/flowo_src/flowo/src/components/settings/ConnectedAccountsTab.tsx, /tmp/flowo_src/flowo/src/components/settings/TeamMembersTab.tsx, /tmp/flowo_src/flowo/src/contexts/AuthContext.tsx, /tmp/flowo_src/flowo/src/hooks/use-plan-gate.ts, /tmp/flowo_src/flowo/src/hooks/useDashboardData.ts, /tmp/flowo_src/flowo/src/lib/switch-brand.ts, /tmp/flowo_src/flowo/src/pages/AnalyticsPage.tsx, /tmp/flowo_src/flowo/src/pages/AuthCallbackPage.tsx, /tmp/flowo_src/flowo/src/pages/BrandsPage.tsx, /tmp/flowo_src/flowo/src/pages/CommentsPage.tsx, /tmp/flowo_src/flowo/src/pages/ContentCalendar.tsx, /tmp/flowo_src/flowo/src/pages/CreatePost.tsx, /tmp/flowo_src/flowo/src/pages/DashboardPage.tsx, /tmp/flowo_src/flowo/src/pages/ForgotPasswordPage.tsx, /tmp/flowo_src/flowo/src/pages/ImageGenerationPage.tsx, /tmp/flowo_src/flowo/src/pages/InviteAcceptPage.tsx, /tmp/flowo_src/flowo/src/pages/LoginPage.tsx, /tmp/flowo_src/flowo/src/pages/OAuthCallbackPage.tsx, /tmp/flowo_src/flowo/src/pages/OnboardingPage.tsx, /tmp/flowo_src/flowo/src/pages/ResetPasswordPage.tsx, /tmp/flowo_src/flowo/src/pages/SettingsPage.tsx, /tmp/flowo_src/flowo/src/pages/SignupPage.tsx, /tmp/flowo_src/flowo/src/pages/TrendsPage.tsx, /tmp/flowo_src/flowo/src/services/analytics.service.ts, /tmp/flowo_src/flowo/src/services/brands.service.ts, /tmp/flowo_src/flowo/src/services/comments.service.ts, /tmp/flowo_src/flowo/src/services/platform.service.ts, /tmp/flowo_src/flowo/src/services/publish.service.ts, /tmp/flowo_src/flowo/src/services/trends.service.ts, dynamic import will not move module into another chunk.
+
+rendering chunks...
+computing gzip size...
+dist/index.html                                2.94 kB │ gzip:   1.11 kB
+dist/assets/dashboard-mockup-BfYHSlFN.png    109.84 kB
+dist/assets/index-D11Y6B_R.css                98.21 kB │ gzip:  16.36 kB
+dist/assets/index-BU5DsZ7g.js              1,881.05 kB │ gzip: 522.78 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 13.52s
