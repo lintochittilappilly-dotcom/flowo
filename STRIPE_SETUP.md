@@ -1,12 +1,12 @@
-# Stripe Setup Guide — Flowo
+# Stripe Setup Guide — Publioxa
 
-Complete step-by-step guide to enable real subscription billing in Flowo.
+Complete step-by-step guide to enable real subscription billing in Publioxa.
 
 ---
 
 ## 📋 Overview
 
-Flowo uses Stripe for subscription billing with three automated plans:
+Publioxa uses Stripe for subscription billing with three automated plans:
 - **Starter**: $49/month or $39/month annual
 - **Pro**: $99/month or $79/month annual  
 - **Agency**: $199/month or $159/month annual
@@ -174,7 +174,7 @@ npm run dev
    - Any 3-digit CVC
    - Any billing address
 5. Complete the payment
-6. You should be redirected back to Flowo with a success message
+6. You should be redirected back to Publioxa with a success message
 
 ### 7.2 — Verify Database Updates
 
@@ -296,7 +296,7 @@ Regular monitoring dashboards:
 
 ## Step 10 — Trial System & Expiry Automation
 
-Flowo includes a 14-day free trial with Pro-level access. After 14 days, the dashboard locks until the user purchases a plan.
+Publioxa includes a 14-day free trial with Pro-level access. After 14 days, the dashboard locks until the user purchases a plan.
 
 ### 10.1 — Trial Activation
 

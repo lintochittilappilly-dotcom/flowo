@@ -200,7 +200,7 @@ const DashboardPage = () => {
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="overflow-hidden rounded-2xl border bg-card shadow-sm">
           <div className="h-1 w-full gradient-bg" />
           <div className="p-6">
-            <h3 className="font-heading text-lg font-bold text-foreground">Get started with Flowo</h3>
+            <h3 className="font-heading text-lg font-bold text-foreground">Get started with Publioxa</h3>
             <div className="mt-4 grid gap-4 sm:grid-cols-3">
               {[
                 { done: hasCompletedOnboarding, label: "Complete your profile", link: "/onboarding" },
@@ -468,7 +468,7 @@ const DashboardPage = () => {
               )}
             </div>
             <p className="mt-1 font-body text-sm text-muted-foreground">
-              {aiInsight?.insight_text || "Start posting consistently and Flowo will analyze your performance and surface personalized insights here every week."}
+              {aiInsight?.insight_text || "Start posting consistently and Publioxa will analyze your performance and surface personalized insights here every week."}
             </p>
           </div>
         </div>

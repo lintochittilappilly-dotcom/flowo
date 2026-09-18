@@ -47,7 +47,7 @@ const contentOptions = [
   { label: "Share tips and education", desc: "Teach your audience something valuable" },
   { label: "Build brand awareness", desc: "Help people get to know your brand story" },
   { label: "Announce something new", desc: "New product, event, or update" },
-  { label: "Let AI decide ✨", desc: "Flowo will create the best mix for your brand" },
+  { label: "Let AI decide ✨", desc: "Publioxa will create the best mix for your brand" },
 ];
 
 const postCounts = [5, 7, 10, 14];
@@ -175,7 +175,7 @@ const OnboardingPage = () => {
       <div className="mx-auto max-w-[640px] px-4 py-8 sm:py-12">
         {/* Logo */}
         <div className="mb-6 text-center">
-          <span className="font-heading text-2xl font-bold text-primary">✨ Flowo</span>
+          <span className="font-heading text-2xl font-bold text-primary">✨ Publioxa</span>
         </div>
 
         {/* Step indicator */}
@@ -213,7 +213,7 @@ const OnboardingPage = () => {
               <div className="space-y-5">
                 <div>
                   <h2 className="font-heading text-xl font-bold text-foreground sm:text-2xl">Tell us about your business</h2>
-                  <p className="mt-1 font-body text-sm text-muted-foreground">This helps Flowo create content that perfectly represents your brand.</p>
+                  <p className="mt-1 font-body text-sm text-muted-foreground">This helps Publioxa create content that perfectly represents your brand.</p>
                 </div>
 
                 <div>

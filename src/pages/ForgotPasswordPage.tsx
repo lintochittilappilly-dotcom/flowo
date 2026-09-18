@@ -34,7 +34,7 @@ const ForgotPasswordPage = () => {
 
   return (
     <>
-      <SEOHead title="Forgot Password — Flowo" description="Reset your Flowo account password. We'll send you a secure link to create a new one." path="/forgot-password" />
+      <SEOHead title="Forgot Password — Publioxa" description="Reset your Publioxa account password. We'll send you a secure link to create a new one." path="/forgot-password" />
       <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
@@ -42,7 +42,7 @@ const ForgotPasswordPage = () => {
         className="w-full max-w-[460px] rounded-[20px] bg-card p-8 shadow-lg sm:p-10"
       >
         <Link to="/" className="mb-6 inline-block font-heading text-2xl font-bold text-primary">
-          ✨ Flowo
+          ✨ Publioxa
         </Link>
 
         {!sent ? (

@@ -69,7 +69,7 @@ const typeConfig: Record<string, { icon: React.ReactNode; label: string; color: 
 };
 
 const ChangelogPage = () => (
-  <InfoPageLayout badge="Product" badgeIcon={<FileText className="h-4 w-4" />} title="Changelog" description="Everything new, improved, and fixed in Flowo — updated with every release.">
+  <InfoPageLayout badge="Product" badgeIcon={<FileText className="h-4 w-4" />} title="Changelog" description="Everything new, improved, and fixed in Publioxa — updated with every release.">
     <div className="relative space-y-10 pl-8 before:absolute before:left-3 before:top-4 before:h-[calc(100%-32px)] before:w-0.5 before:bg-primary/15">
       {releases.map((r, ri) => (
         <motion.div key={r.version} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: ri * 0.05 }} className="relative">

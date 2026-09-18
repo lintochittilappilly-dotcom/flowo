@@ -20,20 +20,20 @@ const rows: { feature: string; values: CellType[] }[] = [
   { feature: "Time Per Month", values: ["30 min", "2 hrs", "15+ hrs", "15+ hrs", "40+ hrs"] },
 ];
 
-const headers = ["Flowo", "Hiring Agency", "Buffer", "Hootsuite", "Doing It Yourself"];
+const headers = ["Publioxa", "Hiring Agency", "Buffer", "Hootsuite", "Doing It Yourself"];
 
 const ComparisonSection = () => (
   <section className="bg-background py-20 sm:py-28">
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="text-center">
-        <SectionBadge text="Why Flowo" />
+        <SectionBadge text="Why Publioxa" />
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="mt-4 font-heading text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl"
         >
-          Why Smart Businesses Choose Flowo Over Every Other Option
+          Why Smart Businesses Choose Publioxa Over Every Other Option
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -101,7 +101,7 @@ const ComparisonSection = () => (
         className="mt-8 rounded-lg border-2 border-primary/30 bg-card p-6 text-center sm:p-8"
       >
         <p className="font-heading text-base font-bold text-foreground sm:text-lg">
-          Flowo gives you agency-quality results at a tool price — with zero time investment. It's the only option that wins on every single dimension that matters.
+          Publioxa gives you agency-quality results at a tool price — with zero time investment. It's the only option that wins on every single dimension that matters.
         </p>
       </motion.div>
     </div>

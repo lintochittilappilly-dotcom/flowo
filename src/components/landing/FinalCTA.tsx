@@ -42,7 +42,7 @@ const FinalCTA = () => (
         transition={{ delay: 0.1 }}
         className="mx-auto mt-4 max-w-2xl font-body text-base text-primary-foreground/80 sm:text-lg"
       >
-        Every day you're not consistently showing up on social media is a day your competitors are stealing your potential customers. Flowo gets you posting today — not next week when you finally find time to write content.
+        Every day you're not consistently showing up on social media is a day your competitors are stealing your potential customers. Publioxa gets you posting today — not next week when you finally find time to write content.
       </motion.p>
 
       <motion.div
@@ -74,7 +74,7 @@ const FinalCTA = () => (
             Start My Free 14-Day Trial Now
           </Link>
           <a
-            href="https://calendly.com/flowo/demo"
+            href="https://calendly.com/publioxa/demo"
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-pill border-2 border-primary-foreground px-8 py-3.5 font-heading text-base font-bold text-primary-foreground transition-all duration-300 hover:bg-primary-foreground/10"

@@ -266,7 +266,7 @@ const ApiAccessTab = () => {
         <div className="rounded-xl bg-[hsl(var(--sidebar-background))] p-6 text-foreground border border-border">
           <div className="flex items-center gap-3 mb-3">
             <Code className="h-6 w-6 text-primary" />
-            <h3 className="font-heading text-lg font-bold">Flowo Public API</h3>
+            <h3 className="font-heading text-lg font-bold">Publioxa Public API</h3>
           </div>
           <p className="text-sm text-muted-foreground mb-4">
             Programmatically manage your brands, posts, and analytics.
@@ -320,7 +320,7 @@ const ApiAccessTab = () => {
                 No API keys yet
               </p>
               <p className="mt-1 text-xs text-muted-foreground/70">
-                Generate your first API key to start using the Flowo API.
+                Generate your first API key to start using the Publioxa API.
               </p>
             </div>
           ) : (

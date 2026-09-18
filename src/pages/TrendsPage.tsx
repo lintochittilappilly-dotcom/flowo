@@ -160,7 +160,7 @@ const TrendsPage = () => {
 
   // Banner
   const [bannerDismissed, setBannerDismissed] = useState(() => {
-    try { return localStorage.getItem("flowo_trends_banner") === "true"; } catch { return false; }
+    try { return localStorage.getItem("publioxa_trends_banner") === "true"; } catch { return false; }
   });
 
   // Stale timer
@@ -391,7 +391,7 @@ const TrendsPage = () => {
 
   const dismissBanner = () => {
     setBannerDismissed(true);
-    try { localStorage.setItem("flowo_trends_banner", "true"); } catch { /* ignore */ }
+    try { localStorage.setItem("publioxa_trends_banner", "true"); } catch { /* ignore */ }
   };
 
   const toggleCampaignPlatform = (p: string) => {

@@ -1,4 +1,4 @@
-# ✦ Flowo — AI Social Media Manager
+# ✦ Publioxa — AI Social Media Manager
 
 > Your AI Social Media Team. Generate, schedule, and publish content across all platforms automatically.
 
@@ -10,9 +10,9 @@
 
 ---
 
-## What is Flowo?
+## What is Publioxa?
 
-Flowo is an AI-powered social media management platform that automates content creation, scheduling, and analytics across all major social platforms. Generate high-quality posts with AI, schedule them weeks in advance, track performance with detailed analytics, and manage multiple brands from one unified dashboard.
+Publioxa is an AI-powered social media management platform that automates content creation, scheduling, and analytics across all major social platforms. Generate high-quality posts with AI, schedule them weeks in advance, track performance with detailed analytics, and manage multiple brands from one unified dashboard.
 
 ## ✨ Features
 
@@ -80,7 +80,7 @@ Flowo is an AI-powered social media management platform that automates content c
 ## 📁 Project Structure
 
 ```
-flowo/
+publioxa/
 ├── src/
 │   ├── components/          # Reusable UI components
 │   │   ├── auth/           # Authentication components
@@ -123,8 +123,8 @@ flowo/
 ### Installation
 
 ```bash
-git clone https://github.com/yourusername/flowo.git
-cd flowo
+git clone https://github.com/yourusername/publioxa.git
+cd publioxa
 npm install
 cp .env.example .env
 ```
@@ -261,11 +261,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🆘 Support
 
-- 📧 Email: support@flowo.com
-- 💬 Discord: [Join our community](https://discord.gg/flowo)
-- 📖 Documentation: [docs.flowo.com](https://docs.flowo.com)
-- 🐛 Bug Reports: [GitHub Issues](https://github.com/yourusername/flowo/issues)
+- 📧 Email: support@publioxa.com
+- 💬 Discord: [Join our community](https://discord.gg/publioxa)
+- 📖 Documentation: [docs.publioxa.com](https://docs.publioxa.com)
+- 🐛 Bug Reports: [GitHub Issues](https://github.com/yourusername/publioxa/issues)
 
 ---
 
-**Built with ❤️ by the Flowo team**
+**Built with ❤️ by the Publioxa team**

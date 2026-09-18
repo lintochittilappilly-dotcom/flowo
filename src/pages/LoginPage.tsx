@@ -9,7 +9,7 @@ import SEOHead from "@/components/seo-head";
 const LoginPage = () => {
   return (
     <>
-      <SEOHead title="Log In — Flowo" description="Log in to your Flowo account to manage your AI-powered social media strategy." path="/login" />
+      <SEOHead title="Log In — Publioxa" description="Log in to your Publioxa account to manage your AI-powered social media strategy." path="/login" />
       <LoginPageInner />
     </>
   );
@@ -75,11 +75,11 @@ const LoginPageInner = () => {
           className="w-full max-w-md"
         >
           <Link to="/" className="mb-8 inline-block font-heading text-2xl font-bold text-primary">
-            ✨ Flowo
+            ✨ Publioxa
           </Link>
 
           <h1 className="font-heading text-2xl font-bold text-foreground sm:text-3xl">Welcome back</h1>
-          <p className="mt-2 font-body text-sm text-muted-foreground">Sign in to your Flowo account</p>
+          <p className="mt-2 font-body text-sm text-muted-foreground">Sign in to your Publioxa account</p>
 
           {error && (
             <motion.div
@@ -160,7 +160,7 @@ const LoginPageInner = () => {
               disabled={!email || !password || loading}
               className="flex w-full items-center justify-center gap-2 rounded-pill gradient-bg py-3.5 font-heading text-sm font-bold text-primary-foreground shadow-lg shadow-primary/25 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl disabled:opacity-50 disabled:hover:scale-100"
             >
-              {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <>Sign In to Flowo <ArrowRight className="h-4 w-4" /></>}
+              {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <>Sign In to Publioxa <ArrowRight className="h-4 w-4" /></>}
             </button>
           </form>
 

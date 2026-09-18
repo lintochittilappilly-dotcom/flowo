@@ -6,7 +6,7 @@ const data: LegalPageData = {
   badge: "Privacy",
   badgeIcon: <Shield className="h-4 w-4" />,
   title: "Privacy Policy",
-  description: "How Flowo collects, uses, and protects your personal information.",
+  description: "How Publioxa collects, uses, and protects your personal information.",
   lastUpdated: "February 15, 2026",
   readTime: "8 min read",
   sections: [
@@ -16,9 +16,9 @@ const data: LegalPageData = {
       title: "Introduction",
       content: (
         <>
-          <p>Welcome to Flowo. Your privacy matters to us — it's not just a legal obligation, it's core to how we build our product. This Privacy Policy explains what information we collect, how we use it, and the choices you have.</p>
-          <p className="mt-3">Flowo ("we," "us," or "our") operates the Flowo platform at <strong>flowo.com</strong>, including our web application, APIs, and related services. This policy applies to all users of our services.</p>
-          <Callout>By using Flowo, you agree to the collection and use of information as described in this policy. If you don't agree, please discontinue use of our services.</Callout>
+          <p>Welcome to Publioxa. Your privacy matters to us — it's not just a legal obligation, it's core to how we build our product. This Privacy Policy explains what information we collect, how we use it, and the choices you have.</p>
+          <p className="mt-3">Publioxa ("we," "us," or "our") operates the Publioxa platform at <strong>publioxa.com</strong>, including our web application, APIs, and related services. This policy applies to all users of our services.</p>
+          <Callout>By using Publioxa, you agree to the collection and use of information as described in this policy. If you don't agree, please discontinue use of our services.</Callout>
         </>
       ),
     },
@@ -30,7 +30,7 @@ const data: LegalPageData = {
         <>
           <p className="mb-3"><strong>Account Information:</strong> When you sign up, we collect your name, email address, and password. If you sign up via Google or social login, we receive your basic profile info from that provider.</p>
           <p className="mb-3"><strong>Social Media Data:</strong> When you connect platforms like Instagram, LinkedIn, or Twitter (X), we access your public profile information, post content, engagement metrics, and scheduling permissions through OAuth. <strong>We never store your social media passwords.</strong></p>
-          <p className="mb-3"><strong>Content & Usage Data:</strong> We store the content you create, schedule, or publish through Flowo, including captions, images, hashtags, and scheduling preferences. We also collect usage data such as features used, pages visited, and interactions within the app.</p>
+          <p className="mb-3"><strong>Content & Usage Data:</strong> We store the content you create, schedule, or publish through Publioxa, including captions, images, hashtags, and scheduling preferences. We also collect usage data such as features used, pages visited, and interactions within the app.</p>
           <p className="mb-3"><strong>Payment Information:</strong> Payments are processed by <strong>Stripe</strong>. We do not store your full credit card number. Stripe provides us with a token, your card's last four digits, and billing address for record-keeping.</p>
           <p><strong>Device & Technical Data:</strong> We automatically collect your IP address, browser type, operating system, device identifiers, and referring URLs through standard web technologies.</p>
         </>
@@ -43,7 +43,7 @@ const data: LegalPageData = {
       content: (
         <ul className="list-none space-y-2">
           {[
-            "Provide, maintain, and improve the Flowo platform",
+            "Provide, maintain, and improve the Publioxa platform",
             "Generate AI-powered content suggestions using OpenAI (your prompts and brand context are sent to OpenAI's API but are not used to train their models)",
             "Schedule and publish your social media posts across connected platforms",
             "Process payments and manage your subscription",
@@ -78,7 +78,7 @@ const data: LegalPageData = {
       title: "Third-Party Sharing",
       content: (
         <>
-          <p className="mb-3">We do <strong>not</strong> sell your personal data. We share information only with trusted service providers who help us operate Flowo:</p>
+          <p className="mb-3">We do <strong>not</strong> sell your personal data. We share information only with trusted service providers who help us operate Publioxa:</p>
           <ul className="list-none space-y-2">
             {[
               { name: "Stripe", purpose: "Payment processing" },
@@ -93,7 +93,7 @@ const data: LegalPageData = {
               </li>
             ))}
           </ul>
-          <p className="mt-3">We may also disclose information if required by law, court order, or to protect the safety and rights of Flowo or its users.</p>
+          <p className="mt-3">We may also disclose information if required by law, court order, or to protect the safety and rights of Publioxa or its users.</p>
         </>
       ),
     },
@@ -127,7 +127,7 @@ const data: LegalPageData = {
               </li>
             ))}
           </ul>
-          <p className="mt-3">To exercise any of these rights, email us at <a href="mailto:privacy@flowo.com" className="font-medium text-primary underline">privacy@flowo.com</a>. We respond within 30 days.</p>
+          <p className="mt-3">To exercise any of these rights, email us at <a href="mailto:privacy@publioxa.com" className="font-medium text-primary underline">privacy@publioxa.com</a>. We respond within 30 days.</p>
         </>
       ),
     },
@@ -147,7 +147,7 @@ const data: LegalPageData = {
       number: "09",
       title: "Children's Privacy",
       content: (
-        <p>Flowo is not intended for users under the age of 16. We do not knowingly collect personal data from children. If we learn that we have collected data from a child under 16, we will delete it promptly. If you believe a child has provided us with personal information, please contact us at <a href="mailto:privacy@flowo.com" className="font-medium text-primary underline">privacy@flowo.com</a>.</p>
+        <p>Publioxa is not intended for users under the age of 16. We do not knowingly collect personal data from children. If we learn that we have collected data from a child under 16, we will delete it promptly. If you believe a child has provided us with personal information, please contact us at <a href="mailto:privacy@publioxa.com" className="font-medium text-primary underline">privacy@publioxa.com</a>.</p>
       ),
     },
     {
@@ -155,7 +155,7 @@ const data: LegalPageData = {
       number: "10",
       title: "Changes to This Policy",
       content: (
-        <p>We may update this Privacy Policy from time to time. When we make significant changes, we will notify you via email or a prominent notice within the app at least <strong>14 days</strong> before the changes take effect. Your continued use of Flowo after changes are posted constitutes acceptance of the updated policy.</p>
+        <p>We may update this Privacy Policy from time to time. When we make significant changes, we will notify you via email or a prominent notice within the app at least <strong>14 days</strong> before the changes take effect. Your continued use of Publioxa after changes are posted constitutes acceptance of the updated policy.</p>
       ),
     },
     {
@@ -166,9 +166,9 @@ const data: LegalPageData = {
         <>
           <p>If you have questions, concerns, or requests regarding this Privacy Policy, contact us at:</p>
           <div className="mt-3 rounded-lg border bg-lavender/50 p-4 font-body text-sm">
-            <p><strong>Flowo Inc.</strong></p>
+            <p><strong>Publioxa Inc.</strong></p>
             <p>Attn: Privacy Team</p>
-            <p>Email: <a href="mailto:privacy@flowo.com" className="font-medium text-primary underline">privacy@flowo.com</a></p>
+            <p>Email: <a href="mailto:privacy@publioxa.com" className="font-medium text-primary underline">privacy@publioxa.com</a></p>
           </div>
         </>
       ),
@@ -176,5 +176,5 @@ const data: LegalPageData = {
   ],
 };
 
-const PrivacyPage = () => <><SEOHead title="Privacy Policy — Flowo" description="How Flowo collects, uses, and protects your personal information. GDPR and CCPA compliant." path="/privacy" /><LegalPageLayout data={data} currentPath="/privacy" /></>;
+const PrivacyPage = () => <><SEOHead title="Privacy Policy — Publioxa" description="How Publioxa collects, uses, and protects your personal information. GDPR and CCPA compliant." path="/privacy" /><LegalPageLayout data={data} currentPath="/privacy" /></>;
 export default PrivacyPage;

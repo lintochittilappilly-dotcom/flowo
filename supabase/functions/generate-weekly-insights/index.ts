@@ -111,7 +111,7 @@ Deno.serve(async (req) => {
         let insightType: string;
 
         if (AI_ENABLED) {
-          const prompt = `You are an expert social media analyst for a platform called Flowo.
+          const prompt = `You are an expert social media analyst for a platform called Publioxa.
 Analyze this user's social media performance for the past week and provide ONE specific, actionable insight in 2-3 sentences.
 
 Week Stats:

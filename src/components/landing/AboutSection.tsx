@@ -21,7 +21,7 @@ const AboutSection = () => (
           viewport={{ once: true }}
           className="mt-4 font-heading text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl"
         >
-          We Built Flowo Because Small Businesses Deserve a Fair Fight
+          We Built Publioxa Because Small Businesses Deserve a Fair Fight
         </motion.h2>
       </div>
 
@@ -56,7 +56,7 @@ const AboutSection = () => (
             Most social media tools were built for enterprise companies with dedicated marketing teams. Small business owners were left behind — forced to choose between spending thousands on agencies or wasting hours doing it themselves.
           </p>
           <p className="mt-4 font-body text-base leading-relaxed text-muted-foreground">
-            Flowo was built to change that. We believe every business owner deserves world-class social media presence — without world-class prices.
+            Publioxa was built to change that. We believe every business owner deserves world-class social media presence — without world-class prices.
           </p>
         </motion.div>
       </div>

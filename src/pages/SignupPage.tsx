@@ -10,7 +10,7 @@ import SEOHead from "@/components/seo-head";
 const SignupPage = () => {
   return (
     <>
-      <SEOHead title="Sign Up — Flowo" description="Create your free Flowo account. Get a 14-day trial with full Pro access. No credit card required." path="/signup" />
+      <SEOHead title="Sign Up — Publioxa" description="Create your free Publioxa account. Get a 14-day trial with full Pro access. No credit card required." path="/signup" />
       <SignupPageInner />
     </>
   );
@@ -87,7 +87,7 @@ const SignupPageInner = () => {
         >
           {/* Logo */}
           <Link to="/" className="mb-8 inline-block font-heading text-2xl font-bold text-primary">
-            ✨ Flowo
+            ✨ Publioxa
           </Link>
 
           <h1 className="font-heading text-2xl font-bold text-foreground sm:text-3xl">Create your free account</h1>

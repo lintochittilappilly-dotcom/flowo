@@ -32,8 +32,8 @@ const SecurityHighlights = () => (
 const data: LegalPageData = {
   badge: "Security",
   badgeIcon: <Shield className="h-4 w-4" />,
-  title: "Security at Flowo",
-  description: "How Flowo keeps your account and data safe and secure.",
+  title: "Security at Publioxa",
+  description: "How Publioxa keeps your account and data safe and secure.",
   lastUpdated: "February 15, 2026",
   readTime: "6 min read",
   sections: [
@@ -43,7 +43,7 @@ const data: LegalPageData = {
       title: "Our Security Philosophy",
       content: (
         <>
-          <p>Security isn't an afterthought at Flowo — it's woven into every layer of our platform. We handle sensitive data like social media credentials, business content, and payment information, and we take that responsibility seriously.</p>
+          <p>Security isn't an afterthought at Publioxa — it's woven into every layer of our platform. We handle sensitive data like social media credentials, business content, and payment information, and we take that responsibility seriously.</p>
           <SecurityHighlights />
         </>
       ),
@@ -54,7 +54,7 @@ const data: LegalPageData = {
       title: "Encryption",
       content: (
         <>
-          <p className="mb-3">All data transmitted between your browser and Flowo is encrypted using <strong>TLS 1.3</strong>, the latest and most secure transport protocol available. We enforce HTTPS on all endpoints with HSTS headers.</p>
+          <p className="mb-3">All data transmitted between your browser and Publioxa is encrypted using <strong>TLS 1.3</strong>, the latest and most secure transport protocol available. We enforce HTTPS on all endpoints with HSTS headers.</p>
           <p>Data stored in our databases is encrypted at rest using <strong>AES-256 encryption</strong>, the same standard used by banks and government agencies. Database backups are also encrypted.</p>
           <Callout>Sensitive data such as OAuth tokens are additionally encrypted at the application level with unique encryption keys before being stored in the database.</Callout>
         </>
@@ -70,9 +70,9 @@ const data: LegalPageData = {
           <ul className="list-none space-y-2">
             {[
               "We never see, store, or have access to your social media passwords",
-              "You grant Flowo specific, limited permissions (scopes) through the platform's own authorization screen",
+              "You grant Publioxa specific, limited permissions (scopes) through the platform's own authorization screen",
               "OAuth tokens are encrypted at rest and stored with minimal required scopes",
-              "You can revoke Flowo's access from your social media platform at any time",
+              "You can revoke Publioxa's access from your social media platform at any time",
               "Tokens are automatically refreshed and expired tokens are securely deleted",
             ].map((i) => (
               <li key={i} className="flex gap-2"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" /><span>{i}</span></li>
@@ -87,7 +87,7 @@ const data: LegalPageData = {
       title: "Infrastructure Security",
       content: (
         <>
-          <p className="mb-3">Flowo's infrastructure is built on top of trusted, enterprise-grade platforms:</p>
+          <p className="mb-3">Publioxa's infrastructure is built on top of trusted, enterprise-grade platforms:</p>
           <ul className="list-none space-y-2">
             {[
               "Supabase (built on AWS) — SOC 2 Type II certified database and authentication",
@@ -129,7 +129,7 @@ const data: LegalPageData = {
       title: "Your Account Security",
       content: (
         <>
-          <p className="mb-3">We provide multiple features to help you keep your Flowo account secure:</p>
+          <p className="mb-3">We provide multiple features to help you keep your Publioxa account secure:</p>
           <ul className="list-none space-y-2">
             {[
               "Two-factor authentication (2FA) — available for all accounts via authenticator apps",
@@ -203,7 +203,7 @@ const data: LegalPageData = {
               <li key={i} className="flex gap-2"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" /><span>{i}</span></li>
             ))}
           </ul>
-          <p>To report a security vulnerability, email <a href="mailto:security@flowo.com" className="font-medium text-primary underline">security@flowo.com</a>. Please include a detailed description of the vulnerability, steps to reproduce, and potential impact. We will acknowledge receipt within 24 hours and aim to resolve confirmed issues within 7 days.</p>
+          <p>To report a security vulnerability, email <a href="mailto:security@publioxa.com" className="font-medium text-primary underline">security@publioxa.com</a>. Please include a detailed description of the vulnerability, steps to reproduce, and potential impact. We will acknowledge receipt within 24 hours and aim to resolve confirmed issues within 7 days.</p>
         </>
       ),
     },

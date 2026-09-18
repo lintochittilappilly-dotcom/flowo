@@ -102,7 +102,7 @@ const extractPlanData = (planFeaturesContent: string) => {
 const generateREADME = (data: any) => {
   const plans = extractPlanData(data.planFeatures);
   
-  return `# ✦ Flowo — AI Social Media Manager
+  return `# ✦ Publioxa — AI Social Media Manager
 
 > Your AI Social Media Team. Generate, schedule, and publish content across all platforms automatically.
 
@@ -114,9 +114,9 @@ const generateREADME = (data: any) => {
 
 ---
 
-## What is Flowo?
+## What is Publioxa?
 
-Flowo is an AI-powered social media management platform that automates content creation, scheduling, and analytics across all major social platforms. Generate high-quality posts with AI, schedule them weeks in advance, track performance with detailed analytics, and manage multiple brands from one unified dashboard.
+Publioxa is an AI-powered social media management platform that automates content creation, scheduling, and analytics across all major social platforms. Generate high-quality posts with AI, schedule them weeks in advance, track performance with detailed analytics, and manage multiple brands from one unified dashboard.
 
 ## ✨ Features
 
@@ -184,7 +184,7 @@ Flowo is an AI-powered social media management platform that automates content c
 ## 📁 Project Structure
 
 \`\`\`
-flowo/
+publioxa/
 ├── src/
 │   ├── components/          # Reusable UI components
 │   │   ├── auth/           # Authentication components
@@ -226,8 +226,8 @@ flowo/
 ### Installation
 
 \`\`\`bash
-git clone https://github.com/yourusername/flowo.git
-cd flowo
+git clone https://github.com/yourusername/publioxa.git
+cd publioxa
 npm install
 cp .env.example .env
 \`\`\`
@@ -329,14 +329,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🆘 Support
 
-- 📧 Email: support@flowo.com
-- 💬 Discord: [Join our community](https://discord.gg/flowo)
-- 📖 Documentation: [docs.flowo.com](https://docs.flowo.com)
-- 🐛 Bug Reports: [GitHub Issues](https://github.com/yourusername/flowo/issues)
+- 📧 Email: support@publioxa.com
+- 💬 Discord: [Join our community](https://discord.gg/publioxa)
+- 📖 Documentation: [docs.publioxa.com](https://docs.publioxa.com)
+- 🐛 Bug Reports: [GitHub Issues](https://github.com/yourusername/publioxa/issues)
 
 ---
 
-**Built with ❤️ by the Flowo team**
+**Built with ❤️ by the Publioxa team**
 `;
 };
 
@@ -344,15 +344,15 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 const generateSupabaseSetup = (data: any) => {
   const edgeFunctions = data.edgeFunctions;
   
-  return `# Supabase Setup Guide — Flowo
+  return `# Supabase Setup Guide — Publioxa
 
-Complete step-by-step guide to set up the Flowo database, authentication, storage, Edge Functions, and cron jobs.
+Complete step-by-step guide to set up the Publioxa database, authentication, storage, Edge Functions, and cron jobs.
 
 ---
 
 ## 📋 Overview
 
-Flowo uses Supabase as its complete backend infrastructure:
+Publioxa uses Supabase as its complete backend infrastructure:
 - **PostgreSQL Database**: 25+ tables with Row Level Security
 - **Authentication**: Email/password + OAuth providers
 - **Storage**: File uploads for images and brand assets  
@@ -364,7 +364,7 @@ Flowo uses Supabase as its complete backend infrastructure:
 1. Go to [https://supabase.com](https://supabase.com) and sign in
 2. Click **"New Project"**
 3. Choose your organization
-4. Enter project name: \`flowo-production\`
+4. Enter project name: \`publioxa-production\`
 5. Set a **strong database password** — save it securely
 6. Choose region closest to your users
 7. Click **"Create new project"** — wait 2-3 minutes for provisioning
@@ -1102,7 +1102,7 @@ https://yourdomain.com/invite/accept
 
 ### 5.4 — Customize Email Templates
 In **Authentication → Email Templates**, update:
-- **Confirm signup** template with Flowo branding
+- **Confirm signup** template with Publioxa branding
 - **Invite user** template
 - **Reset password** template
 
@@ -1340,15 +1340,15 @@ const getFunctionDescription = (functionName: string): string => {
 
 // Generate STRIPE_SETUP.md
 const generateStripeSetup = () => {
-  return `# Stripe Setup Guide — Flowo
+  return `# Stripe Setup Guide — Publioxa
 
-Complete step-by-step guide to enable real subscription billing in Flowo.
+Complete step-by-step guide to enable real subscription billing in Publioxa.
 
 ---
 
 ## 📋 Overview
 
-Flowo uses Stripe for subscription billing with three automated plans:
+Publioxa uses Stripe for subscription billing with three automated plans:
 - **Starter**: $49/month or $39/month annual
 - **Pro**: $99/month or $79/month annual  
 - **Agency**: $199/month or $159/month annual
@@ -1516,7 +1516,7 @@ npm run dev
    - Any 3-digit CVC
    - Any billing address
 5. Complete the payment
-6. You should be redirected back to Flowo with a success message
+6. You should be redirected back to Publioxa with a success message
 
 ### 7.2 — Verify Database Updates
 
@@ -1653,15 +1653,15 @@ Users can now subscribe to paid plans and get automatically charged monthly or a
 
 // Generate API_CONNECT.md
 const generateAPIConnect = () => {
-  return `# Social Platform API Connection Guide — Flowo
+  return `# Social Platform API Connection Guide — Publioxa
 
-Complete step-by-step guide to create developer apps and connect all 6 social media platforms to Flowo.
+Complete step-by-step guide to create developer apps and connect all 6 social media platforms to Publioxa.
 
 ---
 
 ## 📋 Overview
 
-Flowo supports 6 major social media platforms. Each platform requires creating a developer app, getting OAuth credentials, and configuring redirect URLs. **You can connect any combination** — each platform is independent.
+Publioxa supports 6 major social media platforms. Each platform requires creating a developer app, getting OAuth credentials, and configuring redirect URLs. **You can connect any combination** — each platform is independent.
 
 | Platform | Publishing | Analytics | Approval Time | Cost |
 |----------|------------|-----------|---------------|------|
@@ -1679,7 +1679,7 @@ Flowo supports 6 major social media platforms. Each platform requires creating a
 ### Required Information
 
 For each platform you'll need:
-- **App Name**: \`Flowo\` (or your branded name)
+- **App Name**: \`Publioxa\` (or your branded name)
 - **App Description**: \`AI-powered social media management platform for automated content creation and scheduling\`
 - **Website URL**: Your production domain (e.g., \`https://yourdomain.com\`)
 - **Privacy Policy URL**: \`https://yourdomain.com/privacy\`
@@ -1712,7 +1712,7 @@ Replace \`[platform]\` with: \`instagram\`, \`facebook\`, \`linkedin\`, \`twitte
 2. **Use case**: Select **"Other"**
 3. **App type**: Select **"Business"**
 4. **App details**:
-   - **App name**: \`Flowo\`
+   - **App name**: \`Publioxa\`
    - **App contact email**: Your business email
 5. Click **"Create App"**
 
@@ -1823,7 +1823,7 @@ Submit for review requesting the permissions above. Provide screen recordings sh
 
 1. Go to [https://linkedin.com/developers](https://linkedin.com/developers)
 2. Click **"Create App"**
-3. **App name**: \`Flowo\`
+3. **App name**: \`Publioxa\`
 4. **LinkedIn Page**: Select your company LinkedIn page (required)
 5. **App logo**: Upload your logo (400x400px PNG)
 6. **Legal agreement**: Check and accept
@@ -1872,17 +1872,17 @@ VITE_LINKEDIN_ENABLED=true
 1. Go to [https://developer.twitter.com](https://developer.twitter.com)
 2. **Apply for a developer account**
 3. **Describe your use case**: 
-   > "Building Flowo, an AI-powered social media management platform that helps businesses create and schedule Twitter content. Our app will post tweets on behalf of users and provide analytics on tweet performance."
+   > "Building Publioxa, an AI-powered social media management platform that helps businesses create and schedule Twitter content. Our app will post tweets on behalf of users and provide analytics on tweet performance."
 4. **Wait for approval** (usually same day, sometimes up to 3 days)
 
 ### Step 2 — Create Project and App
 
 1. Go to **Developer Portal → Projects & Apps**
 2. **Create Project**:
-   - **Name**: \`Flowo\`
+   - **Name**: \`Publioxa\`
    - **Use case**: \`Making a bot\` or \`Building tools for Twitter users\`
 3. **Create App** inside the project:
-   - **App name**: \`Flowo\`
+   - **App name**: \`Publioxa\`
    - **Environment**: \`Development\` (change to Production later)
 
 ### Step 3 — Configure App Settings
@@ -1921,7 +1921,7 @@ VITE_TWITTER_ENABLED=true
 - **Basic tier**: $100/month — required for posting tweets and managing posts
 - **Pro tier**: $5,000/month — for enterprise features
 
-**For Flowo to publish tweets, you need at least the Basic tier subscription.**
+**For Publioxa to publish tweets, you need at least the Basic tier subscription.**
 
 ### Step 6 — Upgrade to Basic Tier
 
@@ -1945,7 +1945,7 @@ VITE_TWITTER_ENABLED=true
 
 1. Go to **"Manage Apps"** → **"Create an App"**
 2. **App details**:
-   - **App Name**: \`Flowo\`
+   - **App Name**: \`Publioxa\`
    - **Category**: \`Tools and Utilities\`
    - **Platform**: \`Web\`
    - **App description**: \`AI social media management platform\`
@@ -2009,7 +2009,7 @@ Submit app review for **Content Posting API**:
 
 ### Step 3 — Create App
 
-1. **App name**: \`Flowo\`
+1. **App name**: \`Publioxa\`
 2. **Description**: \`AI-powered social media management tool for automated Pinterest pin creation and scheduling\`
 3. **App website**: \`https://yourdomain.com\`
 4. **Privacy Policy URL**: \`https://yourdomain.com/privacy\`
@@ -2153,13 +2153,13 @@ Visit \`/admin/health\` to check platform integration status:
 
 **All social platforms are now configured! 🎉**
 
-Users can connect their social media accounts and start publishing content across all platforms. Your Flowo setup is complete!
+Users can connect their social media accounts and start publishing content across all platforms. Your Publioxa setup is complete!
 `;
 };
 
 // Generate all documentation files
 const generateDocs = () => {
-  console.log('🚀 Generating Flowo documentation files...');
+  console.log('🚀 Generating Publioxa documentation files...');
   
   const projectData = readProjectData();
   

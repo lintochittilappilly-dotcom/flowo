@@ -29,28 +29,28 @@ const features = [
   { icon: <Terminal className="h-5 w-5" />, title: "SDKs", desc: "Official JavaScript/TypeScript SDK. Python SDK coming Q3 2026." },
 ];
 
-const codeExample = `// Install: npm install @flowo/sdk
+const codeExample = `// Install: npm install @publioxa/sdk
 
-import { Flowo } from '@flowo/sdk';
+import { Publioxa } from '@publioxa/sdk';
 
-const flowo = new Flowo({ apiKey: 'your-api-key' });
+const publioxa = new Publioxa({ apiKey: 'your-api-key' });
 
 // Generate AI content
-const content = await flowo.ai.generate({
+const content = await publioxa.ai.generate({
   prompt: 'Share a tip about social media consistency',
   platform: 'instagram',
   tone: 'casual',
 });
 
 // Schedule the post
-await flowo.posts.create({
+await publioxa.posts.create({
   content: content.caption,
   platforms: ['instagram', 'linkedin'],
   scheduledAt: '2026-03-15T10:00:00Z',
 });`;
 
 const APIDocumentationPage = () => (
-  <InfoPageLayout badge="Developers" badgeIcon={<Code2 className="h-4 w-4" />} title="API Documentation" description="Build powerful integrations with Flowo's RESTful API.">
+  <InfoPageLayout badge="Developers" badgeIcon={<Code2 className="h-4 w-4" />} title="API Documentation" description="Build powerful integrations with Publioxa's RESTful API.">
     {/* Features */}
     <div className="mb-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {features.map((f, i) => (
@@ -81,7 +81,7 @@ const APIDocumentationPage = () => (
     {/* Endpoints */}
     <section>
       <h2 className="mb-6 border-l-4 border-primary pl-4 font-heading text-2xl font-bold text-foreground">API Endpoints</h2>
-      <p className="mb-4 font-body text-sm text-muted-foreground">Base URL: <code className="rounded bg-lavender px-2 py-0.5 font-mono text-xs text-primary">https://api.flowo.com</code></p>
+      <p className="mb-4 font-body text-sm text-muted-foreground">Base URL: <code className="rounded bg-lavender px-2 py-0.5 font-mono text-xs text-primary">https://api.publioxa.com</code></p>
       <div className="space-y-2">
         {endpoints.map((ep) => (
           <div key={ep.method + ep.path} className="flex items-center gap-4 rounded-lg border bg-card px-5 py-3 shadow-sm">

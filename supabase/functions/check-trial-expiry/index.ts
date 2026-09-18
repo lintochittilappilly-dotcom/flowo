@@ -74,8 +74,8 @@ Deno.serve(async (req) => {
       const userName = user.full_name || "there";
       const subject =
         daysLeft === 1
-          ? "⚠️ Your Flowo trial expires tomorrow"
-          : "⏳ Your Flowo trial ends in 3 days";
+          ? "⚠️ Your Publioxa trial expires tomorrow"
+          : "⏳ Your Publioxa trial ends in 3 days";
 
       const htmlBody = `
 <!DOCTYPE html>
@@ -84,7 +84,7 @@ Deno.serve(async (req) => {
 <body style="margin:0;padding:0;background:#ffffff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
   <div style="max-width:560px;margin:0 auto;padding:40px 24px;">
     <div style="text-align:center;margin-bottom:32px;">
-      <h1 style="font-size:24px;font-weight:700;color:#1a1a2e;margin:0;">Flowo</h1>
+      <h1 style="font-size:24px;font-weight:700;color:#1a1a2e;margin:0;">Publioxa</h1>
     </div>
     
     <div style="background:${daysLeft === 1 ? "#FEF2F2" : "#FFFBEB"};border:1px solid ${daysLeft === 1 ? "#FECACA" : "#FDE68A"};border-radius:12px;padding:24px;text-align:center;margin-bottom:24px;">
@@ -123,7 +123,7 @@ Deno.serve(async (req) => {
 
     <hr style="border:none;border-top:1px solid #E5E7EB;margin:32px 0 16px 0;">
     <p style="font-size:12px;color:#9CA3AF;text-align:center;">
-      Flowo — AI-Powered Social Media Management
+      Publioxa — AI-Powered Social Media Management
     </p>
   </div>
 </body>
@@ -137,7 +137,7 @@ Deno.serve(async (req) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            from: "Flowo <noreply@flowo.com>",
+            from: "Publioxa <noreply@publioxa.com>",
             to: [user.email],
             subject,
             html: htmlBody,

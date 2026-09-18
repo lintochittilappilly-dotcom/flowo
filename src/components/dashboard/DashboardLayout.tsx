@@ -63,9 +63,9 @@ const DashboardLayout = () => {
       }
 
       // Process pending invite from localStorage
-      const pendingToken = localStorage.getItem("flowo_invite_token");
+      const pendingToken = localStorage.getItem("publioxa_invite_token");
       if (pendingToken) {
-        localStorage.removeItem("flowo_invite_token");
+        localStorage.removeItem("publioxa_invite_token");
         await supabase
           .from("team_members")
           .update({

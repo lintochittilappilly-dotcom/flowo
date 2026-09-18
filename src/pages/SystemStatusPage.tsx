@@ -26,7 +26,7 @@ const StatusIcon = ({ status }: { status: string }) => {
 };
 
 const SystemStatusPage = () => (
-  <InfoPageLayout badge="Status" badgeIcon={<Activity className="h-4 w-4" />} title="System Status" description="Real-time status of all Flowo services and infrastructure.">
+  <InfoPageLayout badge="Status" badgeIcon={<Activity className="h-4 w-4" />} title="System Status" description="Real-time status of all Publioxa services and infrastructure.">
     {/* Overall */}
     <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="mb-10 flex items-center gap-4 rounded-2xl border-2 border-success/30 bg-success/5 p-6">
       <CheckCircle2 className="h-10 w-10 text-success" />

@@ -55,7 +55,7 @@ const ResetPasswordPage = () => {
         className="w-full max-w-[460px] rounded-[20px] bg-card p-8 shadow-lg sm:p-10"
       >
         <Link to="/" className="mb-6 inline-block font-heading text-2xl font-bold text-primary">
-          ✨ Flowo
+          ✨ Publioxa
         </Link>
 
         {success ? (

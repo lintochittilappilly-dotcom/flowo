@@ -34,7 +34,7 @@ interface RelatedPage {
 
 const allPages: RelatedPage[] = [
   { path: "/privacy", title: "Privacy Policy", description: "How we collect and protect your data", icon: <Shield className="h-5 w-5" /> },
-  { path: "/terms", title: "Terms of Service", description: "Rules governing your use of Flowo", icon: <Info className="h-5 w-5" /> },
+  { path: "/terms", title: "Terms of Service", description: "Rules governing your use of Publioxa", icon: <Info className="h-5 w-5" /> },
   { path: "/cookies", title: "Cookie Policy", description: "What cookies we use and why", icon: <Info className="h-5 w-5" /> },
   { path: "/gdpr", title: "GDPR Compliance", description: "Your data rights under GDPR", icon: <Shield className="h-5 w-5" /> },
   { path: "/security", title: "Security", description: "How we keep your data safe", icon: <Shield className="h-5 w-5" /> },
@@ -117,7 +117,7 @@ const LegalPageLayout = ({ data, currentPath }: { data: LegalPageData; currentPa
                 <Clock className="h-3.5 w-3.5" /> {data.readTime}
               </span>
               <span className="inline-flex items-center gap-1.5 rounded-md bg-card px-3 py-1.5 font-body text-xs text-muted-foreground shadow-sm">
-                <Shield className="h-3.5 w-3.5" /> Flowo Inc.
+                <Shield className="h-3.5 w-3.5" /> Publioxa Inc.
               </span>
             </div>
           </motion.div>
@@ -214,10 +214,10 @@ const LegalPageLayout = ({ data, currentPath }: { data: LegalPageData; currentPa
                   We're happy to clarify anything. Our legal and support teams are here to help.
                 </p>
                 <a
-                  href="mailto:legal@flowo.com"
+                  href="mailto:legal@publioxa.com"
                   className="mt-3 inline-flex items-center gap-2 font-body text-sm font-semibold text-primary hover:underline"
                 >
-                  <Mail className="h-4 w-4" /> legal@flowo.com
+                  <Mail className="h-4 w-4" /> legal@publioxa.com
                 </a>
                 <div className="mt-4">
                   <Link

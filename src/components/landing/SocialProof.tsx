@@ -3,11 +3,11 @@ import SectionBadge from "./SectionBadge";
 import { useCountUp } from "@/hooks/useCountUp";
 
 const stats = [
-  { end: 2847, label: "Businesses using Flowo daily", sub: "From solo coaches to 50-person agencies", suffix: "", decimals: 0, format: true },
+  { end: 2847, label: "Businesses using Publioxa daily", sub: "From solo coaches to 50-person agencies", suffix: "", decimals: 0, format: true },
   { end: 94, label: "Report saving 10+ hours/week", sub: "Verified from post-signup survey", suffix: "%", decimals: 0, format: false },
   { end: 4.9, label: "Average customer rating", sub: "Based on 800+ verified reviews", suffix: "/5", decimals: 1, format: false },
-  { end: 12, label: "Posts published through Flowo", sub: "Across all platforms combined", suffix: "M+", decimals: 0, format: false },
-  { end: 3.2, label: "Average engagement increase", sub: "Compared to before using Flowo", suffix: "x", decimals: 1, format: false },
+  { end: 12, label: "Posts published through Publioxa", sub: "Across all platforms combined", suffix: "M+", decimals: 0, format: false },
+  { end: 3.2, label: "Average engagement increase", sub: "Compared to before using Publioxa", suffix: "x", decimals: 1, format: false },
   { end: 14, label: "Average time to see results", sub: "Most users see growth in the first two weeks", suffix: " days", decimals: 0, format: false },
 ];
 

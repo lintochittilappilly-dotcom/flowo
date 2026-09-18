@@ -6,7 +6,7 @@ const data: LegalPageData = {
   badge: "Legal",
   badgeIcon: <Info className="h-4 w-4" />,
   title: "Terms of Service",
-  description: "The rules and agreements that govern your use of Flowo.",
+  description: "The rules and agreements that govern your use of Publioxa.",
   lastUpdated: "February 15, 2026",
   readTime: "10 min read",
   sections: [
@@ -16,8 +16,8 @@ const data: LegalPageData = {
       title: "Acceptance of Terms",
       content: (
         <>
-          <p>By accessing or using Flowo ("the Service"), you agree to be bound by these Terms of Service ("Terms"). If you are using Flowo on behalf of an organization, you represent that you have authority to bind that organization to these Terms.</p>
-          <Callout>Please read these Terms carefully before using Flowo. If you do not agree with any part of these Terms, you must not use our Service.</Callout>
+          <p>By accessing or using Publioxa ("the Service"), you agree to be bound by these Terms of Service ("Terms"). If you are using Publioxa on behalf of an organization, you represent that you have authority to bind that organization to these Terms.</p>
+          <Callout>Please read these Terms carefully before using Publioxa. If you do not agree with any part of these Terms, you must not use our Service.</Callout>
         </>
       ),
     },
@@ -27,13 +27,13 @@ const data: LegalPageData = {
       title: "Account Registration & Eligibility",
       content: (
         <>
-          <p className="mb-3">To use Flowo, you must:</p>
+          <p className="mb-3">To use Publioxa, you must:</p>
           <ul className="list-none space-y-2">
             {["Be at least 16 years of age", "Provide accurate and complete registration information", "Maintain the security of your account credentials", "Notify us immediately of any unauthorized account access"].map((i) => (
               <li key={i} className="flex gap-2"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" /><span>{i}</span></li>
             ))}
           </ul>
-          <p className="mt-3">You are solely responsible for all activity under your account. Flowo reserves the right to refuse service, terminate accounts, or remove content at our discretion.</p>
+          <p className="mt-3">You are solely responsible for all activity under your account. Publioxa reserves the right to refuse service, terminate accounts, or remove content at our discretion.</p>
         </>
       ),
     },
@@ -43,7 +43,7 @@ const data: LegalPageData = {
       title: "Acceptable Use Policy",
       content: (
         <>
-          <p className="mb-3">You agree to use Flowo only for lawful purposes and in accordance with these Terms. You must <strong>not</strong>:</p>
+          <p className="mb-3">You agree to use Publioxa only for lawful purposes and in accordance with these Terms. You must <strong>not</strong>:</p>
           <ul className="list-none space-y-2">
             {[
               "Use the Service to distribute spam, malware, or harmful content",
@@ -66,7 +66,7 @@ const data: LegalPageData = {
       title: "Subscription & Billing",
       content: (
         <>
-          <p className="mb-3">Flowo offers free and paid subscription plans. By selecting a paid plan:</p>
+          <p className="mb-3">Publioxa offers free and paid subscription plans. By selecting a paid plan:</p>
           <ul className="list-none space-y-2 mb-3">
             {[
               "You authorize us to charge your payment method on a recurring basis (monthly or annual)",
@@ -87,8 +87,8 @@ const data: LegalPageData = {
       title: "Intellectual Property",
       content: (
         <>
-          <p className="mb-3"><strong>Our IP:</strong> Flowo, its logo, design, features, and underlying technology are owned by Flowo Inc. and protected by copyright, trademark, and other intellectual property laws. You may not copy, modify, or reverse-engineer any part of our Service.</p>
-          <p><strong>Your Content:</strong> You retain full ownership of all content you create, upload, or publish through Flowo. By using our Service, you grant us a limited, non-exclusive license to store, process, and display your content solely for the purpose of providing the Service to you.</p>
+          <p className="mb-3"><strong>Our IP:</strong> Publioxa, its logo, design, features, and underlying technology are owned by Publioxa Inc. and protected by copyright, trademark, and other intellectual property laws. You may not copy, modify, or reverse-engineer any part of our Service.</p>
+          <p><strong>Your Content:</strong> You retain full ownership of all content you create, upload, or publish through Publioxa. By using our Service, you grant us a limited, non-exclusive license to store, process, and display your content solely for the purpose of providing the Service to you.</p>
         </>
       ),
     },
@@ -98,13 +98,13 @@ const data: LegalPageData = {
       title: "AI-Generated Content",
       content: (
         <>
-          <p className="mb-3">Flowo uses artificial intelligence (powered by OpenAI) to generate content suggestions, captions, and ideas. You understand and agree that:</p>
+          <p className="mb-3">Publioxa uses artificial intelligence (powered by OpenAI) to generate content suggestions, captions, and ideas. You understand and agree that:</p>
           <ul className="list-none space-y-2">
             {[
               "AI-generated content is provided as suggestions — you are responsible for reviewing and approving all content before publishing",
               "AI outputs may not always be accurate, original, or appropriate for your audience",
               "You are solely responsible for any content you publish, whether AI-generated or manually created",
-              "Flowo makes no warranties regarding the quality, accuracy, or legality of AI-generated content",
+              "Publioxa makes no warranties regarding the quality, accuracy, or legality of AI-generated content",
             ].map((i) => (
               <li key={i} className="flex gap-2"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" /><span>{i}</span></li>
             ))}
@@ -138,9 +138,9 @@ const data: LegalPageData = {
       title: "Disclaimers & Limitation of Liability",
       content: (
         <>
-          <p className="mb-3">Flowo is provided <strong>"as is"</strong> and <strong>"as available."</strong> We disclaim all warranties, express or implied, including merchantability, fitness for a particular purpose, and non-infringement.</p>
-          <Callout>To the maximum extent permitted by law, Flowo Inc. shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or business opportunities, arising from your use of the Service.</Callout>
-          <p>Our total liability for any claim related to the Service shall not exceed the amount you paid to Flowo in the 12 months preceding the claim.</p>
+          <p className="mb-3">Publioxa is provided <strong>"as is"</strong> and <strong>"as available."</strong> We disclaim all warranties, express or implied, including merchantability, fitness for a particular purpose, and non-infringement.</p>
+          <Callout>To the maximum extent permitted by law, Publioxa Inc. shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, data, or business opportunities, arising from your use of the Service.</Callout>
+          <p>Our total liability for any claim related to the Service shall not exceed the amount you paid to Publioxa in the 12 months preceding the claim.</p>
         </>
       ),
     },
@@ -149,7 +149,7 @@ const data: LegalPageData = {
       number: "09",
       title: "Indemnification",
       content: (
-        <p>You agree to indemnify, defend, and hold harmless Flowo Inc., its officers, directors, employees, and agents from any claims, damages, losses, or expenses (including reasonable attorney's fees) arising from your use of the Service, your content, or your violation of these Terms.</p>
+        <p>You agree to indemnify, defend, and hold harmless Publioxa Inc., its officers, directors, employees, and agents from any claims, damages, losses, or expenses (including reasonable attorney's fees) arising from your use of the Service, your content, or your violation of these Terms.</p>
       ),
     },
     {
@@ -168,11 +168,11 @@ const data: LegalPageData = {
       number: "11",
       title: "Changes to These Terms",
       content: (
-        <p>We reserve the right to modify these Terms at any time. Material changes will be communicated via email or in-app notification at least <strong>30 days</strong> before taking effect. Continued use of Flowo after changes constitutes acceptance. If you disagree with updated Terms, you may cancel your account before the changes take effect.</p>
+        <p>We reserve the right to modify these Terms at any time. Material changes will be communicated via email or in-app notification at least <strong>30 days</strong> before taking effect. Continued use of Publioxa after changes constitutes acceptance. If you disagree with updated Terms, you may cancel your account before the changes take effect.</p>
       ),
     },
   ],
 };
 
-const TermsPage = () => <><SEOHead title="Terms of Service — Flowo" description="The rules and agreements that govern your use of the Flowo platform." path="/terms" /><LegalPageLayout data={data} currentPath="/terms" /></>;
+const TermsPage = () => <><SEOHead title="Terms of Service — Publioxa" description="The rules and agreements that govern your use of the Publioxa platform." path="/terms" /><LegalPageLayout data={data} currentPath="/terms" /></>;
 export default TermsPage;

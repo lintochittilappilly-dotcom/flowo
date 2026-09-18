@@ -5,7 +5,7 @@ const data: LegalPageData = {
   badge: "GDPR",
   badgeIcon: <Shield className="h-4 w-4" />,
   title: "GDPR Compliance",
-  description: "How Flowo complies with the General Data Protection Regulation.",
+  description: "How Publioxa complies with the General Data Protection Regulation.",
   lastUpdated: "February 15, 2026",
   readTime: "7 min read",
   sections: [
@@ -15,18 +15,18 @@ const data: LegalPageData = {
       title: "Our Commitment to GDPR",
       content: (
         <>
-          <p>Flowo is committed to full compliance with the General Data Protection Regulation (GDPR) and the UK GDPR. We believe that strong data protection practices aren't just a legal requirement — they're fundamental to building trust with our users across the European Union, the United Kingdom, and worldwide.</p>
-          <Callout>Whether you're based in the EU or not, we apply GDPR-level data protection standards to all Flowo users globally.</Callout>
+          <p>Publioxa is committed to full compliance with the General Data Protection Regulation (GDPR) and the UK GDPR. We believe that strong data protection practices aren't just a legal requirement — they're fundamental to building trust with our users across the European Union, the United Kingdom, and worldwide.</p>
+          <Callout>Whether you're based in the EU or not, we apply GDPR-level data protection standards to all Publioxa users globally.</Callout>
         </>
       ),
     },
     {
       id: "role",
       number: "02",
-      title: "Flowo as Data Controller",
+      title: "Publioxa as Data Controller",
       content: (
         <>
-          <p className="mb-3">Under the GDPR, Flowo Inc. acts as the <strong>data controller</strong> for the personal data of our users. This means we determine the purposes and means of processing your personal data.</p>
+          <p className="mb-3">Under the GDPR, Publioxa Inc. acts as the <strong>data controller</strong> for the personal data of our users. This means we determine the purposes and means of processing your personal data.</p>
           <p>When you connect third-party social media platforms (Instagram, LinkedIn, Twitter/X), we process that data under your explicit authorization via OAuth consent. We act as a data processor for the content you create and schedule through our platform.</p>
         </>
       ),
@@ -40,7 +40,7 @@ const data: LegalPageData = {
           <p className="mb-3">We process your personal data under the following lawful bases:</p>
           <ul className="list-none space-y-3">
             {[
-              { basis: "Contract Performance", desc: "Processing necessary to provide the Flowo service you signed up for, including account management, content scheduling, and social media publishing." },
+              { basis: "Contract Performance", desc: "Processing necessary to provide the Publioxa service you signed up for, including account management, content scheduling, and social media publishing." },
               { basis: "Legitimate Interest", desc: "Processing for analytics, product improvement, fraud prevention, and security — where our interests don't override your rights." },
               { basis: "Consent", desc: "Processing for marketing emails, optional analytics cookies, and AI content generation. You can withdraw consent at any time." },
               { basis: "Legal Obligation", desc: "Processing required to comply with tax, accounting, and regulatory requirements." },
@@ -72,7 +72,7 @@ const data: LegalPageData = {
               <li key={r} className="flex gap-2"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" /><span>{r}</span></li>
             ))}
           </ul>
-          <Callout>To exercise any of these rights, email <a href="mailto:privacy@flowo.com" className="font-medium text-primary underline">privacy@flowo.com</a> with the subject line "GDPR Request." We will respond within <strong>30 days</strong> as required by law. We may ask for identity verification before processing your request.</Callout>
+          <Callout>To exercise any of these rights, email <a href="mailto:privacy@publioxa.com" className="font-medium text-primary underline">privacy@publioxa.com</a> with the subject line "GDPR Request." We will respond within <strong>30 days</strong> as required by law. We may ask for identity verification before processing your request.</Callout>
         </>
       ),
     },
@@ -82,7 +82,7 @@ const data: LegalPageData = {
       title: "International Data Transfers",
       content: (
         <>
-          <p className="mb-3">Flowo's primary infrastructure is hosted in the United States via Supabase (AWS). When transferring data outside the EU/EEA, we rely on the following safeguards:</p>
+          <p className="mb-3">Publioxa's primary infrastructure is hosted in the United States via Supabase (AWS). When transferring data outside the EU/EEA, we rely on the following safeguards:</p>
           <ul className="list-none space-y-2">
             {[
               "EU-U.S. Data Privacy Framework (DPF) for applicable service providers",
@@ -146,8 +146,8 @@ const data: LegalPageData = {
           <p>You can reach our Data Protection Officer for any GDPR-related inquiries:</p>
           <div className="mt-3 rounded-lg border bg-lavender/50 p-4 font-body text-sm">
             <p><strong>Data Protection Officer</strong></p>
-            <p>Flowo Inc.</p>
-            <p>Email: <a href="mailto:dpo@flowo.com" className="font-medium text-primary underline">dpo@flowo.com</a></p>
+            <p>Publioxa Inc.</p>
+            <p>Email: <a href="mailto:dpo@publioxa.com" className="font-medium text-primary underline">dpo@publioxa.com</a></p>
           </div>
           <p className="mt-3">If you are not satisfied with our response, you have the right to lodge a complaint with your local data protection supervisory authority.</p>
         </>

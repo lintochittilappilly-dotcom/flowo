@@ -16,13 +16,13 @@ const CookieTable = () => (
         {[
           ["sb-access-token", "Supabase authentication session", "1 hour", "Essential"],
           ["sb-refresh-token", "Supabase session refresh", "7 days", "Essential"],
-          ["flowo_session", "Application session management", "Session", "Essential"],
-          ["flowo_preferences", "User UI preferences (theme, sidebar)", "1 year", "Preference"],
+          ["publioxa_session", "Application session management", "Session", "Essential"],
+          ["publioxa_preferences", "User UI preferences (theme, sidebar)", "1 year", "Preference"],
           ["_ga", "Google Analytics — unique visitor tracking", "2 years", "Analytics"],
           ["_ga_*", "Google Analytics — session tracking", "1 year", "Analytics"],
           ["__stripe_mid", "Stripe fraud prevention", "1 year", "Essential"],
           ["__stripe_sid", "Stripe checkout session", "30 min", "Essential"],
-          ["flowo_consent", "Cookie consent preferences", "1 year", "Essential"],
+          ["publioxa_consent", "Cookie consent preferences", "1 year", "Essential"],
           ["_fbp", "Facebook Pixel (if ads enabled)", "90 days", "Marketing"],
         ].map(([name, purpose, duration, type]) => (
           <tr key={name} className="hover:bg-lavender/30">
@@ -48,7 +48,7 @@ const data: LegalPageData = {
   badge: "Cookies",
   badgeIcon: <Info className="h-4 w-4" />,
   title: "Cookie Policy",
-  description: "What cookies Flowo uses and how to control them.",
+  description: "What cookies Publioxa uses and how to control them.",
   lastUpdated: "February 15, 2026",
   readTime: "5 min read",
   sections: [
@@ -57,7 +57,7 @@ const data: LegalPageData = {
       number: "01",
       title: "What Are Cookies?",
       content: (
-        <p>Cookies are small text files placed on your device when you visit a website. They help websites remember your preferences, keep you signed in, and understand how you use the site. Cookies can be "first-party" (set by Flowo) or "third-party" (set by services we use like Google Analytics or Stripe).</p>
+        <p>Cookies are small text files placed on your device when you visit a website. They help websites remember your preferences, keep you signed in, and understand how you use the site. Cookies can be "first-party" (set by Publioxa) or "third-party" (set by services we use like Google Analytics or Stripe).</p>
       ),
     },
     {
@@ -66,8 +66,8 @@ const data: LegalPageData = {
       title: "Types of Cookies We Use",
       content: (
         <>
-          <p className="mb-3"><strong>Essential Cookies:</strong> Required for Flowo to function properly. These handle authentication, security, and basic session management. You cannot opt out of these cookies — without them, the app won't work.</p>
-          <p className="mb-3"><strong>Analytics Cookies:</strong> Help us understand how users interact with Flowo so we can improve the experience. We use Google Analytics with IP anonymization enabled. These cookies track page views, feature usage, and session duration.</p>
+          <p className="mb-3"><strong>Essential Cookies:</strong> Required for Publioxa to function properly. These handle authentication, security, and basic session management. You cannot opt out of these cookies — without them, the app won't work.</p>
+          <p className="mb-3"><strong>Analytics Cookies:</strong> Help us understand how users interact with Publioxa so we can improve the experience. We use Google Analytics with IP anonymization enabled. These cookies track page views, feature usage, and session duration.</p>
           <p className="mb-3"><strong>Preference Cookies:</strong> Remember your settings and UI preferences, like sidebar state, theme preference, and language. These make your experience more personalized.</p>
           <p><strong>Marketing Cookies:</strong> Used only if we run advertising campaigns. These cookies help us measure the effectiveness of our ads and avoid showing you irrelevant ones. We currently use these minimally.</p>
         </>
@@ -79,7 +79,7 @@ const data: LegalPageData = {
       title: "Cookie Reference Table",
       content: (
         <>
-          <p className="mb-2">Below is a detailed list of cookies used by Flowo and our third-party partners:</p>
+          <p className="mb-2">Below is a detailed list of cookies used by Publioxa and our third-party partners:</p>
           <CookieTable />
         </>
       ),
@@ -93,7 +93,7 @@ const data: LegalPageData = {
           <p className="mb-3">Some cookies are placed by services we integrate with:</p>
           <ul className="list-none space-y-2">
             {[
-              { name: "Google Analytics", purpose: "Anonymized usage analytics to improve Flowo" },
+              { name: "Google Analytics", purpose: "Anonymized usage analytics to improve Publioxa" },
               { name: "Stripe", purpose: "Payment processing and fraud prevention" },
               { name: "Supabase", purpose: "Authentication session management" },
             ].map((p) => (
@@ -110,8 +110,8 @@ const data: LegalPageData = {
       title: "Cookie Consent",
       content: (
         <>
-          <p>When you first visit Flowo, a cookie consent banner appears allowing you to accept or customize your cookie preferences. Essential cookies are always active. You can change your preferences at any time from your account Settings page.</p>
-          <Callout>Your cookie consent choice is stored in the <strong>flowo_consent</strong> cookie so we can remember your preferences across visits.</Callout>
+          <p>When you first visit Publioxa, a cookie consent banner appears allowing you to accept or customize your cookie preferences. Essential cookies are always active. You can change your preferences at any time from your account Settings page.</p>
+          <Callout>Your cookie consent choice is stored in the <strong>publioxa_consent</strong> cookie so we can remember your preferences across visits.</Callout>
         </>
       ),
     },
@@ -132,7 +132,7 @@ const data: LegalPageData = {
               <li key={i} className="flex gap-2"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" /><span>{i}</span></li>
             ))}
           </ul>
-          <Callout>Blocking essential cookies may prevent Flowo from functioning correctly. We recommend keeping essential cookies enabled for the best experience.</Callout>
+          <Callout>Blocking essential cookies may prevent Publioxa from functioning correctly. We recommend keeping essential cookies enabled for the best experience.</Callout>
         </>
       ),
     },

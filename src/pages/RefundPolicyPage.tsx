@@ -8,7 +8,7 @@ const GuaranteeBanner = () => (
     </span>
     <div>
       <p className="font-heading text-lg font-bold text-primary">30-Day Money Back Guarantee</p>
-      <p className="mt-0.5 font-body text-sm text-foreground/70">No questions asked. If Flowo isn't the right fit, we'll refund you in full.</p>
+      <p className="mt-0.5 font-body text-sm text-foreground/70">No questions asked. If Publioxa isn't the right fit, we'll refund you in full.</p>
     </div>
   </div>
 );
@@ -28,7 +28,7 @@ const data: LegalPageData = {
       content: (
         <>
           <GuaranteeBanner />
-          <p>We believe in Flowo, and we want you to feel confident when you subscribe. That's why every paid plan comes with a <strong>30-day money back guarantee</strong>. If you're not satisfied with Flowo for any reason within the first 30 days of your subscription, we'll issue a full refund — no questions asked, no hoops to jump through.</p>
+          <p>We believe in Publioxa, and we want you to feel confident when you subscribe. That's why every paid plan comes with a <strong>30-day money back guarantee</strong>. If you're not satisfied with Publioxa for any reason within the first 30 days of your subscription, we'll issue a full refund — no questions asked, no hoops to jump through.</p>
         </>
       ),
     },
@@ -41,7 +41,7 @@ const data: LegalPageData = {
           <p className="mb-3">Requesting a refund is simple:</p>
           <ul className="list-none space-y-2 mb-3">
             {[
-              "Email us at billing@flowo.com with the subject line \"Refund Request\"",
+              "Email us at billing@publioxa.com with the subject line \"Refund Request\"",
               "Include your account email and the reason for your refund (optional but helpful)",
               "Our team will process your request within 1-2 business days",
               "Refunds are issued to your original payment method via Stripe",
@@ -116,7 +116,7 @@ const data: LegalPageData = {
       title: "How to Cancel Your Subscription",
       content: (
         <>
-          <p className="mb-3">You can cancel your Flowo subscription at any time:</p>
+          <p className="mb-3">You can cancel your Publioxa subscription at any time:</p>
           <ul className="list-none space-y-2 mb-3">
             {[
               "Go to Settings → Billing → Cancel Subscription",
@@ -164,7 +164,7 @@ const data: LegalPageData = {
               "Posts scheduled within your remaining billing period will still be published as planned",
               "Posts scheduled after your billing period ends will be paused and moved to drafts",
               "You'll receive an email notification listing all affected scheduled posts",
-              "Published posts remain on your social media accounts — Flowo doesn't remove them",
+              "Published posts remain on your social media accounts — Publioxa doesn't remove them",
             ].map((i) => (
               <li key={i} className="flex gap-2"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" /><span>{i}</span></li>
             ))}
@@ -181,8 +181,8 @@ const data: LegalPageData = {
         <>
           <p>For any billing or refund questions, reach out to our billing team:</p>
           <div className="mt-3 rounded-lg border bg-lavender/50 p-4 font-body text-sm">
-            <p><strong>Flowo Billing Team</strong></p>
-            <p>Email: <a href="mailto:billing@flowo.com" className="font-medium text-primary underline">billing@flowo.com</a></p>
+            <p><strong>Publioxa Billing Team</strong></p>
+            <p>Email: <a href="mailto:billing@publioxa.com" className="font-medium text-primary underline">billing@publioxa.com</a></p>
             <p>Response time: Within 1 business day</p>
           </div>
         </>

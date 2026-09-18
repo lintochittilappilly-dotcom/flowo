@@ -49,7 +49,7 @@ export const useBrandStore = create<BrandStore>()(
       clearBrand: () => set({ activeBrand: null, allBrands: [] }),
     }),
     {
-      name: "flowo-active-brand",
+      name: "publioxa-active-brand",
       partialize: (state) => ({ activeBrand: state.activeBrand }),
     }
   )

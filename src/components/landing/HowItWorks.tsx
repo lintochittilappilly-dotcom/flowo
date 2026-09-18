@@ -7,7 +7,7 @@ const steps = [
     num: "01",
     icon: <Building className="h-8 w-8" />,
     heading: "Tell Us About Your Business",
-    desc: "Answer 4 quick questions about your brand, industry, and tone of voice. Flowo builds a complete brand voice profile that makes every single post sound authentically like you — not a robot.",
+    desc: "Answer 4 quick questions about your brand, industry, and tone of voice. Publioxa builds a complete brand voice profile that makes every single post sound authentically like you — not a robot.",
     badge: "Takes 90 seconds",
   },
   {
@@ -21,7 +21,7 @@ const steps = [
     num: "03",
     icon: <Sparkles className="h-8 w-8" />,
     heading: "Watch AI Build Your Content Calendar",
-    desc: "Click one button and Flowo generates a full month of platform-specific, on-brand, engagement-optimized posts. Review them, tweak anything, then hit schedule. Done.",
+    desc: "Click one button and Publioxa generates a full month of platform-specific, on-brand, engagement-optimized posts. Review them, tweak anything, then hit schedule. Done.",
     badge: "Takes 2 minutes",
   },
 ];

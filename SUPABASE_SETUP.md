@@ -1,12 +1,12 @@
-# Supabase Setup Guide — Flowo
+# Supabase Setup Guide — Publioxa
 
-Complete step-by-step guide to set up the Flowo database, authentication, storage, Edge Functions, and cron jobs.
+Complete step-by-step guide to set up the Publioxa database, authentication, storage, Edge Functions, and cron jobs.
 
 ---
 
 ## 📋 Overview
 
-Flowo uses Supabase as its complete backend infrastructure:
+Publioxa uses Supabase as its complete backend infrastructure:
 - **PostgreSQL Database**: 25+ tables with Row Level Security
 - **Authentication**: Email/password + OAuth providers
 - **Storage**: File uploads for images and brand assets  
@@ -18,7 +18,7 @@ Flowo uses Supabase as its complete backend infrastructure:
 1. Go to [https://supabase.com](https://supabase.com) and sign in
 2. Click **"New Project"**
 3. Choose your organization
-4. Enter project name: `flowo-production`
+4. Enter project name: `publioxa-production`
 5. Set a **strong database password** — save it securely
 6. Choose region closest to your users
 7. Click **"Create new project"** — wait 2-3 minutes for provisioning
@@ -750,7 +750,7 @@ https://yourdomain.com/invite/accept
 
 ### 5.4 — Customize Email Templates
 In **Authentication → Email Templates**, update:
-- **Confirm signup** template with Flowo branding
+- **Confirm signup** template with Publioxa branding
 - **Invite user** template
 - **Reset password** template
 

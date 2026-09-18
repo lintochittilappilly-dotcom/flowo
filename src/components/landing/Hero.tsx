@@ -46,7 +46,7 @@ const Hero = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mx-auto mt-6 max-w-2xl font-body text-base leading-relaxed text-muted-foreground sm:text-lg"
         >
-          Stop wasting 15 hours a week writing posts, scheduling content, and stressing about what to say. Flowo generates, schedules, and publishes your entire social media strategy — while you focus on running your business.
+          Stop wasting 15 hours a week writing posts, scheduling content, and stressing about what to say. Publioxa generates, schedules, and publishes your entire social media strategy — while you focus on running your business.
         </motion.p>
 
         {/* Buttons */}
@@ -106,7 +106,7 @@ const Hero = () => {
           <div className="animate-float rounded-lg border border-border bg-card p-2 shadow-card-hover sm:rounded-xl sm:p-3">
             <img
               src={dashboardMockup}
-              alt="Flowo AI Social Media Dashboard showing content calendar with posts for Instagram, LinkedIn, Twitter, and Facebook"
+              alt="Publioxa AI Social Media Dashboard showing content calendar with posts for Instagram, LinkedIn, Twitter, and Facebook"
               className="w-full rounded-md sm:rounded-lg"
               loading="eager"
             />
@@ -137,7 +137,7 @@ const Hero = () => {
               <div className="flex aspect-video items-center justify-center rounded-[16px] bg-midnight">
                 <div className="text-center">
                   <Play className="mx-auto h-16 w-16 text-primary-foreground/50" />
-                  <p className="mt-4 font-heading text-lg font-bold text-primary-foreground/70">Flowo Demo Video</p>
+                  <p className="mt-4 font-heading text-lg font-bold text-primary-foreground/70">Publioxa Demo Video</p>
                   <p className="mt-1 text-sm text-primary-foreground/40">Video placeholder</p>
                 </div>
               </div>

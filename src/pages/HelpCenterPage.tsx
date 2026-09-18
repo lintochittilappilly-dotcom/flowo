@@ -6,7 +6,7 @@ import InfoPageLayout from "@/components/info/InfoPageLayout";
 import { Input } from "@/components/ui/input";
 
 const categories = [
-  { icon: <BookOpen className="h-6 w-6" />, title: "Getting Started", desc: "New to Flowo? Start here with setup guides and basics.", link: "/getting-started", articles: 12 },
+  { icon: <BookOpen className="h-6 w-6" />, title: "Getting Started", desc: "New to Publioxa? Start here with setup guides and basics.", link: "/getting-started", articles: 12 },
   { icon: <MessageSquare className="h-6 w-6" />, title: "Content & Scheduling", desc: "Learn to create, schedule, and publish content like a pro.", link: "#", articles: 18 },
   { icon: <FileText className="h-6 w-6" />, title: "Analytics & Reporting", desc: "Understand your metrics, insights, and growth tracking.", link: "#", articles: 9 },
   { icon: <Shield className="h-6 w-6" />, title: "Account & Security", desc: "Manage your account, password, and connected platforms.", link: "#", articles: 14 },
@@ -30,7 +30,7 @@ const HelpCenterPage = () => {
   const filtered = categories.filter(c => c.title.toLowerCase().includes(search.toLowerCase()) || c.desc.toLowerCase().includes(search.toLowerCase()));
 
   return (
-    <InfoPageLayout badge="Support" badgeIcon={<HelpCircle className="h-4 w-4" />} title="Help Center" description="Find answers, guides, and resources to get the most out of Flowo.">
+    <InfoPageLayout badge="Support" badgeIcon={<HelpCircle className="h-4 w-4" />} title="Help Center" description="Find answers, guides, and resources to get the most out of Publioxa.">
       {/* Search */}
       <div className="relative mx-auto mb-12 max-w-xl">
         <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />

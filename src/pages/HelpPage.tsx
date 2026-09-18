@@ -9,7 +9,7 @@ import { SkeletonList } from "@/components/ui/loading-skeletons";
 import { toast } from "sonner";
 
 const faqs = [
-  { q: "How do I connect my social media accounts?", a: "Go to Settings → Connected Platforms and click 'Connect' next to the platform you want to link. Follow the authorization steps to grant Flowo access." },
+  { q: "How do I connect my social media accounts?", a: "Go to Settings → Connected Platforms and click 'Connect' next to the platform you want to link. Follow the authorization steps to grant Publioxa access." },
   { q: "How does AI content generation work?", a: "Our AI analyzes your brand voice, industry trends, and target audience to generate tailored content. Visit the Trends page and click 'Generate Post' on any trending topic, or use Create Post for custom content." },
   { q: "Can I schedule posts across multiple platforms?", a: "Yes! Use the Content Calendar to schedule posts across all your connected platforms. You can set different times for each platform or publish simultaneously." },
   { q: "How do I manage multiple brands?", a: "Navigate to the Brands page to add and manage multiple brand profiles. Each brand can have its own voice, industry, and connected platforms." },
@@ -29,32 +29,32 @@ interface Guide {
 
 const guides: Guide[] = [
   {
-    title: "Getting Started with Flowo",
+    title: "Getting Started with Publioxa",
     desc: "Learn the basics of setting up your account and creating your first post.",
     icon: Zap,
     tag: "Beginner",
-    fullContent: "Welcome to Flowo! Getting started is easy. First, head to the Brands page and create your first brand profile — enter your brand name, industry, and describe your brand's personality. Next, go to Settings and connect your social media accounts (Instagram, LinkedIn, Twitter, etc.) by following the OAuth authorization flow. Once connected, navigate to Create Post, enter a topic or idea, select your target platforms, and click Generate. Flowo's AI will craft platform-optimized content using your brand voice. Review the generated posts, make any edits, and publish instantly or schedule for later using the Content Calendar. Start with one post to get comfortable, then explore Campaign Generator on the Trends page to create a full week of content at once.",
+    fullContent: "Welcome to Publioxa! Getting started is easy. First, head to the Brands page and create your first brand profile — enter your brand name, industry, and describe your brand's personality. Next, go to Settings and connect your social media accounts (Instagram, LinkedIn, Twitter, etc.) by following the OAuth authorization flow. Once connected, navigate to Create Post, enter a topic or idea, select your target platforms, and click Generate. Publioxa's AI will craft platform-optimized content using your brand voice. Review the generated posts, make any edits, and publish instantly or schedule for later using the Content Calendar. Start with one post to get comfortable, then explore Campaign Generator on the Trends page to create a full week of content at once.",
   },
   {
     title: "Mastering AI Content Generation",
     desc: "Deep dive into using AI to create engaging, on-brand content at scale.",
     icon: Sparkles,
     tag: "Intermediate",
-    fullContent: "Flowo's AI content generation is powered by your Brand Voice Profile — a custom AI model trained on your brand's tone, style, and messaging. To get the best results, visit your Brand settings and provide 2-3 sample posts that represent your ideal voice. The AI analyzes these samples to understand your writing patterns, vocabulary preferences, and emotional tone. When generating content, choose the right Content Type (Educational, Promotional, Engagement, etc.) to guide the AI's approach. Use 'Brand Default' tone to let your trained voice shine, or override with specific tones like 'Witty' or 'Bold' for variety. Pro tip: the more specific your topic prompt, the better the output. Instead of 'skincare tips,' try 'morning skincare routine for sensitive skin in winter.' You can regenerate individual posts, add AI-generated hashtags, and edit inline before publishing.",
+    fullContent: "Publioxa's AI content generation is powered by your Brand Voice Profile — a custom AI model trained on your brand's tone, style, and messaging. To get the best results, visit your Brand settings and provide 2-3 sample posts that represent your ideal voice. The AI analyzes these samples to understand your writing patterns, vocabulary preferences, and emotional tone. When generating content, choose the right Content Type (Educational, Promotional, Engagement, etc.) to guide the AI's approach. Use 'Brand Default' tone to let your trained voice shine, or override with specific tones like 'Witty' or 'Bold' for variety. Pro tip: the more specific your topic prompt, the better the output. Instead of 'skincare tips,' try 'morning skincare routine for sensitive skin in winter.' You can regenerate individual posts, add AI-generated hashtags, and edit inline before publishing.",
   },
   {
     title: "Analytics & Performance Tracking",
     desc: "Understand your metrics and optimize your content strategy.",
     icon: Users,
     tag: "Intermediate",
-    fullContent: "Flowo's Analytics dashboard gives you a clear picture of your content performance across all connected platforms. Key metrics include: Reach (how many unique users saw your content), Engagements (total likes, comments, and shares), and Engagement Rate (the percentage of people who interacted with your post relative to reach). Use the time range selector to view data for the last 7, 30, or 90 days. The Platform Breakdown table shows which platforms perform best for your brand. Check the Top Performing Posts section to identify content patterns that resonate with your audience. Every week, Flowo's AI analyzes your data and surfaces personalized insights in the AI Analytics Insight card — actionable recommendations like optimal posting times, content types that drive the most engagement, and platform-specific strategies. Use the Compare Brands toggle to see all your brands side by side and identify which ones need more attention.",
+    fullContent: "Publioxa's Analytics dashboard gives you a clear picture of your content performance across all connected platforms. Key metrics include: Reach (how many unique users saw your content), Engagements (total likes, comments, and shares), and Engagement Rate (the percentage of people who interacted with your post relative to reach). Use the time range selector to view data for the last 7, 30, or 90 days. The Platform Breakdown table shows which platforms perform best for your brand. Check the Top Performing Posts section to identify content patterns that resonate with your audience. Every week, Publioxa's AI analyzes your data and surfaces personalized insights in the AI Analytics Insight card — actionable recommendations like optimal posting times, content types that drive the most engagement, and platform-specific strategies. Use the Compare Brands toggle to see all your brands side by side and identify which ones need more attention.",
   },
   {
     title: "Brand Voice & Tone Configuration",
     desc: "Set up consistent brand voices across all your content.",
     icon: Shield,
     tag: "Advanced",
-    fullContent: "Managing multiple brands in Flowo means each brand gets its own AI voice profile, connected platforms, and content library. To set up a new brand, go to Brands → Add New Brand and complete the 3-step wizard: define your brand identity (name, industry, color), configure your tone preferences (Professional, Casual, Witty, etc.), and optionally paste sample posts to train the AI voice. Each brand's voice profile is independently trained, so content generated for Brand A will never sound like Brand B. You can switch between brands instantly using the Brand Switcher in the sidebar — all pages automatically filter to show only that brand's data. For agencies managing client brands, upgrade to the Agency plan for unlimited brand slots. Use the Brand Comparison view in Analytics to benchmark performance across all your brands and allocate resources to underperforming ones.",
+    fullContent: "Managing multiple brands in Publioxa means each brand gets its own AI voice profile, connected platforms, and content library. To set up a new brand, go to Brands → Add New Brand and complete the 3-step wizard: define your brand identity (name, industry, color), configure your tone preferences (Professional, Casual, Witty, etc.), and optionally paste sample posts to train the AI voice. Each brand's voice profile is independently trained, so content generated for Brand A will never sound like Brand B. You can switch between brands instantly using the Brand Switcher in the sidebar — all pages automatically filter to show only that brand's data. For agencies managing client brands, upgrade to the Agency plan for unlimited brand slots. Use the Brand Comparison view in Analytics to benchmark performance across all your brands and allocate resources to underperforming ones.",
   },
 ];
 

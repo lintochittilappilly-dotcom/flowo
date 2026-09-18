@@ -16,7 +16,7 @@ const NoBrandsState = () => {
             Create your first brand to get started
           </h2>
           <p className="mt-2 max-w-xs text-sm text-muted-foreground">
-            Flowo organizes all your content by brand. Create your first brand to start generating and scheduling posts.
+            Publioxa organizes all your content by brand. Create your first brand to start generating and scheduling posts.
           </p>
           <button
             onClick={() => navigate("/brands")}

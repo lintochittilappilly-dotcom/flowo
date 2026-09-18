@@ -7,7 +7,7 @@ const quarters = [
     label: "Q1 2026 — Completed",
     status: "done",
     items: [
-      { title: "TikTok Auto-Publishing", desc: "Publish directly to TikTok from Flowo", done: true },
+      { title: "TikTok Auto-Publishing", desc: "Publish directly to TikTok from Publioxa", done: true },
       { title: "AI Brand Voice 2.0", desc: "Improved brand tone matching with few-shot learning", done: true },
       { title: "Bulk Content Import", desc: "Import content libraries from CSV and other tools", done: true },
       { title: "Advanced Hashtag Analytics", desc: "Track hashtag performance and discover trending tags", done: true },
@@ -59,7 +59,7 @@ const statusIcons: Record<string, React.ReactNode> = {
 };
 
 const RoadmapPage = () => (
-  <InfoPageLayout badge="Product" badgeIcon={<Map className="h-4 w-4" />} title="Product Roadmap" description="See what we're building, what's next, and what we're exploring for Flowo's future.">
+  <InfoPageLayout badge="Product" badgeIcon={<Map className="h-4 w-4" />} title="Product Roadmap" description="See what we're building, what's next, and what we're exploring for Publioxa's future.">
     <div className="space-y-10">
       {quarters.map((q, qi) => (
         <motion.section key={q.label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: qi * 0.05 }}>
@@ -87,7 +87,7 @@ const RoadmapPage = () => (
     <div className="mt-12 rounded-2xl border bg-lavender/50 p-8 text-center">
       <Lightbulb className="mx-auto mb-3 h-8 w-8 text-primary" />
       <h3 className="font-heading text-xl font-bold text-foreground">Have a Feature Idea?</h3>
-      <p className="mx-auto mt-2 max-w-md font-body text-sm text-muted-foreground">We build Flowo based on user feedback. Share your ideas in our Community Forum and vote on features that matter to you.</p>
+      <p className="mx-auto mt-2 max-w-md font-body text-sm text-muted-foreground">We build Publioxa based on user feedback. Share your ideas in our Community Forum and vote on features that matter to you.</p>
     </div>
   </InfoPageLayout>
 );

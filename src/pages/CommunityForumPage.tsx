@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import InfoPageLayout from "@/components/info/InfoPageLayout";
 
 const channels = [
-  { icon: <MessageSquare className="h-6 w-6" />, title: "Discussion Forum", desc: "Ask questions, share strategies, and get advice from fellow Flowo users and our team.", members: "8,400+", link: "#" },
+  { icon: <MessageSquare className="h-6 w-6" />, title: "Discussion Forum", desc: "Ask questions, share strategies, and get advice from fellow Publioxa users and our team.", members: "8,400+", link: "#" },
   { icon: <Users className="h-6 w-6" />, title: "Discord Community", desc: "Real-time chat with other creators. Get instant feedback, share wins, and connect with your peers.", members: "5,200+", link: "#" },
   { icon: <Award className="h-6 w-6" />, title: "Creator Spotlight", desc: "Each month we highlight outstanding community members and their social media success stories.", members: "Featured monthly", link: "#" },
 ];
@@ -11,14 +11,14 @@ const channels = [
 const topics = [
   { title: "Content Strategy", threads: 342, desc: "Share and discuss content strategies that drive engagement" },
   { title: "Instagram Growth", threads: 287, desc: "Tips, tricks, and case studies for growing on Instagram" },
-  { title: "AI Content Tips", threads: 198, desc: "Get the most out of Flowo's AI content generation" },
+  { title: "AI Content Tips", threads: 198, desc: "Get the most out of Publioxa's AI content generation" },
   { title: "LinkedIn for Business", threads: 156, desc: "B2B social strategies and LinkedIn best practices" },
   { title: "Analytics Deep Dives", threads: 134, desc: "Understanding your data and making it actionable" },
-  { title: "Feature Requests", threads: 412, desc: "Suggest and vote on new Flowo features" },
+  { title: "Feature Requests", threads: 412, desc: "Suggest and vote on new Publioxa features" },
 ];
 
 const CommunityForumPage = () => (
-  <InfoPageLayout badge="Community" badgeIcon={<Users className="h-4 w-4" />} title="Community Forum" description="Connect with 13,000+ creators, marketers, and small business owners who use Flowo.">
+  <InfoPageLayout badge="Community" badgeIcon={<Users className="h-4 w-4" />} title="Community Forum" description="Connect with 13,000+ creators, marketers, and small business owners who use Publioxa.">
     {/* Channels */}
     <div className="mb-12 grid gap-6 sm:grid-cols-3">
       {channels.map((c, i) => (

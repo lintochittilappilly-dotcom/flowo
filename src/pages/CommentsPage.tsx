@@ -82,7 +82,7 @@ const CommentsPage = () => {
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
-  const [bannerDismissed, setBannerDismissed] = useState(() => localStorage.getItem("flowo_comments_banner_dismissed") === "true");
+  const [bannerDismissed, setBannerDismissed] = useState(() => localStorage.getItem("publioxa_comments_banner_dismissed") === "true");
   const replyRef = useRef<HTMLTextAreaElement>(null);
 
   const brandId = activeBrand?.id;
@@ -251,7 +251,7 @@ const CommentsPage = () => {
 
   const dismissBanner = () => {
     setBannerDismissed(true);
-    localStorage.setItem("flowo_comments_banner_dismissed", "true");
+    localStorage.setItem("publioxa_comments_banner_dismissed", "true");
   };
 
   // Counts
@@ -386,7 +386,7 @@ const CommentsPage = () => {
                 {activeFilter === "All" ? "No comments yet" : activeFilter === "Unread" ? "No unread comments" : activeFilter === "Flagged" ? "No flagged comments" : "No comments match this filter"}
               </p>
               <p className="mt-1 max-w-sm text-xs text-muted-foreground">
-                {activeFilter === "All" ? "Only comments on posts published through Flowo will appear here. Connect your social platforms, publish posts, and click Sync Comments to fetch real comments." : ""}
+                {activeFilter === "All" ? "Only comments on posts published through Publioxa will appear here. Connect your social platforms, publish posts, and click Sync Comments to fetch real comments." : ""}
               </p>
               {activeFilter === "All" && (
                 <button onClick={handleSyncComments} disabled={syncing} className="mt-4 rounded-[var(--radius-sm)] gradient-bg px-6 py-2.5 text-xs font-bold text-primary-foreground">

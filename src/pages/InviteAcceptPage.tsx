@@ -77,7 +77,7 @@ const InviteAcceptPage = () => {
   const handleAccept = async () => {
     if (!user || !invite) {
       // Not logged in — save token and redirect to signup
-      localStorage.setItem("flowo_invite_token", token ?? "");
+      localStorage.setItem("publioxa_invite_token", token ?? "");
       navigate("/signup");
       return;
     }
@@ -124,7 +124,7 @@ const InviteAcceptPage = () => {
         {/* Logo */}
         <Link to="/" className="inline-flex items-center gap-2 font-heading text-xl font-bold text-foreground mb-6">
           <Sparkles className="h-5 w-5 text-primary" />
-          Flowo
+          Publioxa
         </Link>
 
         {state === "loading" && (
@@ -142,7 +142,7 @@ const InviteAcceptPage = () => {
               </h2>
               <p className="text-sm text-muted-foreground mt-2">
                 <span className="font-semibold text-foreground">{invite.ownerName}</span> has invited you
-                to join their Flowo workspace.
+                to join their Publioxa workspace.
               </p>
             </div>
 

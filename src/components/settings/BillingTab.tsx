@@ -94,11 +94,11 @@ const UpgradeContactModal = ({ open, onClose, planName, price, interval }: {
           </p>
           <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
             Our team will be in touch to complete your upgrade. You can also reach us at{" "}
-            <a href="mailto:billing@flowo.com" className="font-semibold text-primary hover:underline">billing@flowo.com</a>
+            <a href="mailto:billing@publioxa.com" className="font-semibold text-primary hover:underline">billing@publioxa.com</a>
           </p>
           <div className="mt-5 flex gap-3">
             <a
-              href="mailto:billing@flowo.com?subject=Plan Upgrade Request&body=I'd like to upgrade to the ${planName} plan."
+              href="mailto:billing@publioxa.com?subject=Plan Upgrade Request&body=I'd like to upgrade to the ${planName} plan."
               className="flex flex-1 items-center justify-center gap-1.5 rounded-lg gradient-bg py-2.5 text-sm font-bold text-primary-foreground transition-transform hover:scale-[1.02]"
             >
               <Mail className="h-3.5 w-3.5" /> Contact Us
@@ -314,7 +314,7 @@ const BillingTab = forwardRef<HTMLDivElement, BillingTabProps>(
       const blob = new Blob([csv], { type: "text/csv" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
-      a.href = url; a.download = "flowo-billing-history.csv"; a.click();
+      a.href = url; a.download = "publioxa-billing-history.csv"; a.click();
       URL.revokeObjectURL(url);
       toast.success("Billing history exported");
     };

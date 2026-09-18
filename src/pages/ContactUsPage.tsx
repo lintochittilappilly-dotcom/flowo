@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 const contactMethods = [
-  { icon: <Mail className="h-5 w-5" />, title: "Email Us", value: "support@flowo.com", desc: "For general inquiries and support" },
+  { icon: <Mail className="h-5 w-5" />, title: "Email Us", value: "support@publioxa.com", desc: "For general inquiries and support" },
   { icon: <MessageSquare className="h-5 w-5" />, title: "Live Chat", value: "Available in-app", desc: "Mon–Fri, 9am–6pm EST" },
   { icon: <MapPin className="h-5 w-5" />, title: "Office", value: "San Francisco, CA", desc: "548 Market St, Suite 35100" },
   { icon: <Clock className="h-5 w-5" />, title: "Response Time", value: "Under 4 hours", desc: "During business hours" },
@@ -35,7 +35,7 @@ const ContactUsPage = () => {
 
   return (
     <>
-      <SEOHead title="Contact Us — Flowo" description="Get in touch with the Flowo team. We respond within 4 hours during business hours." path="/contact" />
+      <SEOHead title="Contact Us — Publioxa" description="Get in touch with the Publioxa team. We respond within 4 hours during business hours." path="/contact" />
       <InfoPageLayout badge="Contact" badgeIcon={<Mail className="h-4 w-4" />} title="Contact Us" description="Have a question, feedback, or partnership idea? We'd love to hear from you.">
       {/* Contact Methods */}
       <div className="mb-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

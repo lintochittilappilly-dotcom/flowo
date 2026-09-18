@@ -1,12 +1,12 @@
-# Social Platform API Connection Guide — Flowo
+# Social Platform API Connection Guide — Publioxa
 
-Complete step-by-step guide to create developer apps and connect all 6 social media platforms to Flowo.
+Complete step-by-step guide to create developer apps and connect all 6 social media platforms to Publioxa.
 
 ---
 
 ## 📋 Overview
 
-Flowo supports 6 major social media platforms. Each platform requires creating a developer app, getting OAuth credentials, and configuring redirect URLs. **You can connect any combination** — each platform is independent.
+Publioxa supports 6 major social media platforms. Each platform requires creating a developer app, getting OAuth credentials, and configuring redirect URLs. **You can connect any combination** — each platform is independent.
 
 | Platform | Publishing | Analytics | Approval Time | Cost |
 |----------|------------|-----------|---------------|------|
@@ -24,7 +24,7 @@ Flowo supports 6 major social media platforms. Each platform requires creating a
 ### Required Information
 
 For each platform you'll need:
-- **App Name**: `Flowo` (or your branded name)
+- **App Name**: `Publioxa` (or your branded name)
 - **App Description**: `AI-powered social media management platform for automated content creation and scheduling`
 - **Website URL**: Your production domain (e.g., `https://yourdomain.com`)
 - **Privacy Policy URL**: `https://yourdomain.com/privacy`
@@ -57,7 +57,7 @@ Replace `[platform]` with: `instagram`, `facebook`, `linkedin`, `twitter`, `tikt
 2. **Use case**: Select **"Other"**
 3. **App type**: Select **"Business"**
 4. **App details**:
-   - **App name**: `Flowo`
+   - **App name**: `Publioxa`
    - **App contact email**: Your business email
 5. Click **"Create App"**
 
@@ -168,7 +168,7 @@ Submit for review requesting the permissions above. Provide screen recordings sh
 
 1. Go to [https://linkedin.com/developers](https://linkedin.com/developers)
 2. Click **"Create App"**
-3. **App name**: `Flowo`
+3. **App name**: `Publioxa`
 4. **LinkedIn Page**: Select your company LinkedIn page (required)
 5. **App logo**: Upload your logo (400x400px PNG)
 6. **Legal agreement**: Check and accept
@@ -217,17 +217,17 @@ VITE_LINKEDIN_ENABLED=true
 1. Go to [https://developer.twitter.com](https://developer.twitter.com)
 2. **Apply for a developer account**
 3. **Describe your use case**: 
-   > "Building Flowo, an AI-powered social media management platform that helps businesses create and schedule Twitter content. Our app will post tweets on behalf of users and provide analytics on tweet performance."
+   > "Building Publioxa, an AI-powered social media management platform that helps businesses create and schedule Twitter content. Our app will post tweets on behalf of users and provide analytics on tweet performance."
 4. **Wait for approval** (usually same day, sometimes up to 3 days)
 
 ### Step 2 — Create Project and App
 
 1. Go to **Developer Portal → Projects & Apps**
 2. **Create Project**:
-   - **Name**: `Flowo`
+   - **Name**: `Publioxa`
    - **Use case**: `Making a bot` or `Building tools for Twitter users`
 3. **Create App** inside the project:
-   - **App name**: `Flowo`
+   - **App name**: `Publioxa`
    - **Environment**: `Development` (change to Production later)
 
 ### Step 3 — Configure App Settings
@@ -266,7 +266,7 @@ VITE_TWITTER_ENABLED=true
 - **Basic tier**: $100/month — required for posting tweets and managing posts
 - **Pro tier**: $5,000/month — for enterprise features
 
-**For Flowo to publish tweets, you need at least the Basic tier subscription.**
+**For Publioxa to publish tweets, you need at least the Basic tier subscription.**
 
 ### Step 6 — Upgrade to Basic Tier
 
@@ -290,7 +290,7 @@ VITE_TWITTER_ENABLED=true
 
 1. Go to **"Manage Apps"** → **"Create an App"**
 2. **App details**:
-   - **App Name**: `Flowo`
+   - **App Name**: `Publioxa`
    - **Category**: `Tools and Utilities`
    - **Platform**: `Web`
    - **App description**: `AI social media management platform`
@@ -354,7 +354,7 @@ Submit app review for **Content Posting API**:
 
 ### Step 3 — Create App
 
-1. **App name**: `Flowo`
+1. **App name**: `Publioxa`
 2. **Description**: `AI-powered social media management tool for automated Pinterest pin creation and scheduling`
 3. **App website**: `https://yourdomain.com`
 4. **Privacy Policy URL**: `https://yourdomain.com/privacy`
@@ -498,4 +498,4 @@ Visit `/admin/health` to check platform integration status:
 
 **All social platforms are now configured! 🎉**
 
-Users can connect their social media accounts and start publishing content across all platforms. Your Flowo setup is complete!
+Users can connect their social media accounts and start publishing content across all platforms. Your Publioxa setup is complete!

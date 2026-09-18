@@ -133,7 +133,7 @@ const DashboardSidebar = ({ open, onClose, collapsed, onToggleCollapse }: Dashbo
       <div className={`flex items-center ${isCollapsed ? "justify-center px-2" : "justify-between px-5"} pt-5 pb-4`}>
         <Link to="/dashboard" className="flex items-center gap-2 font-heading text-xl font-bold text-primary-foreground">
           <Sparkles className="h-5 w-5 shrink-0 text-secondary" />
-          {!isCollapsed && <span>Flowo</span>}
+          {!isCollapsed && <span>Publioxa</span>}
         </Link>
         {isMobile && (
           <button onClick={onClose} className="text-primary-foreground/50 hover:text-primary-foreground">

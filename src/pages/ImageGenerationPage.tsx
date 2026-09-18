@@ -122,7 +122,7 @@ const bannerTemplates: BannerTemplate[] = [
     description: "Seasonal or holiday themed post",
     fields: [
       { key: "occasion", label: "Occasion", placeholder: "e.g. Christmas, Eid, Diwali", defaultValue: "Happy Holidays" },
-      { key: "from", label: "From (Brand)", placeholder: "e.g. From the Flowo team", defaultValue: "From our team" },
+      { key: "from", label: "From (Brand)", placeholder: "e.g. From the Publioxa team", defaultValue: "From our team" },
       { key: "message", label: "Short Message", placeholder: "e.g. Wishing you joy!", defaultValue: "Warmest wishes" },
     ],
     buildPrompt: (v) => `Holiday greeting banner for "${v.occasion}". Message: "${v.message}". From: ${v.from}. Festive, warm design with holiday-appropriate decorations and elegant typography.`,
@@ -375,7 +375,7 @@ const ImageGenerationPage = () => {
     if (!imageUrl) return;
     const link = document.createElement("a");
     link.href = imageUrl;
-    link.download = `flowo-${activeTab}-${Date.now()}.png`;
+    link.download = `publioxa-${activeTab}-${Date.now()}.png`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

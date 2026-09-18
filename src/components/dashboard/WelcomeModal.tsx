@@ -122,7 +122,7 @@ const WelcomeModal = () => {
             </div>
 
             <h2 className="text-center font-heading text-2xl font-bold text-foreground">
-              Welcome to Flowo, {firstName}!
+              Welcome to Publioxa, {firstName}!
             </h2>
             <p className="mt-2 text-center font-body text-sm text-muted-foreground">
               Your AI social media team is ready. Here's what we set up for you:

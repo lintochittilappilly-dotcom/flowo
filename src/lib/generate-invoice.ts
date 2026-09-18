@@ -17,10 +17,10 @@ interface InvoiceData {
 }
 
 const COMPANY = {
-  name: "Flowo",
+  name: "Publioxa",
   tagline: "AI-Powered Social Media Management",
-  email: "billing@flowo.com",
-  website: "flowo.com",
+  email: "billing@publioxa.com",
+  website: "publioxa.com",
   address: "123 Innovation Drive, Suite 400\nSan Francisco, CA 94107, USA",
 };
 
