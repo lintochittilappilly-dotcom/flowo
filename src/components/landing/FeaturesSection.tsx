@@ -3,13 +3,13 @@ import { Bot, Brain, Calendar, Flame, Clock, BarChart3, MessageSquare, Palette }
 import SectionBadge from "./SectionBadge";
 
 const features = [
-  { icon: Bot, heading: "AI Content Generation Engine", desc: "Describe what you want to post and Publioxa instantly generates platform-native content for every connected account. Instagram captions, LinkedIn articles, Twitter threads, TikTok scripts — each one perfectly written for that platform." },
-  { icon: Brain, heading: "Brand Voice Training", desc: "Publioxa learns exactly how your brand speaks. Paste in a few of your best posts and the AI memorizes your tone, vocabulary, and style forever. Every post sounds like you wrote it on your best day." },
-  { icon: Calendar, heading: "30-Day Content Calendar Builder", desc: "Stop planning one post at a time. Click one button and Publioxa builds an entire month of balanced, strategic content automatically spread across your best posting times." },
-  { icon: Flame, heading: "Real-Time Trend Detection", desc: "Publioxa monitors trending topics in your industry every single day. When something relevant blows up, you get an instant alert with a one-click option to generate a post before your competitors do." },
-  { icon: Clock, heading: "Smart Auto-Scheduling & Publishing", desc: "Set your preferred posting times once and forget it. Publioxa automatically publishes your content at the exact moment your audience is most active on each platform." },
+  { icon: Bot, heading: "AI Content Generation Engine", desc: "Describe what you want to post and Flowo instantly generates platform-native content for every connected account. Instagram captions, LinkedIn articles, Twitter threads, TikTok scripts — each one perfectly written for that platform." },
+  { icon: Brain, heading: "Brand Voice Training", desc: "Flowo learns exactly how your brand speaks. Paste in a few of your best posts and the AI memorizes your tone, vocabulary, and style forever. Every post sounds like you wrote it on your best day." },
+  { icon: Calendar, heading: "30-Day Content Calendar Builder", desc: "Stop planning one post at a time. Click one button and Flowo builds an entire month of balanced, strategic content automatically spread across your best posting times." },
+  { icon: Flame, heading: "Real-Time Trend Detection", desc: "Flowo monitors trending topics in your industry every single day. When something relevant blows up, you get an instant alert with a one-click option to generate a post before your competitors do." },
+  { icon: Clock, heading: "Smart Auto-Scheduling & Publishing", desc: "Set your preferred posting times once and forget it. Flowo automatically publishes your content at the exact moment your audience is most active on each platform." },
   { icon: BarChart3, heading: "Unified Analytics Dashboard", desc: "See exactly what's working across every platform in one clean dashboard. Every week the AI sends you a plain-English performance summary with specific recommendations to improve." },
-  { icon: MessageSquare, heading: "AI Comment & DM Manager", desc: "Never miss an engagement opportunity again. Publioxa monitors all your comments and DMs, categorizes them by intent, and suggests perfectly crafted replies that match your brand voice." },
+  { icon: MessageSquare, heading: "AI Comment & DM Manager", desc: "Never miss an engagement opportunity again. Flowo monitors all your comments and DMs, categorizes them by intent, and suggests perfectly crafted replies that match your brand voice." },
   { icon: Palette, heading: "AI Image & Visual Generator", desc: "Every post comes with a matching AI-generated image or curated stock photo suggestion. Beautiful on-brand visuals generated automatically alongside your caption." },
 ];
 
