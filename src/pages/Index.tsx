@@ -18,8 +18,8 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="Publioxa — Your AI Social Media Team"
-        description="Publioxa generates, schedules, and publishes your entire social media strategy using AI. Save 15+ hours/week. Start your free 14-day trial today."
+        title="Flowo — Your AI Social Media Team"
+        description="Flowo generates, schedules, and publishes your entire social media strategy using AI. Save 15+ hours/week. Start your free 14-day trial today."
         path="/"
       />
       <Navbar />
