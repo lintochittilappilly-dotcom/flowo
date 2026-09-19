@@ -243,9 +243,9 @@ const SignupPageInner = () => {
               />
               <span className="font-body text-xs text-muted-foreground">
                 I agree to the{" "}
-                <a href="#" target="_blank" className="font-semibold text-primary underline">Terms of Service</a>
+                <Link to="/terms" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline">Terms of Service</Link>
                 {" "}and{" "}
-                <a href="#" target="_blank" className="font-semibold text-primary underline">Privacy Policy</a>
+                <Link to="/privacy" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline">Privacy Policy</Link>
               </span>
             </label>
 
