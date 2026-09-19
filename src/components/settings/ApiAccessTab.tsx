@@ -121,7 +121,7 @@ const ApiAccessTab = () => {
   const [logs, setLogs] = useState<RequestLog[]>([]);
   const [logsLoading, setLogsLoading] = useState(false);
 
-  const apiBaseUrl = `https://mguavdrifefyzswdiqww.supabase.co/functions/v1/api-v1/v1`;
+  const apiBaseUrl = `https://rmqisvutyndlzpqcwyym.supabase.co/functions/v1/api-v1/v1`;
 
   useEffect(() => {
     if (!user) return;
