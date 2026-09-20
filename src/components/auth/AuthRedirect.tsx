@@ -13,6 +13,12 @@ const AuthRedirect = ({ children }: { children: React.ReactNode }) => {
     );
   }
 
+  // Allow /signup to be public
+  if (window.location.pathname === "/signup") {
+    return <>{children}</>;
+  }
+
+  // Normal redirect logic for protected pages
   if (session) {
     if (profile && !profile.completed_onboarding) {
       return <Navigate to="/onboarding" replace />;
