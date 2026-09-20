@@ -112,23 +112,23 @@ const Hero = () => {
 
     {/* 🔥 Floating Premium Objects */}
     <motion.div
-      className="absolute -top-8 left-1/2 h-4 w-4 rounded-full bg-primary/50 blur-md -z-30"
+      className="absolute -top-8 left-1/2 h-4 w-4 rounded-full bg-primary/50 blur-md z-30"
       animate={{ y: [0, -18, 0], opacity: [0.3, 0.7, 0.3], rotate: [0, 12, 0] }}
       transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
     />
     <motion.div
-      className="absolute top-10 left-[30%] h-3 w-3 rounded-full bg-secondary/50 blur-md -z-30"
+      className="absolute top-10 left-[30%] h-3 w-3 rounded-full bg-secondary/50 blur-md z-30"
       animate={{ y: [0, -14, 0], opacity: [0.2, 0.6, 0.2], rotate: [0, -10, 0] }}
       transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
     />
     <motion.div
-      className="absolute top-6 right-[25%] h-5 w-5 rounded-full bg-primary/60 blur-lg -z-30"
+      className="absolute top-6 right-[25%] h-5 w-5 rounded-full bg-primary/60 blur-lg z-30"
       animate={{ y: [0, -22, 0], opacity: [0.4, 0.9, 0.4], rotate: [0, 15, 0] }}
       transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
     />
 
     {/* Glow Ring */}
-    <div className="absolute inset-0 -z-10 rounded-full bg-gradient-to-r from-primary/30 to-primary-foreground/30 blur-xl opacity-60" />
+    <div className="absolute inset-0 z-10 rounded-full bg-gradient-to-r from-primary/30 to-primary-foreground/30 blur-xl opacity-60" />
 
     {/* Premium Gradient Ribbons */}
     <div className="absolute inset-0 -z-20 pointer-events-none">
