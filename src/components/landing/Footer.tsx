@@ -5,7 +5,7 @@ type FooterLink = { label: string; path?: string; href?: string };
 
 const footerLinks: Record<string, FooterLink[]> = {
   Product: [
-    { label: "Features", href: "#features"},
+    { label: "Features", href: "#features" },
     { label: "How It Works", href: "#how-it-works" },
     { label: "Pricing", href: "#pricing" },
     { label: "Changelog", path: "/changelog" },
@@ -45,12 +45,18 @@ const Footer = () => (
   <footer className="bg-midnight">
     <div className="h-px w-full bg-primary/30" />
     <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+
       {/* Top row */}
       <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
         <div>
-          <a href="#" className="font-heading text-2xl font-bold text-primary-foreground">Publioxa</a>
-          <p className="mt-1 font-body text-sm text-primary-foreground/50">Your AI Social Media Team</p>
+          <Link to="/" className="font-heading text-2xl font-bold text-primary-foreground">
+            Publioxa
+          </Link>
+          <p className="mt-1 font-body text-sm text-primary-foreground/50">
+            Your AI Social Media Team
+          </p>
         </div>
+
         <div className="flex gap-3">
           {socials.map((s) => (
             <a
@@ -70,22 +76,42 @@ const Footer = () => (
         {Object.entries(footerLinks).map(([heading, links]) => (
           <div key={heading}>
             <h4 className="font-heading text-sm font-bold text-primary-foreground">{heading}</h4>
+
             <ul className="mt-4 space-y-2.5">
               {links.map((link) => (
                 <li key={link.label}>
-                  {link.path ? (
-                    <Link to={link.path} className="font-body text-sm text-primary-foreground/50 transition-colors hover:text-primary-foreground">
-                      {link.label}
-                    </Link>
-                  ) : link.href ? (
-                    <a href={link.href} target="_blank" rel="noopener noreferrer" className="font-body text-sm text-primary-foreground/50 transition-colors hover:text-primary-foreground">
+                  
+                  {/* ⭐ Updated logic — anchor links scroll instead of opening new tab */}
+                  {link.href ? (
+                    <a
+                      href={link.href}
+                      onClick={(e) => {
+                        if (link.href.startsWith("#")) {
+                          e.preventDefault();
+                          const el = document.querySelector(link.href);
+                          if (el) el.scrollIntoView({ behavior: "smooth" });
+                        }
+                      }}
+                      className="font-body text-sm text-primary-foreground/50 transition-colors hover:text-primary-foreground"
+                    >
                       {link.label}
                     </a>
+                  ) : link.path ? (
+                    <Link
+                      to={link.path}
+                      className="font-body text-sm text-primary-foreground/50 transition-colors hover:text-primary-foreground"
+                    >
+                      {link.label}
+                    </Link>
                   ) : (
-                    <a href="#" className="font-body text-sm text-primary-foreground/50 transition-colors hover:text-primary-foreground">
+                    <a
+                      href="#"
+                      className="font-body text-sm text-primary-foreground/50 transition-colors hover:text-primary-foreground"
+                    >
                       {link.label}
                     </a>
                   )}
+
                 </li>
               ))}
             </ul>
@@ -98,8 +124,10 @@ const Footer = () => (
       {/* Bottom */}
       <div className="mt-6 flex flex-col items-center justify-between gap-4 sm:flex-row">
         <p className="font-body text-xs text-primary-foreground/40">
-          © 2024 Publioxa Inc. All rights reserved. Made with <Heart className="inline h-3 w-3 fill-current text-secondary" /> for small business owners everywhere.
+          © 2024 Publioxa Inc. All rights reserved. Made with{" "}
+          <Heart className="inline h-3 w-3 fill-current text-secondary" /> for small business owners everywhere.
         </p>
+
         <div className="flex gap-4 text-xs text-primary-foreground/40">
           <span>SSL Secured</span>
           <span>Stripe Payments</span>
