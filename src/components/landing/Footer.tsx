@@ -5,9 +5,9 @@ type FooterLink = { label: string; path?: string; href?: string };
 
 const footerLinks: Record<string, FooterLink[]> = {
   Product: [
-    { label: "Features", path: "#features" },
-    { label: "How It Works", path: "#how-it-works" },
-    { label: "Pricing", path: "#pricing" },
+    { label: "Features", href: "#features"},
+    { label: "How It Works", href: "#how-it-works" },
+    { label: "Pricing", href: "#pricing" },
     { label: "Changelog", path: "/changelog" },
     { label: "Roadmap", path: "/roadmap" },
     { label: "API Documentation", path: "/api-docs" },
