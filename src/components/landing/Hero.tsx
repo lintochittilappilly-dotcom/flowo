@@ -68,14 +68,16 @@ const Hero = () => {
           <Sparkles className="mr-1 inline h-3.5 w-3.5" /> Trusted by 2,000+ growing businesses
         </motion.div>
 
-        {/* Spotlight Sweep (LIMITED TO HEADLINE ONLY) */}
-        <motion.div
-          className="absolute left-0 top-[12%] h-[100px] w-full pointer-events-none -z-10 overflow-hidden"
-          animate={{ x: ["-40%", "140%"] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <div className="absolute top-0 h-full w-1/3 bg-gradient-to-r from-transparent via-white/10 to-transparent blur-2xl" />
-        </motion.div>
+        {/* Spotlight Sweep — HARD CUT (never reaches CTA) */}
+        <div className="relative h-[140px] w-full mx-auto overflow-hidden -z-10">
+          <motion.div
+            className="absolute inset-0 pointer-events-none"
+            animate={{ x: ["-40%", "140%"] }}
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <div className="absolute top-0 h-full w-1/3 bg-gradient-to-r from-transparent via-white/10 to-transparent blur-2xl" />
+          </motion.div>
+        </div>
 
         {/* Headline */}
         <motion.h1
@@ -111,7 +113,7 @@ const Hero = () => {
           <motion.div className="relative">
 
             {/* Soft dark gradient behind CTA */}
-            <div className="absolute inset-0 -z-30 bg-gradient-to-b from-black/30 to-transparent rounded-full" />
+            <div className="absolute inset-0 -z-30 bg-gradient-to-b from-black/40 to-transparent rounded-full" />
 
             {/* Premium Gradient Ribbons */}
             <div className="absolute inset-0 -z-20 pointer-events-none">
