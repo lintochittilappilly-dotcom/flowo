@@ -2,15 +2,17 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   motion,
+  AnimatePresence,
   useScroll,
   useTransform,
+  useAnimationControls,
 } from "framer-motion";
 import { ArrowRight, Star, Sparkles } from "lucide-react";
 import dashboardMockup from "@/assets/dashboard-mockup.png";
 
 const Hero = () => {
   /* -----------------------------
-     Premium Slow Typing Animation
+     AI Typing Animation (Premium)
   ------------------------------ */
   const fullText = "Powered by AI.";
   const [typedText, setTypedText] = useState("");
@@ -21,7 +23,7 @@ const Hero = () => {
       setTypedText(fullText.slice(0, i));
       i++;
       if (i > fullText.length) clearInterval(interval);
-    }, 150);
+    }, 70);
     return () => clearInterval(interval);
   }, []);
 
@@ -68,18 +70,7 @@ const Hero = () => {
           <Sparkles className="mr-1 inline h-3.5 w-3.5" /> Trusted by 2,000+ growing businesses
         </motion.div>
 
-        {/* Spotlight Sweep — HARD CUT (never reaches CTA) */}
-        <div className="relative h-[140px] w-full mx-auto overflow-hidden -z-10">
-          <motion.div
-            className="absolute inset-0 pointer-events-none"
-            animate={{ x: ["-40%", "140%"] }}
-            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <div className="absolute top-0 h-full w-1/3 bg-gradient-to-r from-transparent via-white/10 to-transparent blur-2xl" />
-          </motion.div>
-        </div>
-
-        {/* Headline */}
+        {/* Headline with Parallax + Typing */}
         <motion.h1
           style={{ y: headlineY }}
           initial={{ opacity: 0, y: 30 }}
@@ -92,7 +83,7 @@ const Hero = () => {
           For $49/Month.
         </motion.h1>
 
-        {/* Subtitle */}
+        {/* Subtitle with Parallax */}
         <motion.p
           style={{ y: subY }}
           initial={{ opacity: 0, y: 30 }}
@@ -103,35 +94,33 @@ const Hero = () => {
           Stop wasting 15 hours a week writing posts, scheduling content, and stressing about what to say. Publioxa generates, schedules, and publishes your entire social media strategy — while you focus on running your business.
         </motion.p>
 
-        {/* CTA Section */}
+        {/* Premium CTA */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
         >
-          <motion.div className="relative">
-
-            {/* Soft dark gradient behind CTA */}
-            <div className="absolute inset-0 -z-30 bg-gradient-to-b from-black/40 to-transparent rounded-full" />
-
-            {/* Premium Gradient Ribbons */}
-            <div className="absolute inset-0 -z-20 pointer-events-none">
-              <div className="absolute -top-10 left-1/2 h-40 w-[140%] -translate-x-1/2 rotate-[8deg] bg-gradient-to-r from-primary/20 via-pink-400/10 to-primary-foreground/20 blur-3xl opacity-40" />
-              <div className="absolute top-10 left-1/2 h-40 w-[140%] -translate-x-1/2 -rotate-[6deg] bg-gradient-to-r from-primary-foreground/20 via-purple-400/10 to-primary/20 blur-3xl opacity-40" />
-            </div>
-
+          <motion.div
+            className="relative"
+            animate={{ scale: [1, 1.03, 1] }}
+            transition={{
+              duration: 3.2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
             {/* Glow Ring */}
-            <div className="absolute inset-0 -z-10 rounded-full bg-gradient-to-r from-primary/30 to-primary-foreground/30 blur-xl opacity-40" />
+            <div className="absolute inset-0 -z-10 rounded-full bg-gradient-to-r from-primary/30 to-primary-foreground/30 blur-xl opacity-60" />
 
-            {/* Glass Morphism CTA (fully readable) */}
+            {/* Button */}
             <motion.div
               whileHover={{ rotate: -1.5, scale: 1.06 }}
               transition={{ type: "spring", stiffness: 200, damping: 12 }}
             >
               <Link
                 to="/signup"
-                className="backdrop-blur-xl bg-white/10 border border-white/20 inline-flex items-center gap-2 rounded-pill px-14 py-5 font-heading text-xl font-bold text-white shadow-2xl shadow-primary/20 transition-all duration-300 hover:scale-[1.06] hover:shadow-primary/40"
+                className="gradient-bg inline-flex items-center gap-2 rounded-pill px-12 py-5 font-heading text-xl font-bold text-primary-foreground shadow-xl shadow-primary/25 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/40"
               >
                 Start Your Free 14-Day Trial <ArrowRight className="h-5 w-5" />
               </Link>
@@ -164,34 +153,22 @@ const Hero = () => {
           </span>
         </motion.div>
 
-        {/* Floating 3D Dashboard Card */}
+        {/* Dashboard mockup */}
         <motion.div
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="relative mx-auto mt-12 max-w-5xl perspective-[2000px]"
+          className="relative mx-auto mt-12 max-w-5xl"
         >
-          <motion.div
-            className="rounded-xl border border-border bg-card p-3 shadow-xl"
-            animate={{
-              rotateX: [0, 4, 0],
-              rotateY: [0, -4, 0],
-              y: [0, -8, 0],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
+          <div className="pointer-events-none absolute inset-0 -z-10 rounded-lg bg-primary/10 blur-[60px]" />
+          <div className="animate-float rounded-lg border border-border bg-card p-2 shadow-card-hover sm:rounded-xl sm:p-3">
             <img
               src={dashboardMockup}
-              alt="Publioxa Dashboard"
-              className="w-full rounded-lg"
+              alt="Publioxa AI Social Media Dashboard"
+              className="w-full rounded-md sm:rounded-lg"
+              loading="eager"
             />
-          </motion.div>
-
-          <div className="absolute inset-0 -z-10 rounded-xl bg-primary/10 blur-[70px]" />
+          </div>
         </motion.div>
       </div>
     </section>
