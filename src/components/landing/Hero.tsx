@@ -9,9 +9,6 @@ import { ArrowRight, Star, Sparkles } from "lucide-react";
 import dashboardMockup from "@/assets/dashboard-mockup.png";
 
 const Hero = () => {
-  /* -----------------------------
-     Premium Slow Typing Animation
-  ------------------------------ */
   const fullText = "Powered by AI.";
   const [typedText, setTypedText] = useState("");
 
@@ -25,9 +22,6 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, []);
 
-  /* -----------------------------
-     Scroll-triggered Parallax
-  ------------------------------ */
   const { scrollY } = useScroll();
   const headlineY = useTransform(scrollY, [0, 300], [0, -24]);
   const subY = useTransform(scrollY, [0, 300], [0, -12]);
@@ -67,17 +61,6 @@ const Hero = () => {
         >
           <Sparkles className="mr-1 inline h-3.5 w-3.5" /> Trusted by 2,000+ growing businesses
         </motion.div>
-
-        {/* Spotlight Sweep — safely ABOVE CTA */}
-        <div className="relative h-[120px] w-full mx-auto overflow-hidden -z-10">
-          <motion.div
-            className="absolute inset-0 pointer-events-none"
-            animate={{ x: ["-40%", "140%"] }}
-            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <div className="absolute top-0 h-full w-1/3 bg-gradient-to-r from-transparent via-white/10 to-transparent blur-2xl" />
-          </motion.div>
-        </div>
 
         {/* Headline */}
         <motion.h1
