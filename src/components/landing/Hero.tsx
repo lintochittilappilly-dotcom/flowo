@@ -70,7 +70,7 @@ const Hero = () => {
 
         {/* Spotlight Sweep (LIMITED TO HEADLINE ONLY) */}
         <motion.div
-          className="absolute left-0 top-[18%] h-[140px] w-full pointer-events-none -z-10"
+          className="absolute left-0 top-[12%] h-[100px] w-full pointer-events-none -z-10 overflow-hidden"
           animate={{ x: ["-40%", "140%"] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         >
@@ -111,7 +111,7 @@ const Hero = () => {
           <motion.div className="relative">
 
             {/* Soft dark gradient behind CTA */}
-            <div className="absolute inset-0 -z-30 bg-gradient-to-b from-black/25 to-transparent rounded-full" />
+            <div className="absolute inset-0 -z-30 bg-gradient-to-b from-black/30 to-transparent rounded-full" />
 
             {/* Premium Gradient Ribbons */}
             <div className="absolute inset-0 -z-20 pointer-events-none">
