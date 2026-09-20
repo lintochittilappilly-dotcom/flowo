@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   motion,
-  AnimatePresence,
   useScroll,
   useTransform,
 } from "framer-motion";
@@ -11,7 +10,7 @@ import dashboardMockup from "@/assets/dashboard-mockup.png";
 
 const Hero = () => {
   /* -----------------------------
-     AI Typing Animation (Premium)
+     Premium Slow Typing Animation
   ------------------------------ */
   const fullText = "Powered by AI.";
   const [typedText, setTypedText] = useState("");
@@ -22,7 +21,7 @@ const Hero = () => {
       setTypedText(fullText.slice(0, i));
       i++;
       if (i > fullText.length) clearInterval(interval);
-    }, 70);
+    }, 150); // slowed down for premium pacing
     return () => clearInterval(interval);
   }, []);
 
@@ -78,7 +77,7 @@ const Hero = () => {
           <div className="absolute top-0 h-full w-1/3 bg-gradient-to-r from-transparent via-white/10 to-transparent blur-2xl" />
         </motion.div>
 
-        {/* Headline with Parallax + Typing */}
+        {/* Headline */}
         <motion.h1
           style={{ y: headlineY }}
           initial={{ opacity: 0, y: 30 }}
@@ -91,7 +90,7 @@ const Hero = () => {
           For $49/Month.
         </motion.h1>
 
-        {/* Subtitle with Parallax */}
+        {/* Subtitle */}
         <motion.p
           style={{ y: subY }}
           initial={{ opacity: 0, y: 30 }}
@@ -111,23 +110,26 @@ const Hero = () => {
         >
           <motion.div className="relative">
 
+            {/* Soft dark gradient behind CTA for readability */}
+            <div className="absolute inset-0 -z-30 bg-gradient-to-b from-black/20 to-transparent rounded-full" />
+
             {/* Premium Gradient Ribbons */}
             <div className="absolute inset-0 -z-20 pointer-events-none">
-              <div className="absolute -top-10 left-1/2 h-40 w-[140%] -translate-x-1/2 rotate-[8deg] bg-gradient-to-r from-primary/20 via-pink-400/10 to-primary-foreground/20 blur-3xl opacity-60" />
-              <div className="absolute top-10 left-1/2 h-40 w-[140%] -translate-x-1/2 -rotate-[6deg] bg-gradient-to-r from-primary-foreground/20 via-purple-400/10 to-primary/20 blur-3xl opacity-50" />
+              <div className="absolute -top-10 left-1/2 h-40 w-[140%] -translate-x-1/2 rotate-[8deg] bg-gradient-to-r from-primary/20 via-pink-400/10 to-primary-foreground/20 blur-3xl opacity-40" />
+              <div className="absolute top-10 left-1/2 h-40 w-[140%] -translate-x-1/2 -rotate-[6deg] bg-gradient-to-r from-primary-foreground/20 via-purple-400/10 to-primary/20 blur-3xl opacity-40" />
             </div>
 
             {/* Glow Ring */}
-            <div className="absolute inset-0 -z-10 rounded-full bg-gradient-to-r from-primary/30 to-primary-foreground/30 blur-xl opacity-60" />
+            <div className="absolute inset-0 -z-10 rounded-full bg-gradient-to-r from-primary/30 to-primary-foreground/30 blur-xl opacity-40" />
 
-            {/* Glass Morphism CTA */}
+            {/* Glass Morphism CTA (fixed contrast) */}
             <motion.div
               whileHover={{ rotate: -1.5, scale: 1.06 }}
               transition={{ type: "spring", stiffness: 200, damping: 12 }}
             >
               <Link
                 to="/signup"
-                className="backdrop-blur-xl bg-white/10 border border-white/20 inline-flex items-center gap-2 rounded-pill px-14 py-5 font-heading text-xl font-bold text-primary-foreground shadow-2xl shadow-primary/20 transition-all duration-300 hover:scale-[1.06] hover:shadow-primary/40"
+                className="backdrop-blur-xl bg-white/10 border border-white/20 inline-flex items-center gap-2 rounded-pill px-14 py-5 font-heading text-xl font-bold text-white shadow-2xl shadow-primary/20 transition-all duration-300 hover:scale-[1.06] hover:shadow-primary/40"
               >
                 Start Your Free 14-Day Trial <ArrowRight className="h-5 w-5" />
               </Link>
