@@ -11,28 +11,22 @@ const navLinks = [
   { label: "Testimonials", href: "#testimonials" },
 ];
 
-const Navbar = () => {
-  const scrollY = useScrollPosition();
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const scrolled = scrollY > 40;
+import { useNavigate } from "react-router-dom";
+const navigate = useNavigate();
 
-  const handleScroll = (href: string) => {
+const handleScroll = (href: string) => {
+  if (window.location.pathname !== "/") {
+    navigate("/");
+
+    setTimeout(() => {
+      const el = document.querySelector(href);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }, 150);
+  } else {
     const el = document.querySelector(href);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  useEffect(() => {
-    if (mobileOpen) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [mobileOpen]);
-
-  return (
-    <>
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  }
+};
       {/* Announcement Bar */}
       <div className="gradient-bg py-2 text-center text-xs font-medium text-primary-foreground sm:text-sm">
         <Zap className="mr-1 inline h-3.5 w-3.5" /> New: TikTok auto-publishing is now live —{" "}
