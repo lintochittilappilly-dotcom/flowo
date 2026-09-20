@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Zap } from "lucide-react";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
@@ -11,22 +11,39 @@ const navLinks = [
   { label: "Testimonials", href: "#testimonials" },
 ];
 
-import { useNavigate } from "react-router-dom";
-const navigate = useNavigate();
+const Navbar = () => {
+  const scrollY = useScrollPosition();
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const scrolled = scrollY > 40;
 
-const handleScroll = (href: string) => {
-  if (window.location.pathname !== "/") {
-    navigate("/");
+  const navigate = useNavigate();
 
-    setTimeout(() => {
+  /* ⭐ FIXED handleScroll — works on ALL pages */
+  const handleScroll = (href: string) => {
+    const isHome = window.location.pathname === "/";
+
+    if (!isHome) {
+      navigate("/");
+
+      setTimeout(() => {
+        const el = document.querySelector(href);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 150);
+    } else {
       const el = document.querySelector(href);
       if (el) el.scrollIntoView({ behavior: "smooth" });
-    }, 150);
-  } else {
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  }
-};
+    }
+  };
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
+  return (
+    <>
       {/* Announcement Bar */}
       <div className="gradient-bg py-2 text-center text-xs font-medium text-primary-foreground sm:text-sm">
         <Zap className="mr-1 inline h-3.5 w-3.5" /> New: TikTok auto-publishing is now live —{" "}
@@ -41,10 +58,14 @@ const handleScroll = (href: string) => {
         }`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-          {/* Logo */}
-          <a href="#" className="font-heading text-xl font-bold text-primary sm:text-2xl">
+          
+          {/* ⭐ FIXED LOGO — always navigates home */}
+          <Link
+            to="/"
+            className="font-heading text-xl font-bold text-primary sm:text-2xl"
+          >
             Publioxa
-          </a>
+          </Link>
 
           {/* Desktop links */}
           <div className="hidden items-center gap-8 md:flex">
