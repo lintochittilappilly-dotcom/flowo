@@ -122,4 +122,76 @@ const Hero = () => {
 
             {/* Glass Morphism CTA */}
             <motion.div
-              whileHover={{ rotate: -1.5, scale: 1
+              whileHover={{ rotate: -1.5, scale: 1.06 }}
+              transition={{ type: "spring", stiffness: 200, damping: 12 }}
+            >
+              <Link
+                to="/signup"
+                className="backdrop-blur-xl bg-white/10 border border-white/20 inline-flex items-center gap-2 rounded-pill px-14 py-5 font-heading text-xl font-bold text-primary-foreground shadow-2xl shadow-primary/20 transition-all duration-300 hover:scale-[1.06] hover:shadow-primary/40"
+              >
+                Start Your Free 14-Day Trial <ArrowRight className="h-5 w-5" />
+              </Link>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+
+        {/* Trust line */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="mt-5 font-body text-sm text-muted-foreground"
+        >
+          No credit card required · Cancel anytime · Setup in 4 minutes
+        </motion.p>
+
+        {/* Rating */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6 }}
+          className="mt-3 flex items-center justify-center gap-1.5"
+        >
+          {[...Array(5)].map((_, i) => (
+            <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
+          ))}
+          <span className="ml-1 font-body text-sm text-muted-foreground">
+            Rated 4.9/5 by 800+ customers
+          </span>
+        </motion.div>
+
+        {/* Floating 3D Dashboard Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="relative mx-auto mt-12 max-w-5xl perspective-[2000px]"
+        >
+          <motion.div
+            className="rounded-xl border border-border bg-card p-3 shadow-xl"
+            animate={{
+              rotateX: [0, 4, 0],
+              rotateY: [0, -4, 0],
+              y: [0, -8, 0],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <img
+              src={dashboardMockup}
+              alt="Publioxa Dashboard"
+              className="w-full rounded-lg"
+            />
+          </motion.div>
+
+          <div className="absolute inset-0 -z-10 rounded-xl bg-primary/10 blur-[70px]" />
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default Hero;
