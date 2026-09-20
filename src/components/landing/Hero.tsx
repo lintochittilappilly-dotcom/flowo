@@ -1,46 +1,99 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Play, Star, Sparkles, X } from "lucide-react";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import { ArrowRight, Star, Sparkles } from "lucide-react";
 import dashboardMockup from "@/assets/dashboard-mockup.png";
 
 const Hero = () => {
-  const [showVideo, setShowVideo] = useState(false);
+  /* -----------------------------
+     AI Typing Animation (Premium)
+  ------------------------------ */
+  const fullText = "Powered by AI.";
+  const [typedText, setTypedText] = useState("");
+
+  useEffect(() => {
+    let i = 0;
+    const interval = setInterval(() => {
+      setTypedText(fullText.slice(0, i));
+      i++;
+      if (i > fullText.length) clearInterval(interval);
+    }, 70);
+    return () => clearInterval(interval);
+  }, []);
+
+  /* -----------------------------
+     Scroll-triggered Parallax
+  ------------------------------ */
+  const { scrollY } = useScroll();
+  const headlineY = useTransform(scrollY, [0, 300], [0, -24]);
+  const subY = useTransform(scrollY, [0, 300], [0, -12]);
+  const particlesY = useTransform(scrollY, [0, 300], [0, -36]);
 
   return (
     <section className="relative overflow-hidden bg-background pb-20 pt-12 sm:pt-16 lg:pt-20">
-      {/* Decorative orbs */}
-      <div className="pointer-events-none absolute -left-40 top-20 h-80 w-80 rounded-full bg-primary/10 blur-[100px]" />
-      <div className="pointer-events-none absolute -right-40 top-60 h-96 w-96 rounded-full bg-secondary/10 blur-[120px]" />
-      <div className="pointer-events-none absolute left-1/2 top-40 h-4 w-4 rounded-full bg-primary/30" />
-      <div className="pointer-events-none absolute left-[20%] top-60 h-3 w-3 rounded-full bg-secondary/40" />
-      <div className="pointer-events-none absolute right-[25%] top-32 h-2 w-2 rounded-full bg-primary/50" />
+
+      {/* Floating Premium Particles */}
+      <motion.div
+        style={{ y: particlesY }}
+        className="absolute left-1/2 top-40 -z-10 h-8 w-8 rounded-full bg-primary/40 blur-md"
+        animate={{ y: [0, -30, 0], rotate: [0, 8, 0], opacity: [0.4, 0.8, 0.4] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        style={{ y: particlesY }}
+        className="absolute left-[30%] top-56 -z-10 h-5 w-5 rounded-full bg-secondary/40 blur-sm"
+        animate={{ y: [0, -20, 0], rotate: [0, -6, 0], opacity: [0.3, 0.7, 0.3] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        style={{ y: particlesY }}
+        className="absolute right-[35%] top-48 -z-10 h-6 w-6 rounded-full bg-primary/50 blur-md"
+        animate={{ y: [0, -35, 0], rotate: [0, 10, 0], opacity: [0.4, 0.9, 0.4] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+      />
 
       <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="mb-6 inline-flex items-center gap-1.5 rounded-pill bg-lavender px-4 py-1.5 font-heading text-sm font-semibold text-primary"
-         >
-           <Sparkles className="mr-1 inline h-3.5 w-3.5" /> Trusted by 2,000+ growing businesses
-         </motion.div>
+        >
+          <Sparkles className="mr-1 inline h-3.5 w-3.5" /> Trusted by 2,000+ growing businesses
+        </motion.div>
 
-        {/* Headline */}
+        {/* Ambient Spotlight Sweep */}
+        <motion.div
+          className="absolute left-0 top-0 h-full w-full pointer-events-none -z-10"
+          animate={{ x: ["-40%", "140%"] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <div className="absolute top-0 h-full w-1/3 bg-gradient-to-r from-transparent via-white/10 to-transparent blur-2xl" />
+        </motion.div>
+
+        {/* Headline with Parallax + Typing */}
         <motion.h1
+          style={{ y: headlineY }}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mx-auto max-w-4xl font-heading text-4xl font-extrabold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl"
         >
           Your Entire Social Media Team.{" "}
-          <span className="gradient-text">Powered by AI.</span>{" "}
+          <span className="gradient-text">{typedText}</span>{" "}
           For $49/Month.
         </motion.h1>
 
-        {/* Subtitle */}
+        {/* Subtitle with Parallax */}
         <motion.p
+          style={{ y: subY }}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -49,104 +102,24 @@ const Hero = () => {
           Stop wasting 15 hours a week writing posts, scheduling content, and stressing about what to say. Publioxa generates, schedules, and publishes your entire social media strategy — while you focus on running your business.
         </motion.p>
 
-        {/* Buttons */}
+        {/* CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
+          className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
         >
-          <Link
-              to="/signup"
-              className="gradient-bg inline-flex items-center gap-2 rounded-pill px-8 py-3.5 font-heading text-base font-bold text-primary-foreground shadow-lg shadow-primary/25 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-primary/30"
-            >
-              Start Your Free 14-Day Trial <ArrowRight className="h-5 w-5" />
-            </Link>
-            <button
-              onClick={() => setShowVideo(true)}
-              className="inline-flex items-center gap-2 rounded-pill border-2 border-primary bg-transparent px-8 py-3.5 font-heading text-base font-bold text-primary transition-all duration-300 hover:bg-primary/5"
-            >
-              <Play className="h-4 w-4" /> Watch 2-Minute Demo
-            </button>
-          </motion.div>
+          <motion.div className="relative">
 
-        {/* Trust line */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="mt-5 font-body text-sm text-muted-foreground"
-        >
-          No credit card required · Cancel anytime · Setup in 4 minutes
-        </motion.p>
+            {/* Premium Gradient Ribbons */}
+            <div className="absolute inset-0 -z-20 pointer-events-none">
+              <div className="absolute -top-10 left-1/2 h-40 w-[140%] -translate-x-1/2 rotate-[8deg] bg-gradient-to-r from-primary/20 via-pink-400/10 to-primary-foreground/20 blur-3xl opacity-60" />
+              <div className="absolute top-10 left-1/2 h-40 w-[140%] -translate-x-1/2 -rotate-[6deg] bg-gradient-to-r from-primary-foreground/20 via-purple-400/10 to-primary/20 blur-3xl opacity-50" />
+            </div>
 
-        {/* Rating */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="mt-3 flex items-center justify-center gap-1.5"
-        >
-          {[...Array(5)].map((_, i) => (
-            <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
-          ))}
-          <span className="ml-1 font-body text-sm text-muted-foreground">
-            Rated 4.9/5 by 800+ customers
-          </span>
-        </motion.div>
+            {/* Glow Ring */}
+            <div className="absolute inset-0 -z-10 rounded-full bg-gradient-to-r from-primary/30 to-primary-foreground/30 blur-xl opacity-60" />
 
-        {/* Dashboard mockup */}
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="relative mx-auto mt-12 max-w-5xl"
-        >
-          <div className="pointer-events-none absolute inset-0 -z-10 rounded-lg bg-primary/10 blur-[60px]" />
-          <div className="animate-float rounded-lg border border-border bg-card p-2 shadow-card-hover sm:rounded-xl sm:p-3">
-            <img
-              src={dashboardMockup}
-              alt="Publioxa AI Social Media Dashboard showing content calendar with posts for Instagram, LinkedIn, Twitter, and Facebook"
-              className="w-full rounded-md sm:rounded-lg"
-              loading="eager"
-            />
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Video Modal */}
-      <AnimatePresence>
-        {showVideo && (
-          <>
+            {/* Glass Morphism CTA */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setShowVideo(false)}
-              className="fixed inset-0 z-50 bg-foreground/70 backdrop-blur-sm"
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              className="fixed left-1/2 top-1/2 z-50 w-full max-w-3xl -translate-x-1/2 -translate-y-1/2 rounded-[20px] bg-foreground p-2"
-            >
-              <button onClick={() => setShowVideo(false)} className="absolute -right-2 -top-2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-card text-foreground shadow-lg">
-                <X className="h-4 w-4" />
-              </button>
-              <div className="flex aspect-video items-center justify-center rounded-[16px] bg-midnight">
-                <div className="text-center">
-                  <Play className="mx-auto h-16 w-16 text-primary-foreground/50" />
-                  <p className="mt-4 font-heading text-lg font-bold text-primary-foreground/70">Publioxa Demo Video</p>
-                  <p className="mt-1 text-sm text-primary-foreground/40">Video placeholder</p>
-                </div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-    </section>
-  );
-};
-
-export default Hero;
+              whileHover={{ rotate: -1.5, scale: 1
