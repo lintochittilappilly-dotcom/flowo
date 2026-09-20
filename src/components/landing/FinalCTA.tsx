@@ -73,6 +73,7 @@ const FinalCTA = () => (
           >
             Start My Free 14-Day Trial Now
           </Link>
+        {/*
           <a
             href="https://calendly.com/publioxa/demo"
             target="_blank"
@@ -81,6 +82,7 @@ const FinalCTA = () => (
           >
             Book a 15-Minute Demo Instead
           </a>
+          */}
       </motion.div>
 
       <div className="mt-10 flex flex-wrap items-center justify-center gap-6">
