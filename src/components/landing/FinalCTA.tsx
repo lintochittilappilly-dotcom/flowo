@@ -65,7 +65,8 @@ const FinalCTA = () => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.3 }}
-        className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
+        className="mt-8 flex flex-col items-center gap-2 sm:justify-center"
+        {/*className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"*/}
       >
         <Link
             to="/signup"
