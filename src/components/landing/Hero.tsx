@@ -21,7 +21,7 @@ const Hero = () => {
       setTypedText(fullText.slice(0, i));
       i++;
       if (i > fullText.length) clearInterval(interval);
-    }, 150); // slowed down for premium pacing
+    }, 150);
     return () => clearInterval(interval);
   }, []);
 
@@ -68,9 +68,9 @@ const Hero = () => {
           <Sparkles className="mr-1 inline h-3.5 w-3.5" /> Trusted by 2,000+ growing businesses
         </motion.div>
 
-        {/* Ambient Spotlight Sweep */}
+        {/* Spotlight Sweep (LIMITED TO HEADLINE ONLY) */}
         <motion.div
-          className="absolute left-0 top-0 h-full w-full pointer-events-none -z-10"
+          className="absolute left-0 top-[18%] h-[140px] w-full pointer-events-none -z-10"
           animate={{ x: ["-40%", "140%"] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         >
@@ -110,8 +110,8 @@ const Hero = () => {
         >
           <motion.div className="relative">
 
-            {/* Soft dark gradient behind CTA for readability */}
-            <div className="absolute inset-0 -z-30 bg-gradient-to-b from-black/20 to-transparent rounded-full" />
+            {/* Soft dark gradient behind CTA */}
+            <div className="absolute inset-0 -z-30 bg-gradient-to-b from-black/25 to-transparent rounded-full" />
 
             {/* Premium Gradient Ribbons */}
             <div className="absolute inset-0 -z-20 pointer-events-none">
@@ -122,7 +122,7 @@ const Hero = () => {
             {/* Glow Ring */}
             <div className="absolute inset-0 -z-10 rounded-full bg-gradient-to-r from-primary/30 to-primary-foreground/30 blur-xl opacity-40" />
 
-            {/* Glass Morphism CTA (fixed contrast) */}
+            {/* Glass Morphism CTA (fully readable) */}
             <motion.div
               whileHover={{ rotate: -1.5, scale: 1.06 }}
               transition={{ type: "spring", stiffness: 200, damping: 12 }}
