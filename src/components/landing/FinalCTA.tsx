@@ -35,6 +35,7 @@ const FinalCTA = () => (
       >
         Your Competitors Are Posting Right Now. Are You?
       </motion.h2>
+
       <motion.p
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -60,35 +61,35 @@ const FinalCTA = () => (
         ))}
       </motion.div>
 
+      {/* CTA Section — Larger Button + Subtle Animation */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.3 }}
         className="mt-8 flex flex-col items-center gap-2 sm:justify-center"
-        {/*className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"*/}
       >
-        <Link
+        <motion.div
+          animate={{ scale: [1, 1.03, 1] }}
+          transition={{
+            duration: 3.2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          <Link
             to="/signup"
-            className="rounded-pill bg-card px-8 py-3.5 font-heading text-base font-bold text-primary shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
+            className="rounded-pill bg-card px-10 py-4 font-heading text-lg font-bold text-primary shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl"
           >
             Start My Free 14-Day Trial Now
           </Link>
-        {/*
-          <a
-            href="https://calendly.com/publioxa/demo"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-pill border-2 border-primary-foreground px-8 py-3.5 font-heading text-base font-bold text-primary-foreground transition-all duration-300 hover:bg-primary-foreground/10"
-          >
-            Book a 15-Minute Demo Instead
-          </a>
-          */}
+        </motion.div>
       </motion.div>
 
-      <div className="mt-10 flex flex-wrap items-center justify-center gap-6">
+      {/* Trust Badges — Tighter Spacing */}
+      <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
         {trustBadges.map((b) => (
-          <div key={b.label} className="flex items-center gap-1.5 text-primary-foreground/70">
+          <div key={b.label} className="flex items-center gap-1 text-primary-foreground/70">
             <b.icon className="h-4 w-4" />
             <span className="font-body text-xs">{b.label}</span>
           </div>
