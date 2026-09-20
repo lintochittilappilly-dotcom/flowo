@@ -112,7 +112,11 @@ const Hero = () => {
           >
             {/* Glow Ring */}
             <div className="absolute inset-0 -z-10 rounded-full bg-gradient-to-r from-primary/30 to-primary-foreground/30 blur-xl opacity-60" />
-
+{/* Premium Gradient Ribbons */}
+<div className="absolute inset-0 -z-20 pointer-events-none">
+  <div className="absolute -top-10 left-1/2 h-40 w-[140%] -translate-x-1/2 rotate-[8deg] bg-gradient-to-r from-primary/20 via-pink-400/10 to-primary-foreground/20 blur-3xl opacity-60" />
+  <div className="absolute top-10 left-1/2 h-40 w-[140%] -translate-x-1/2 -rotate-[6deg] bg-gradient-to-r from-primary-foreground/20 via-purple-400/10 to-primary/20 blur-3xl opacity-50" />
+</div>
             {/* Button */}
             <motion.div
               whileHover={{ rotate: -1.5, scale: 1.06 }}
