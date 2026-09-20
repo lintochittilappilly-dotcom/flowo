@@ -38,25 +38,24 @@ const Hero = () => {
   return (
     <section className="relative overflow-hidden bg-background pb-20 pt-12 sm:pt-16 lg:pt-20">
 
-      {/* Floating Premium Particles */}
-      <motion.div
-        style={{ y: particlesY }}
-        className="absolute left-1/2 top-40 -z-10 h-8 w-8 rounded-full bg-primary/40 blur-md"
-        animate={{ y: [0, -30, 0], rotate: [0, 8, 0], opacity: [0.4, 0.8, 0.4] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        style={{ y: particlesY }}
-        className="absolute left-[30%] top-56 -z-10 h-5 w-5 rounded-full bg-secondary/40 blur-sm"
-        animate={{ y: [0, -20, 0], rotate: [0, -6, 0], opacity: [0.3, 0.7, 0.3] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        style={{ y: particlesY }}
-        className="absolute right-[35%] top-48 -z-10 h-6 w-6 rounded-full bg-primary/50 blur-md"
-        animate={{ y: [0, -35, 0], rotate: [0, 10, 0], opacity: [0.4, 0.9, 0.4] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-      />
+      {/* Floating CTA Particles (FIXED Z-INDEX) */}
+<motion.div
+  className="absolute -top-8 left-1/2 h-4 w-4 rounded-full bg-primary/50 blur-md z-30"
+  animate={{ y: [0, -18, 0], opacity: [0.3, 0.7, 0.3], rotate: [0, 12, 0] }}
+  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+/>
+
+<motion.div
+  className="absolute top-10 left-[30%] h-3 w-3 rounded-full bg-secondary/50 blur-md z-30"
+  animate={{ y: [0, -14, 0], opacity: [0.2, 0.6, 0.2], rotate: [0, -10, 0] }}
+  transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+/>
+
+<motion.div
+  className="absolute top-6 right-[25%] h-5 w-5 rounded-full bg-primary/60 blur-lg z-30"
+  animate={{ y: [0, -22, 0], opacity: [0.4, 0.9, 0.4], rotate: [0, 15, 0] }}
+  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+/>
 
       <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
 
