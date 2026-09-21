@@ -2,17 +2,15 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   motion,
-  AnimatePresence,
   useScroll,
   useTransform,
-  useAnimationControls,
 } from "framer-motion";
 import { ArrowRight, Star, Sparkles } from "lucide-react";
 import dashboardMockup from "@/assets/dashboard-mockup.png";
 
 const Hero = () => {
   /* -----------------------------
-     AI Typing Animation (Premium)
+     AI Typing Animation
   ------------------------------ */
   const fullText = "Powered by AI.";
   const [typedText, setTypedText] = useState("");
@@ -33,29 +31,28 @@ const Hero = () => {
   const { scrollY } = useScroll();
   const headlineY = useTransform(scrollY, [0, 300], [0, -24]);
   const subY = useTransform(scrollY, [0, 300], [0, -12]);
-  const particlesY = useTransform(scrollY, [0, 300], [0, -36]);
 
   return (
     <section className="relative overflow-hidden bg-background pb-20 pt-12 sm:pt-16 lg:pt-20">
 
-      {/* Floating CTA Particles (FIXED Z-INDEX) */}
-<motion.div
-  className="absolute -top-8 left-1/2 h-4 w-4 rounded-full bg-primary/50 blur-md z-30"
-  animate={{ y: [0, -18, 0], opacity: [0.3, 0.7, 0.3], rotate: [0, 12, 0] }}
-  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-/>
+      {/* Floating CTA Particles — FIXED */}
+      <motion.div
+        className="absolute -top-8 left-1/2 h-4 w-4 rounded-full bg-primary/50 blur-md z-30 pointer-events-none"
+        animate={{ y: [0, -18, 0], opacity: [0.3, 0.7, 0.3], rotate: [0, 12, 0] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+      />
 
-<motion.div
-  className="absolute top-10 left-[30%] h-3 w-3 rounded-full bg-secondary/50 blur-md z-30"
-  animate={{ y: [0, -14, 0], opacity: [0.2, 0.6, 0.2], rotate: [0, -10, 0] }}
-  transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-/>
+      <motion.div
+        className="absolute top-10 left-[30%] h-3 w-3 rounded-full bg-secondary/50 blur-md z-30 pointer-events-none"
+        animate={{ y: [0, -14, 0], opacity: [0.2, 0.6, 0.2], rotate: [0, -10, 0] }}
+        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+      />
 
-<motion.div
-  className="absolute top-6 right-[25%] h-5 w-5 rounded-full bg-primary/60 blur-lg z-30"
-  animate={{ y: [0, -22, 0], opacity: [0.4, 0.9, 0.4], rotate: [0, 15, 0] }}
-  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-/>
+      <motion.div
+        className="absolute top-6 right-[25%] h-5 w-5 rounded-full bg-primary/60 blur-lg z-30 pointer-events-none"
+        animate={{ y: [0, -22, 0], opacity: [0.4, 0.9, 0.4], rotate: [0, 15, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      />
 
       <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
 
@@ -69,7 +66,7 @@ const Hero = () => {
           <Sparkles className="mr-1 inline h-3.5 w-3.5" /> Trusted by 2,000+ growing businesses
         </motion.div>
 
-        {/* Headline with Parallax + Typing */}
+        {/* Headline */}
         <motion.h1
           style={{ y: headlineY }}
           initial={{ opacity: 0, y: 30 }}
@@ -82,7 +79,7 @@ const Hero = () => {
           For $49/Month.
         </motion.h1>
 
-        {/* Subtitle with Parallax */}
+        {/* Subtitle */}
         <motion.p
           style={{ y: subY }}
           initial={{ opacity: 0, y: 30 }}
@@ -93,64 +90,65 @@ const Hero = () => {
           Stop wasting 15 hours a week writing posts, scheduling content, and stressing about what to say. Publioxa generates, schedules, and publishes your entire social media strategy — while you focus on running your business.
         </motion.p>
 
-       {/* Premium CTA */}
-<motion.div
-  initial={{ opacity: 0, y: 30 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6, delay: 0.3 }}
-  className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
->
-  <motion.div
-    className="relative"
-    animate={{ scale: [1, 1.03, 1] }}
-    transition={{
-      duration: 3.2,
-      repeat: Infinity,
-      ease: "easeInOut",
-    }}
-  >
+        {/* CTA Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
+        >
+          <motion.div
+            className="relative"
+            animate={{ scale: [1, 1.03, 1] }}
+            transition={{
+              duration: 3.2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
 
-    {/* 🔥 Floating Premium Objects */}
-    <motion.div
-      className="absolute -top-8 left-1/2 h-4 w-4 rounded-full bg-primary/50 blur-md z-30"
-      animate={{ y: [0, -18, 0], opacity: [0.3, 0.7, 0.3], rotate: [0, 12, 0] }}
-      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-    />
-    <motion.div
-      className="absolute top-10 left-[30%] h-3 w-3 rounded-full bg-secondary/50 blur-md z-30"
-      animate={{ y: [0, -14, 0], opacity: [0.2, 0.6, 0.2], rotate: [0, -10, 0] }}
-      transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-    />
-    <motion.div
-      className="absolute top-6 right-[25%] h-5 w-5 rounded-full bg-primary/60 blur-lg z-30"
-      animate={{ y: [0, -22, 0], opacity: [0.4, 0.9, 0.4], rotate: [0, 15, 0] }}
-      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-    />
+            {/* Floating CTA Particles — FIXED */}
+            <motion.div
+              className="absolute -top-8 left-1/2 h-4 w-4 rounded-full bg-primary/50 blur-md z-30 pointer-events-none"
+              animate={{ y: [0, -18, 0], opacity: [0.3, 0.7, 0.3], rotate: [0, 12, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.div
+              className="absolute top-10 left-[30%] h-3 w-3 rounded-full bg-secondary/50 blur-md z-30 pointer-events-none"
+              animate={{ y: [0, -14, 0], opacity: [0.2, 0.6, 0.2], rotate: [0, -10, 0] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.div
+              className="absolute top-6 right-[25%] h-5 w-5 rounded-full bg-primary/60 blur-lg z-30 pointer-events-none"
+              animate={{ y: [0, -22, 0], opacity: [0.4, 0.9, 0.4], rotate: [0, 15, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            />
 
-    {/* Glow Ring */}
-    <div className="absolute inset-0 z-10 rounded-full bg-gradient-to-r from-primary/30 to-primary-foreground/30 blur-xl opacity-60" />
+            {/* Glow Ring — FIXED */}
+            <div className="absolute inset-0 z-10 pointer-events-none rounded-full bg-gradient-to-r from-primary/30 to-primary-foreground/30 blur-xl opacity-60" />
 
-    {/* Premium Gradient Ribbons */}
-    <div className="absolute inset-0 -z-20 pointer-events-none">
-      <div className="absolute -top-10 left-1/2 h-40 w-[140%] -translate-x-1/2 rotate-[8deg] bg-gradient-to-r from-primary/20 via-pink-400/10 to-primary-foreground/20 blur-3xl opacity-60" />
-      <div className="absolute top-10 left-1/2 h-40 w-[140%] -translate-x-1/2 -rotate-[6deg] bg-gradient-to-r from-primary-foreground/20 via-purple-400/10 to-primary/20 blur-3xl opacity-50" />
-    </div>
+            {/* Gradient Ribbons */}
+            <div className="absolute inset-0 -z-20 pointer-events-none">
+              <div className="absolute -top-10 left-1/2 h-40 w-[140%] -translate-x-1/2 rotate-[8deg] bg-gradient-to-r from-primary/20 via-pink-400/10 to-primary-foreground/20 blur-3xl opacity-60" />
+              <div className="absolute top-10 left-1/2 h-40 w-[140%] -translate-x-1/2 -rotate-[6deg] bg-gradient-to-r from-primary-foreground/20 via-purple-400/10 to-primary/20 blur-3xl opacity-50" />
+            </div>
 
-    {/* Button */}
-    <motion.div
-      whileHover={{ rotate: -1.5, scale: 1.06 }}
-      transition={{ type: "spring", stiffness: 200, damping: 12 }}
-    >
-      <Link
-  to="/signup"
-  style={{ position: "relative", zIndex: 50 }}
-  className="gradient-bg inline-flex items-center gap-2 rounded-pill px-12 py-5 font-heading text-xl font-bold text-primary-foreground shadow-xl shadow-primary/25 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/40"
->
-  Start Your Free 14-Day Trial <ArrowRight className="h-5 w-5" />
-</Link>
-    </motion.div>
-  </motion.div>
-</motion.div>
+            {/* CTA Button — FIXED */}
+            <motion.div
+              whileHover={{ rotate: -1.5, scale: 1.06 }}
+              transition={{ type: "spring", stiffness: 200, damping: 12 }}
+              className="relative z-50"
+            >
+              <Link
+                to="/signup"
+                className="gradient-bg inline-flex items-center gap-2 rounded-pill px-12 py-5 font-heading text-xl font-bold text-primary-foreground shadow-xl shadow-primary/25 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/40"
+              >
+                Start Your Free 14-Day Trial <ArrowRight className="h-5 w-5" />
+              </Link>
+            </motion.div>
+
+          </motion.div>
+        </motion.div>
 
         {/* Trust line */}
         <motion.p
@@ -194,6 +192,7 @@ const Hero = () => {
             />
           </div>
         </motion.div>
+
       </div>
     </section>
   );
