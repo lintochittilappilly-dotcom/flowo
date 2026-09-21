@@ -143,7 +143,7 @@ const Hero = () => {
     >
       <Link
   to="/signup"
-  style={{ position: "relative", zIndex: 10 }}
+  style={{ position: "relative", zIndex: 50 }}
   className="gradient-bg inline-flex items-center gap-2 rounded-pill px-12 py-5 font-heading text-xl font-bold text-primary-foreground shadow-xl shadow-primary/25 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/40"
 >
   Start Your Free 14-Day Trial <ArrowRight className="h-5 w-5" />
