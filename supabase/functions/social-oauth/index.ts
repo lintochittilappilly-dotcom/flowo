@@ -292,7 +292,11 @@ Deno.serve(async (req) => {
       }
 
       // Clean up expired states first
-      await supabase.rpc("cleanup_expired_oauth_states").catch(() => {});
+      try {
+        await supabase.rpc("cleanup_expired_oauth_states");
+      } catch (_) {
+        // ignore cleanup errors
+      }
 
       // Save state
       await supabase.from("oauth_states").insert({
