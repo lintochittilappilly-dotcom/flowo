@@ -52,10 +52,12 @@ const ConnectedAccountsTab = ({ brandId }: Props) => {
   const loadAccounts = async () => {
     if (!user) return;
     try {
-      const { data: sa } = await supabase
-        .from("social_accounts")
-        .select("*")
-        .eq("user_id", user.id);
+      const { data: sa, error: saError } = await supabase
+  .from("social_accounts")
+  .select("*")
+  .eq("user_id", user.id)
+  .eq("brand_id", brandId);      // ← align read with how rows are written
+if (saError) console.error("Failed to load social_accounts:", saError.message);
 
       const mapped: ConnectedAccount[] = PLATFORM_KEYS.map((key) => {
         const found = (sa ?? []).find(
