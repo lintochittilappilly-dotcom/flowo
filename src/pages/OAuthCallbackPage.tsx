@@ -13,7 +13,10 @@ const ERROR_MESSAGES: Record<string, string> = {
   callback_failed: "Something went wrong. Please try again.",
   invalid_callback: "Invalid callback parameters.",
   no_session: "You need to be logged in. Redirecting…",
-  no_pages: "No Facebook Pages found on this account. Create a Page first, then reconnect.",
+  no_pages: "No Facebook Page found on your account. You need a Facebook Page (not just a personal profile) to connect.",
+  fb_pages_fetch_failed: "Couldn't fetch your Facebook Pages. Reconnect and make sure you grant the Pages permissions when prompted.",
+  token_exchange_failed: "Facebook rejected the login. Please try connecting again.",
+  invalid_state: "Your session expired during login. Please try connecting again.",
   selection_expired: "Selection timed out. Please connect again.",
   page_not_found: "That Page could not be found. Please try again.",
 };
