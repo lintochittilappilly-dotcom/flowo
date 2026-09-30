@@ -6,7 +6,14 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type",
 };
 
-// OAuth configs — all secrets from edge function env
+// Small helper so every response is consistent
+function json(body: unknown, status = 200) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { ...corsHeaders, "Content-Type": "application/json" },
+  });
+}
+
 const OAUTH_CONFIGS: Record<string, {
   authUrl: string;
   tokenUrl: string;
@@ -109,7 +116,6 @@ async function generateCodeChallenge(verifier: string): Promise<string> {
     .replace(/=+$/, "");
 }
 
-// Simple XOR-based token obfuscation for storage (real encryption needs a proper key)
 const ENCRYPTION_KEY = Deno.env.get("TOKEN_ENCRYPTION_KEY") || "";
 
 function obfuscateToken(token: string): string {
@@ -133,20 +139,19 @@ async function fetchUserProfile(
   config: typeof OAUTH_CONFIGS[string]
 ) {
   const defaultProfile = { id: "", username: "", profilePicture: null as string | null, followersCount: 0 };
-
   try {
     const headers: Record<string, string> = { Authorization: `Bearer ${accessToken}` };
     let url = config.profileUrl;
-
     if (platform === "instagram") url += "?fields=id,username";
     else if (platform === "twitter") url += "?user.fields=profile_image_url,public_metrics";
     else if (platform === "tiktok") url += "?fields=open_id,display_name,avatar_url,follower_count";
 
     const res = await fetch(url, { headers });
-    if (!res.ok) return defaultProfile;
-
+    if (!res.ok) {
+      console.error(`profile fetch failed for ${platform}:`, res.status, await res.text());
+      return defaultProfile;
+    }
     const data = await res.json();
-
     switch (platform) {
       case "instagram":
         return { id: data.id || "", username: data.username || "", profilePicture: null, followersCount: 0 };
@@ -165,9 +170,116 @@ async function fetchUserProfile(
       default:
         return defaultProfile;
     }
-  } catch {
+  } catch (e) {
+    console.error(`profile fetch threw for ${platform}:`, e);
     return defaultProfile;
   }
+}
+
+const FB_GRAPH = "https://graph.facebook.com/v18.0";
+
+async function exchangeFacebookLongLivedToken(
+  shortToken: string,
+  config: typeof OAUTH_CONFIGS[string]
+): Promise<string> {
+  try {
+    const url = `${FB_GRAPH}/oauth/access_token?grant_type=fb_exchange_token&client_id=${config.clientId}&client_secret=${config.clientSecret}&fb_exchange_token=${shortToken}`;
+    const res = await fetch(url);
+    if (!res.ok) {
+      console.error("FB long-lived exchange failed:", res.status, await res.text());
+      return shortToken;
+    }
+    const data = await res.json();
+    return data.access_token || shortToken;
+  } catch (e) {
+    console.error("FB long-lived exchange threw:", e);
+    return shortToken;
+  }
+}
+
+interface FacebookPage {
+  id: string;
+  name: string;
+  access_token: string;
+  followers: number;
+  picture: string | null;
+}
+
+// CHANGED: throws on a real Graph error instead of silently returning []
+async function fetchFacebookPages(userToken: string): Promise<FacebookPage[]> {
+  const url = `${FB_GRAPH}/me/accounts?fields=id,name,access_token,fan_count,followers_count,picture{url}&limit=100&access_token=${userToken}`;
+  const res = await fetch(url);
+  if (!res.ok) {
+    const errText = await res.text();
+    console.error("FB /me/accounts failed:", res.status, errText);
+    throw new Error(`fb_pages_fetch_failed: ${res.status} ${errText}`);
+  }
+  const data = await res.json();
+  return (data.data || []).map((p: any) => ({
+    id: p.id,
+    name: p.name,
+    access_token: p.access_token,
+    followers: p.followers_count ?? p.fan_count ?? 0,
+    picture: p.picture?.data?.url ?? null,
+  }));
+}
+
+// CHANGED: now throws on any write error so the caller returns a real failure
+async function persistAccount(
+  supabase: any,
+  p: {
+    userId: string; brandId: string; platform: string;
+    platformUserId: string; username: string; profilePicture: string | null;
+    followersCount: number; accessToken: string; refreshToken: string | null;
+    tokenExpiresAt: string | null; scopes: string[];
+  }
+) {
+  const { data: existing, error: selErr } = await supabase
+    .from("social_accounts")
+    .select("id")
+    .eq("user_id", p.userId)
+    .eq("brand_id", p.brandId)
+    .eq("platform", p.platform)
+    .maybeSingle();
+
+  if (selErr) throw new Error(`social_accounts lookup failed: ${selErr.message}`);
+
+  const row = {
+    platform_user_id: p.platformUserId,
+    platform_username: p.username,
+    account_name: p.username,
+    platform_profile_picture: p.profilePicture,
+    platform_followers_count: p.followersCount,
+    access_token: p.accessToken,
+    refresh_token: p.refreshToken,
+    token_expires_at: p.tokenExpiresAt,
+    scopes: p.scopes,
+    is_active: true,
+    needs_reconnect: false,
+    error_message: null,
+    connected_at: new Date().toISOString(),
+    last_used_at: new Date().toISOString(),
+  };
+
+  if (existing) {
+    const { error } = await supabase.from("social_accounts").update(row).eq("id", existing.id);
+    if (error) throw new Error(`social_accounts update failed: ${error.message}`);
+  } else {
+    const { error } = await supabase.from("social_accounts").insert({
+      user_id: p.userId, brand_id: p.brandId, platform: p.platform, ...row,
+    });
+    if (error) throw new Error(`social_accounts insert failed: ${error.message}`);
+  }
+
+  const label = OAUTH_CONFIGS[p.platform]?.label ?? p.platform;
+  // Notification is non-fatal: log but don't fail the connection
+  const { error: notifErr } = await supabase.from("notifications").insert({
+    user_id: p.userId,
+    type: "platform_connected",
+    title: `${label} connected`,
+    message: `Your ${label} account "${p.username}" has been connected successfully.`,
+  });
+  if (notifErr) console.error("notification insert failed (non-fatal):", notifErr.message);
 }
 
 Deno.serve(async (req) => {
@@ -178,10 +290,7 @@ Deno.serve(async (req) => {
   try {
     const authHeader = req.headers.get("Authorization");
     if (!authHeader?.startsWith("Bearer ")) {
-      return new Response(JSON.stringify({ error: "Unauthorized" }), {
-        status: 401,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+      return json({ error: "Unauthorized" }, 401);
     }
 
     const supabase = createClient(
@@ -192,14 +301,11 @@ Deno.serve(async (req) => {
 
     const { data: { user }, error: userError } = await supabase.auth.getUser();
     if (userError || !user) {
-      return new Response(JSON.stringify({ error: "Unauthorized" }), {
-        status: 401,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+      return json({ error: "Unauthorized" }, 401);
     }
 
     const body = await req.json();
-    const { action, platform, brand_id, account_id, return_url } = body;
+    const { action, platform, brand_id, account_id } = body;
 
     // ─── CHECK PLATFORM STATUS ───
     if (action === "check_platforms") {
@@ -207,35 +313,30 @@ Deno.serve(async (req) => {
       for (const key of Object.keys(OAUTH_CONFIGS)) {
         statuses[key] = isPlatformConfigured(key);
       }
-      return new Response(JSON.stringify({ platforms: statuses }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+      return json({ platforms: statuses });
     }
 
-    // ─── START CONNECT (generate auth URL or simulate) ───
+    // ─── START CONNECT ───
     if (action === "connect") {
       if (!platform || !brand_id) {
-        return new Response(JSON.stringify({ error: "Missing platform or brand_id" }), {
-          status: 400,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
+        return json({ error: "Missing platform or brand_id" }, 400);
       }
 
       const config = OAUTH_CONFIGS[platform];
 
-      // If platform not configured with real keys, simulate connection (dev mode)
+      // Dev/simulation mode
       if (!config || !isPlatformConfigured(platform)) {
         const simUsername = `demo_${platform}_user`;
         const simFollowers = Math.floor(Math.random() * 5000) + 500;
 
-        // Check for existing account to update
-        const { data: existing } = await supabase
+        const { data: existing, error: selErr } = await supabase
           .from("social_accounts")
           .select("id")
           .eq("user_id", user.id)
           .eq("brand_id", brand_id)
           .eq("platform", platform)
           .maybeSingle();
+        if (selErr) return json({ error: `lookup_failed: ${selErr.message}` }, 500);
 
         const accountData = {
           user_id: user.id,
@@ -258,9 +359,11 @@ Deno.serve(async (req) => {
         };
 
         if (existing) {
-          await supabase.from("social_accounts").update(accountData).eq("id", existing.id);
+          const { error } = await supabase.from("social_accounts").update(accountData).eq("id", existing.id);
+          if (error) return json({ error: `update_failed: ${error.message}` }, 500);
         } else {
-          await supabase.from("social_accounts").insert(accountData);
+          const { error } = await supabase.from("social_accounts").insert(accountData);
+          if (error) return json({ error: `insert_failed: ${error.message}` }, 500);
         }
 
         await supabase.from("notifications").insert({
@@ -270,18 +373,12 @@ Deno.serve(async (req) => {
           message: `${config?.label ?? platform} account @${simUsername} connected in dev mode.`,
         });
 
-        return new Response(JSON.stringify({
-          success: true,
-          simulated: true,
-          platform,
-          username: simUsername,
-          followers_count: simFollowers,
-        }), {
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        return json({
+          success: true, simulated: true, platform,
+          username: simUsername, followers_count: simFollowers,
         });
       }
 
-      // Generate state token
       const stateToken = generateRandomString(32);
       let codeVerifier: string | null = null;
       let codeChallenge: string | null = null;
@@ -291,23 +388,17 @@ Deno.serve(async (req) => {
         codeChallenge = await generateCodeChallenge(codeVerifier);
       }
 
-      // Clean up expired states first
-      try {
-        await supabase.rpc("cleanup_expired_oauth_states");
-      } catch (_) {
-        // ignore cleanup errors
-      }
+      try { await supabase.rpc("cleanup_expired_oauth_states"); } catch (_) { /* ignore */ }
 
-      // Save state
-      await supabase.from("oauth_states").insert({
+      const { error: stateInsertErr } = await supabase.from("oauth_states").insert({
         user_id: user.id,
         brand_id,
         platform,
         state_token: stateToken,
         code_verifier: codeVerifier,
       });
+      if (stateInsertErr) return json({ error: `state_insert_failed: ${stateInsertErr.message}` }, 500);
 
-      // Build auth URL
       const params = new URLSearchParams({
         client_id: config.clientId,
         redirect_uri: config.redirectUri,
@@ -315,31 +406,21 @@ Deno.serve(async (req) => {
         response_type: "code",
         state: stateToken,
       });
-
       if (codeChallenge) {
         params.set("code_challenge", codeChallenge);
         params.set("code_challenge_method", "S256");
       }
 
-      const authUrl = `${config.authUrl}?${params.toString()}`;
-
-      return new Response(JSON.stringify({ auth_url: authUrl }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+      return json({ auth_url: `${config.authUrl}?${params.toString()}` });
     }
 
-    // ─── CALLBACK (exchange code for tokens) ───
+    // ─── CALLBACK ───
     if (action === "callback") {
       const { code, state } = body;
-
       if (!code || !state || !platform) {
-        return new Response(JSON.stringify({ error: "invalid_callback" }), {
-          status: 400,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
+        return json({ error: "invalid_callback" }, 400);
       }
 
-      // Verify state — CSRF protection
       const { data: oauthState, error: stateError } = await supabase
         .from("oauth_states")
         .select("*")
@@ -350,18 +431,13 @@ Deno.serve(async (req) => {
         .single();
 
       if (stateError || !oauthState) {
-        return new Response(JSON.stringify({ error: "invalid_state" }), {
-          status: 400,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
+        return json({ error: "invalid_state" }, 400);
       }
 
-      // Delete used state
       await supabase.from("oauth_states").delete().eq("id", oauthState.id);
 
       const config = OAUTH_CONFIGS[platform];
 
-      // Exchange code for tokens
       const tokenParams: Record<string, string> = {
         grant_type: "authorization_code",
         code,
@@ -369,41 +445,29 @@ Deno.serve(async (req) => {
         client_id: config.clientId,
         client_secret: config.clientSecret,
       };
-
-      if (oauthState.code_verifier) {
-        tokenParams.code_verifier = oauthState.code_verifier;
-      }
+      if (oauthState.code_verifier) tokenParams.code_verifier = oauthState.code_verifier;
 
       const headers: Record<string, string> = {
         "Content-Type": "application/x-www-form-urlencoded",
       };
-
       if (platform === "twitter") {
-        const credentials = btoa(`${config.clientId}:${config.clientSecret}`);
-        headers["Authorization"] = `Basic ${credentials}`;
+        headers["Authorization"] = `Basic ${btoa(`${config.clientId}:${config.clientSecret}`)}`;
       }
 
       const tokenRes = await fetch(config.tokenUrl, {
-        method: "POST",
-        headers,
-        body: new URLSearchParams(tokenParams),
+        method: "POST", headers, body: new URLSearchParams(tokenParams),
       });
 
       if (!tokenRes.ok) {
-        const errText = await tokenRes.text();
-        console.error(`Token exchange failed for ${platform}:`, errText);
-        return new Response(JSON.stringify({ error: "token_exchange_failed" }), {
-          status: 400,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
+        console.error(`Token exchange failed for ${platform}:`, await tokenRes.text());
+        return json({ error: "token_exchange_failed" }, 400);
       }
 
       const tokenData = await tokenRes.json();
       let accessToken = tokenData.access_token;
-      let refreshToken = tokenData.refresh_token ?? null;
+      const refreshToken = tokenData.refresh_token ?? null;
       let expiresIn = tokenData.expires_in ?? null;
 
-      // Instagram: exchange for long-lived token
       if (platform === "instagram" && accessToken && config.longLivedTokenUrl) {
         try {
           const llRes = await fetch(
@@ -414,159 +478,122 @@ Deno.serve(async (req) => {
             accessToken = llData.access_token;
             expiresIn = llData.expires_in;
           }
-        } catch {}
+        } catch (e) { console.error("IG long-lived exchange threw:", e); }
       }
 
-      // Fetch profile
-      const profile = await fetchUserProfile(platform, accessToken, config);
+      // ── Facebook: fetch Pages ──
+      if (platform === "facebook") {
+        let pages: FacebookPage[];
+        try {
+          const longLived = await exchangeFacebookLongLivedToken(accessToken, config);
+          pages = await fetchFacebookPages(longLived);
+        } catch (e) {
+          // real Graph error is now surfaced instead of masquerading as "no_pages"
+          return json({ error: "fb_pages_fetch_failed", detail: (e as Error).message }, 400);
+        }
 
+        if (pages.length === 0) {
+          return json({ error: "no_pages" }, 400);
+        }
+
+        if (pages.length === 1) {
+          const page = pages[0];
+          await persistAccount(supabase, {
+            userId: user.id, brandId: oauthState.brand_id, platform: "facebook",
+            platformUserId: page.id, username: page.name, profilePicture: page.picture,
+            followersCount: page.followers, accessToken: obfuscateToken(page.access_token),
+            refreshToken: null, tokenExpiresAt: null, scopes: config.scopes,
+          });
+          return json({
+            success: true, platform, username: page.name,
+            profile_picture: page.picture, followers_count: page.followers,
+          });
+        }
+
+        const selectionToken = generateRandomString(24);
+        const { error: pendErr } = await supabase.from("oauth_pending_selections").insert({
+          user_id: user.id,
+          brand_id: oauthState.brand_id,
+          platform: "facebook",
+          selection_token: selectionToken,
+          pages: pages.map((p) => ({
+            id: p.id, name: p.name,
+            access_token: obfuscateToken(p.access_token),
+            followers: p.followers, picture: p.picture,
+          })),
+        });
+        if (pendErr) return json({ error: `pending_insert_failed: ${pendErr.message}` }, 500);
+
+        return json({
+          needs_page_selection: true,
+          platform,
+          selection_token: selectionToken,
+          pages: pages.map((p) => ({ id: p.id, name: p.name, followers: p.followers, picture: p.picture })),
+        });
+      }
+
+      // ── All other platforms ──
+      const profile = await fetchUserProfile(platform, accessToken, config);
       const tokenExpiresAt = expiresIn
         ? new Date(Date.now() + expiresIn * 1000).toISOString()
         : null;
 
-      // Obfuscate tokens
-      const encAccessToken = obfuscateToken(accessToken);
-      const encRefreshToken = refreshToken ? obfuscateToken(refreshToken) : null;
-
-      // Check for existing account to update
-      const { data: existing } = await supabase
-        .from("social_accounts")
-        .select("id")
-        .eq("user_id", user.id)
-        .eq("brand_id", oauthState.brand_id)
-        .eq("platform", platform)
-        .maybeSingle();
-
-      if (existing) {
-        await supabase
-          .from("social_accounts")
-          .update({
-            platform_user_id: profile.id,
-            platform_username: profile.username,
-            account_name: profile.username,
-            platform_profile_picture: profile.profilePicture,
-            platform_followers_count: profile.followersCount,
-            access_token: encAccessToken,
-            refresh_token: encRefreshToken,
-            token_expires_at: tokenExpiresAt,
-            scopes: config.scopes,
-            is_active: true,
-            needs_reconnect: false,
-            error_message: null,
-            connected_at: new Date().toISOString(),
-            last_used_at: new Date().toISOString(),
-          })
-          .eq("id", existing.id);
-      } else {
-        await supabase.from("social_accounts").insert({
-          user_id: user.id,
-          brand_id: oauthState.brand_id,
-          platform,
-          platform_user_id: profile.id,
-          platform_username: profile.username,
-          account_name: profile.username,
-          platform_profile_picture: profile.profilePicture,
-          platform_followers_count: profile.followersCount,
-          access_token: encAccessToken,
-          refresh_token: encRefreshToken,
-          token_expires_at: tokenExpiresAt,
-          scopes: config.scopes,
-          is_active: true,
-          needs_reconnect: false,
-          error_message: null,
-          connected_at: new Date().toISOString(),
-          last_used_at: new Date().toISOString(),
-        });
-      }
-
-      // Create notification
-      await supabase.from("notifications").insert({
-        user_id: user.id,
-        type: "platform_connected",
-        title: `${config.label} connected`,
-        message: `Your ${config.label} account @${profile.username} has been connected successfully.`,
+      await persistAccount(supabase, {
+        userId: user.id, brandId: oauthState.brand_id, platform,
+        platformUserId: profile.id, username: profile.username,
+        profilePicture: profile.profilePicture, followersCount: profile.followersCount,
+        accessToken: obfuscateToken(accessToken),
+        refreshToken: refreshToken ? obfuscateToken(refreshToken) : null,
+        tokenExpiresAt, scopes: config.scopes,
       });
 
-      return new Response(JSON.stringify({
-        success: true,
-        platform,
-        username: profile.username,
-        profile_picture: profile.profilePicture,
-        followers_count: profile.followersCount,
-      }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      return json({
+        success: true, platform, username: profile.username,
+        profile_picture: profile.profilePicture, followers_count: profile.followersCount,
       });
     }
 
     // ─── DISCONNECT ───
     if (action === "disconnect") {
-      if (!platform || !brand_id) {
-        return new Response(JSON.stringify({ error: "Missing params" }), {
-          status: 400,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
-      }
+      if (!platform || !brand_id) return json({ error: "Missing params" }, 400);
 
-      await supabase
+      const { error } = await supabase
         .from("social_accounts")
         .update({
-          is_active: false,
-          access_token: null,
-          refresh_token: null,
-          token_expires_at: null,
-          needs_reconnect: false,
-          error_message: null,
+          is_active: false, access_token: null, refresh_token: null,
+          token_expires_at: null, needs_reconnect: false, error_message: null,
         })
         .eq("user_id", user.id)
         .eq("brand_id", brand_id)
         .eq("platform", platform);
+      if (error) return json({ error: `disconnect_failed: ${error.message}` }, 500);
 
       await supabase.from("notifications").insert({
-        user_id: user.id,
-        type: "platform_disconnected",
+        user_id: user.id, type: "platform_disconnected",
         title: `${platform} disconnected`,
         message: `Your ${platform} account has been disconnected.`,
       });
 
-      return new Response(JSON.stringify({ success: true }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+      return json({ success: true });
     }
 
     // ─── REFRESH TOKEN ───
     if (action === "refresh_token") {
-      if (!account_id) {
-        return new Response(JSON.stringify({ error: "Missing account_id" }), {
-          status: 400,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
-      }
+      if (!account_id) return json({ error: "Missing account_id" }, 400);
 
       const { data: account } = await supabase
-        .from("social_accounts")
-        .select("*")
-        .eq("id", account_id)
-        .eq("user_id", user.id)
-        .single();
+        .from("social_accounts").select("*")
+        .eq("id", account_id).eq("user_id", user.id).single();
 
       if (!account?.refresh_token) {
-        await supabase
-          .from("social_accounts")
+        await supabase.from("social_accounts")
           .update({ needs_reconnect: true, error_message: "Token expired. Please reconnect." })
           .eq("id", account_id);
-        return new Response(JSON.stringify({ error: "needs_reconnect" }), {
-          status: 401,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
+        return json({ error: "needs_reconnect" }, 401);
       }
 
       const config = OAUTH_CONFIGS[account.platform];
-      if (!config) {
-        return new Response(JSON.stringify({ error: "Unknown platform" }), {
-          status: 400,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
-      }
+      if (!config) return json({ error: "Unknown platform" }, 400);
 
       const tokenRes = await fetch(config.tokenUrl, {
         method: "POST",
@@ -580,20 +607,14 @@ Deno.serve(async (req) => {
       }).catch(() => null);
 
       if (!tokenRes?.ok) {
-        await supabase
-          .from("social_accounts")
+        await supabase.from("social_accounts")
           .update({ needs_reconnect: true, error_message: "Token refresh failed." })
           .eq("id", account_id);
-        return new Response(JSON.stringify({ error: "refresh_failed" }), {
-          status: 401,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
+        return json({ error: "refresh_failed" }, 401);
       }
 
       const newTokens = await tokenRes.json();
-
-      await supabase
-        .from("social_accounts")
+      const { error } = await supabase.from("social_accounts")
         .update({
           access_token: obfuscateToken(newTokens.access_token),
           refresh_token: newTokens.refresh_token
@@ -602,26 +623,52 @@ Deno.serve(async (req) => {
           token_expires_at: newTokens.expires_in
             ? new Date(Date.now() + newTokens.expires_in * 1000).toISOString()
             : null,
-          needs_reconnect: false,
-          error_message: null,
+          needs_reconnect: false, error_message: null,
           last_used_at: new Date().toISOString(),
         })
         .eq("id", account_id);
+      if (error) return json({ error: `refresh_persist_failed: ${error.message}` }, 500);
 
-      return new Response(JSON.stringify({ success: true }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      return json({ success: true });
+    }
+
+    // ─── SELECT PAGE ───
+    if (action === "select_page") {
+      const { selection_token, page_id } = body;
+      if (!selection_token || !page_id) return json({ error: "invalid_selection" }, 400);
+
+      const { data: pending, error: pErr } = await supabase
+        .from("oauth_pending_selections").select("*")
+        .eq("selection_token", selection_token)
+        .eq("user_id", user.id)
+        .gt("expires_at", new Date().toISOString())
+        .single();
+
+      if (pErr || !pending) return json({ error: "selection_expired" }, 400);
+
+      const page = (pending.pages as any[]).find((p) => p.id === page_id);
+      if (!page) return json({ error: "page_not_found" }, 400);
+
+      await persistAccount(supabase, {
+        userId: user.id, brandId: pending.brand_id, platform: pending.platform,
+        platformUserId: page.id, username: page.name,
+        profilePicture: page.picture ?? null, followersCount: page.followers ?? 0,
+        accessToken: page.access_token, // already obfuscated when stored
+        refreshToken: null, tokenExpiresAt: null,
+        scopes: OAUTH_CONFIGS[pending.platform]?.scopes ?? [],
+      });
+
+      await supabase.from("oauth_pending_selections").delete().eq("id", pending.id);
+
+      return json({
+        success: true, platform: pending.platform,
+        username: page.name, followers_count: page.followers ?? 0,
       });
     }
 
-    return new Response(JSON.stringify({ error: "Unknown action" }), {
-      status: 400,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    return json({ error: "Unknown action" }, 400);
   } catch (err) {
     console.error("social-oauth error:", err);
-    return new Response(JSON.stringify({ error: (err as Error).message }), {
-      status: 500,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    return json({ error: (err as Error).message }, 500);
   }
 });
