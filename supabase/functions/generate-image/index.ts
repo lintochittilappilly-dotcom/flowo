@@ -41,10 +41,12 @@ serve(async (req) => {
     const authHeader = req.headers.get("Authorization");
     let userId = "anonymous";
     let userPlan = "starter";
+    // Lifted to outer scope so the Storage upload below can use it
+    let supabase: ReturnType<typeof createClient> | null = null;
 
     if (authHeader?.startsWith("Bearer ")) {
       try {
-        const supabase = createClient(
+        supabase = createClient(
           Deno.env.get("SUPABASE_URL")!,
           Deno.env.get("SUPABASE_ANON_KEY")!,
           { global: { headers: { Authorization: authHeader } } }
@@ -52,10 +54,12 @@ serve(async (req) => {
         const { data: { user } } = await supabase.auth.getUser();
         if (user) {
           userId = user.id;
-          const { data: profile } = await supabase.from("profiles").select("plan").eq("id", user.id).single();
-          userPlan = profile?.plan || "starter";
+          const { data: profile } = await supabase.from("profiles").select("plan").eq("id", user.id).maybeSingle();
+          userPlan = (profile?.plan as string) || "starter";
         }
-      } catch { /* continue with defaults */ }
+      } catch {
+        supabase = null; // continue with defaults, no upload target
+      }
     }
 
     // Rate limit check
@@ -84,7 +88,11 @@ serve(async (req) => {
     }
 
     const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
-    if (!OPENAI_API_KEY) throw new Error("OPENAI_API_KEY is not configured. Add it as a Supabase secret.");
+    if (!OPENAI_API_KEY) {
+      return new Response(JSON.stringify({ error: "OPENAI_API_KEY is not configured. Add it as a Supabase secret." }), {
+        status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
 
     const response = await fetch("https://api.openai.com/v1/images/generations", {
       method: "POST",
@@ -93,35 +101,61 @@ serve(async (req) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "dall-e-3",
+        model: "gpt-image-1",
         prompt,
         n: 1,
         size: "1024x1024",
-        response_format: "url",
+        // NOTE: no response_format — gpt-image-1 doesn't support it and returns b64_json
       }),
     });
 
     if (!response.ok) {
+      const detail = await response.text();
+      console.error("OpenAI image error:", response.status, detail);
+
       if (response.status === 429) {
-        return new Response(JSON.stringify({ error: "Rate limit exceeded. Please try again in a moment." }), {
+        return new Response(JSON.stringify({ error: "OpenAI rate limit / quota exceeded. Check billing or try again." }), {
           status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
-      if (response.status === 401) {
-        return new Response(JSON.stringify({ error: "Invalid OpenAI API key." }), {
-          status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      if (response.status === 401 || response.status === 403) {
+        return new Response(JSON.stringify({ error: "OpenAI rejected the API key (invalid or lacks image access).", detail }), {
+          status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
-      const t = await response.text();
-      console.error("OpenAI error:", response.status, t);
-      return new Response(JSON.stringify({ error: "Image generation failed" }), {
-        status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      // Surface the REAL reason instead of a blind 500
+      return new Response(JSON.stringify({ error: "Image generation failed", openai_status: response.status, detail }), {
+        status: 502, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
     const data = await response.json();
-    const imageUrl = data.data?.[0]?.url;
-    const revisedPrompt = data.data?.[0]?.revised_prompt || "";
+    const d = data.data?.[0];
+
+    // gpt-image-1 → base64 (b64_json); dall-e-3 → url. Support both.
+    let imageUrl: string | null = d?.url ?? null;
+    if (!imageUrl && d?.b64_json) {
+      const bytes = Uint8Array.from(atob(d.b64_json), (c) => c.charCodeAt(0));
+      const path = `${userId}/${Date.now()}.png`;
+
+      if (supabase) {
+        const { error: upErr } = await supabase.storage
+          .from("generated-images")
+          .upload(path, bytes, { contentType: "image/png", upsert: false });
+
+        if (upErr) {
+          console.error("storage upload failed:", upErr.message);
+          imageUrl = `data:image/png;base64,${d.b64_json}`; // fallback so UI still works
+        } else {
+          imageUrl = supabase.storage.from("generated-images").getPublicUrl(path).data.publicUrl;
+        }
+      } else {
+        // No authenticated client (anonymous) — fall back to data URL
+        imageUrl = `data:image/png;base64,${d.b64_json}`;
+      }
+    }
+
+    const revisedPrompt = d?.revised_prompt || "";
 
     if (!imageUrl) {
       return new Response(JSON.stringify({ error: "No image was generated. Try a different prompt." }), {
