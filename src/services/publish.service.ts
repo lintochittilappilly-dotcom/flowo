@@ -25,8 +25,16 @@ export async function publishPost(postId: string, userId: string): Promise<Publi
     return { success: false, simulated: false, error: "Post not found" };
   }
 
-  const accessToken = (post as any).social_accounts?.access_token;
-  const accountId = (post as any).social_accounts?.account_id;
+  const { data: acct } = await supabase
+  .from("social_accounts")
+  .select("id")
+  .eq("user_id", userId)
+  .eq("brand_id", post.brand_id)
+  .eq("platform", post.platform)
+  .eq("is_active", true)
+  .maybeSingle();
+
+const accountId = acct?.id;
 
   let lastError = "";
   for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
@@ -34,7 +42,6 @@ export async function publishPost(postId: string, userId: string): Promise<Publi
       const result = await publishToplatform(
         post.platform,
         post.content,
-        accessToken,
         accountId,
         post.image_url || undefined
       );
