@@ -132,7 +132,20 @@ function obfuscateToken(token: string): string {
     return token;
   }
 }
-
+function deobfuscateToken(obf: string): string {
+  if (!ENCRYPTION_KEY || !obf) return obf;
+  try {
+    const bin = atob(obf);
+    const bytes = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    const keyBytes = new TextEncoder().encode(ENCRYPTION_KEY);
+    const out = new Uint8Array(bytes.length);
+    for (let i = 0; i < bytes.length; i++) out[i] = bytes[i] ^ keyBytes[i % keyBytes.length];
+    return new TextDecoder().decode(out);
+  } catch {
+    return obf;
+  }
+}
 async function fetchUserProfile(
   platform: string,
   accessToken: string,
@@ -281,7 +294,68 @@ async function persistAccount(
   });
   if (notifErr) console.error("notification insert failed (non-fatal):", notifErr.message);
 }
+// ── Facebook Page: text via /feed, image via /photos. Token = page access token. ──
+async function publishFacebook(
+  pageId: string, pageToken: string, content: string, imageUrl?: string
+): Promise<string> {
+  if (imageUrl) {
+    const res = await fetch(`${FB_GRAPH}/${pageId}/photos`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ url: imageUrl, caption: content, access_token: pageToken }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(`facebook_publish_failed: ${res.status} ${JSON.stringify(data)}`);
+    return data.post_id || data.id;
+  }
+  const res = await fetch(`${FB_GRAPH}/${pageId}/feed`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message: content, access_token: pageToken }),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(`facebook_publish_failed: ${res.status} ${JSON.stringify(data)}`);
+  return data.id;
+}
 
+// ── LinkedIn: text share to the member profile. Image not supported here. ──
+async function publishLinkedIn(personId: string, token: string, content: string): Promise<string> {
+  const bodyPayload = {
+    author: `urn:li:person:${personId}`,
+    lifecycleState: "PUBLISHED",
+    specificContent: {
+      "com.linkedin.ugc.ShareContent": {
+        shareCommentary: { text: content },
+        shareMediaCategory: "NONE",
+      },
+    },
+    visibility: { "com.linkedin.ugc.MemberNetworkVisibility": "PUBLIC" },
+  };
+  const res = await fetch("https://api.linkedin.com/v2/ugcPosts", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+      "X-Restli-Protocol-Version": "2.0.0",
+    },
+    body: JSON.stringify(bodyPayload),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(`linkedin_publish_failed: ${res.status} ${JSON.stringify(data)}`);
+  return data.id || res.headers.get("x-restli-id") || `li_${Date.now()}`;
+}
+
+// ── Twitter / X: text tweet via v2. Image not supported here. ──
+async function publishTwitter(token: string, content: string): Promise<string> {
+  const res = await fetch("https://api.twitter.com/2/tweets", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ text: content }),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(`twitter_publish_failed: ${res.status} ${JSON.stringify(data)}`);
+  return data.data?.id || `tw_${Date.now()}`;
+}
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -301,6 +375,67 @@ Deno.serve(async (req) => {
 
     const { data: { user }, error: userError } = await supabase.auth.getUser();
     if (userError || !user) {
+      // ─── PUBLISH ───
+if (action === "publish") {
+  if (!account_id) return json({ error: "Missing account_id" }, 400);
+
+  const { data: acct, error: acctErr } = await supabase
+    .from("social_accounts")
+    .select("*")
+    .eq("id", account_id)
+    .eq("user_id", user.id)
+    .single();
+
+  if (acctErr || !acct) return json({ error: "account_not_found" }, 404);
+  if (!acct.is_active) return json({ error: "account_inactive" }, 400);
+
+  const rawToken = acct.access_token || "";
+  // Dev/simulated connections have no real token — tell the client to simulate.
+  if (!rawToken || rawToken.startsWith("simulated_token_")) {
+    return json({ error: "simulated_account" }, 400);
+  }
+
+  const token = deobfuscateToken(rawToken);
+  const content: string = body.content ?? "";
+  const imageUrl: string | undefined = body.image_url ?? undefined;
+
+  if (!content && !imageUrl) return json({ error: "empty_content" }, 400);
+
+  try {
+    let platformPostId: string;
+    switch (acct.platform) {
+      case "facebook":
+        platformPostId = await publishFacebook(acct.platform_user_id, token, content, imageUrl);
+        break;
+      case "linkedin":
+        platformPostId = await publishLinkedIn(acct.platform_user_id, token, content);
+        break;
+      case "twitter":
+        platformPostId = await publishTwitter(token, content);
+        break;
+      default:
+        // Instagram / TikTok / Pinterest need different APIs — client will simulate.
+        return json({ error: `publish_not_supported: ${acct.platform}` }, 400);
+    }
+
+    await supabase
+      .from("social_accounts")
+      .update({ last_used_at: new Date().toISOString() })
+      .eq("id", acct.id);
+
+    return json({ success: true, platform_post_id: platformPostId, simulated: false });
+  } catch (e) {
+    const msg = (e as Error).message;
+    // Auth-type failures → flag the account for reconnect
+    if (/invalid|expired|\b401\b|\b190\b|revoked/i.test(msg)) {
+      await supabase
+        .from("social_accounts")
+        .update({ needs_reconnect: true, error_message: msg })
+        .eq("id", acct.id);
+    }
+    return json({ error: msg }, 502);
+  }
+}
       return json({ error: "Unauthorized" }, 401);
     }
 
