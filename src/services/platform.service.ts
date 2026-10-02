@@ -24,37 +24,39 @@ export interface PostAnalyticsData {
 export async function publishToplatform(
   platform: string,
   content: string,
-  accessToken?: string,
   accountId?: string,
   imageUrl?: string
 ): Promise<PublishResult> {
-  // If we have a real access token, try publishing via edge function
-  if (accessToken && accountId) {
-    try {
-      const { data, error } = await supabase.functions.invoke("social-oauth", {
-        body: {
-          action: "publish",
-          platform,
-          content,
-          image_url: imageUrl,
-          account_id: accountId,
-        },
-      });
+  if (accountId) {
+    const { data, error } = await supabase.functions.invoke("social-oauth", {
+      body: {
+        action: "publish",
+        platform,
+        content,
+        image_url: imageUrl,
+        account_id: accountId,
+      },
+    });
 
-      if (!error && data?.success) {
-        return {
-          success: true,
-          platformPostId: data.platform_post_id || `real_${Date.now()}`,
-          simulated: false,
-        };
-      }
-      // If edge function doesn't support publish action yet, fall through to simulation
-    } catch (e) {
-      console.warn(`Real ${platform} publish attempt failed, using simulation:`, e);
+    if (!error && data?.success) {
+      return {
+        success: true,
+        platformPostId: data.platform_post_id || `real_${Date.now()}`,
+        simulated: false,
+      };
     }
+
+    const code = (data as any)?.error || error?.message || "";
+    const shouldSimulate =
+      !code ||
+      code.startsWith("simulated_account") ||
+      code.startsWith("publish_not_supported");
+
+    // A real, configured publish that genuinely failed — surface it, don't fake success.
+    if (!shouldSimulate) throw new Error(code);
   }
 
-  // Simulated publish — works without any API keys
+  // Simulated publish — used when the account is a dev/sim account or the platform isn't wired yet.
   await new Promise((r) => setTimeout(r, 800));
   return {
     success: true,
@@ -62,7 +64,6 @@ export async function publishToplatform(
     simulated: true,
   };
 }
-
 export async function getPostAnalytics(
   platform: string,
   platformPostId: string,
